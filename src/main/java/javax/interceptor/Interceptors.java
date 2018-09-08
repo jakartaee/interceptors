@@ -53,6 +53,8 @@ public @interface Interceptors {
 
     /**
      * An ordered list of interceptors.
+     * 
+     * @return an array representing the interceptor classes
      */
     Class[] value();
 }
