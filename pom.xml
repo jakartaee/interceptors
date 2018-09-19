@@ -22,11 +22,11 @@
     <parent>
         <groupId>org.eclipse.ee4j</groupId>
         <artifactId>project</artifactId>
-        <version>1.0</version>
+        <version>1.0.1</version>
     </parent>
 
-    <groupId>javax.interceptor</groupId>
-    <artifactId>javax.interceptor-api</artifactId>
+    <groupId>jakarta.interceptor</groupId>
+    <artifactId>jakarta.interceptor-api</artifactId>
     <version>1.2.3-SNAPSHOT</version>
     
     <properties>
