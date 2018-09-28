@@ -134,8 +134,6 @@ public interface InvocationContext {
      * @return the context data associated with this invocation or
      * lifecycle callback.  If there is no context data, an
      * empty {@code Map<String,Object>} object will be returned.
-     * 
-     * @return the context data, as a map
      */
     public Map<String, Object> getContextData();
 
