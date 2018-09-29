@@ -17,8 +17,8 @@
 
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"> <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>org.eclipse.ee4j</groupId>
         <artifactId>project</artifactId>
@@ -28,19 +28,20 @@
     <groupId>jakarta.interceptor</groupId>
     <artifactId>jakarta.interceptor-api</artifactId>
     <version>1.2.3-SNAPSHOT</version>
-    
+
+    <name>${extension.name} API</name>
+    <description>Eclipse Interceptors</description>
+
+    <url>https://github.com/eclipse-ee4j/interceptor-api</url>
+
     <properties>
+        <non.final>false</non.final>
         <extension.name>javax.interceptor</extension.name>
         <spec.version>1.2</spec.version>
-        <non.final>false</non.final>
         <findbugs.version>3.0.1</findbugs.version>
         <findbugs.exclude>exclude.xml</findbugs.exclude>
         <findbugs.threshold>Low</findbugs.threshold>
     </properties>
-    <name>${extension.name} API</name>
-    <description>Eclipse Interceptors</description>
-    
-    <url>https://github.com/eclipse-ee4j/interceptor-api</url>
 
     <developers>
         <developer>
@@ -57,7 +58,7 @@
             <organization>Oracle Corporation</organization>
             <organizationUrl>http://www.oracle.com/</organizationUrl>
         </contributor>
-      </contributors>
+    </contributors>
 
     <licenses>
         <license>
@@ -71,15 +72,17 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+
     <issueManagement>
         <system>Github</system>
         <url>https://github.com/eclipse-ee4j/interceptor-api/issues</url>
     </issueManagement>
+
     <scm>
         <connection>scm:git:ssh://git@github.com/eclipse-ee4j/interceptor-api.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/eclipse-ee4j/interceptor-api.git</developerConnection>
         <url>https://github.com/eclipse-ee4j/interceptor-api</url>
-      <tag>HEAD</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <build>
@@ -97,7 +100,8 @@
                     <exclude>META-INF/README</exclude>
                 </excludes>
             </resource>
-        </resources>        
+        </resources>
+        
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -108,11 +112,13 @@
                     <compilerArgument>-Xlint:unchecked</compilerArgument>
                 </configuration>
             </plugin>
+            
             <plugin>
                 <groupId>org.glassfish.build</groupId>
                 <artifactId>spec-version-maven-plugin</artifactId>
-                <version>1.3</version>
+                <version>1.5</version>
                 <configuration>
+                    <specMode>jakarta</specMode>
                     <spec>
                         <nonFinal>${non.final}</nonFinal>
                         <jarType>api</jarType>
@@ -129,7 +135,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>            
+            </plugin>
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
@@ -139,11 +145,12 @@
                         <supportedProjectType>jar</supportedProjectType>
                     </supportedProjectTypes>
                     <instructions>
+                        <Automatic-Module-Name>java.interceptor</Automatic-Module-Name>
                         <Bundle-Version>${spec.bundle.version}</Bundle-Version>
                         <Bundle-SymbolicName>${spec.bundle.symbolic-name}</Bundle-SymbolicName>
                         <Extension-Name>${spec.extension.name}</Extension-Name>
                         <Implementation-Version>${spec.implementation.version}</Implementation-Version>
-                        <Specification-Version>${spec.specification.version}</Specification-Version> 
+                        <Specification-Version>${spec.specification.version}</Specification-Version>
                         <Bundle-Description>
                             Java(TM) Interceptor ${spec.version} API Design Specification
                         </Bundle-Description>
@@ -162,6 +169,7 @@
                     </execution>
                 </executions>
             </plugin>
+            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -169,32 +177,31 @@
                 <configuration>
                     <archive>
                         <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-                        <manifestEntries>
-                            <Automatic-Module-Name>java.interceptor</Automatic-Module-Name>
-                        </manifestEntries>
                     </archive>
                     <excludes>
                         <exclude>**/*.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>
+            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-remote-resources-plugin</artifactId>
                 <version>1.5</version>
                 <executions>
-                  <execution>
-                    <goals>
-                      <goal>process</goal>
-                    </goals>
-                    <configuration>
-                      <resourceBundles>
-                        <resourceBundle>org.glassfish:legal:1.1</resourceBundle>
-                      </resourceBundles>
-                    </configuration>
-                  </execution>
+                    <execution>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                        <configuration>
+                            <resourceBundles>
+                                <resourceBundle>org.glassfish:legal:1.1</resourceBundle>
+                            </resourceBundles>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
+            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -204,17 +211,17 @@
                 </configuration>
                 <executions>
                     <execution>
-                       <id>attach-sources</id>
-                       <goals>
-                           <goal>jar-no-fork</goal> 
-                       </goals>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
+            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.0.1</version>
                 <configuration>
                     <bottom>
 <![CDATA[Copyright &#169; 1996-2013,
@@ -231,7 +238,7 @@
                         <goals>
                             <goal>jar</goal>
                         </goals>
-                   </execution>
+                    </execution>
                     <execution>
                         <phase>javadoc</phase>
                         <goals>
@@ -247,7 +254,8 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>     
+            </plugin>
+            
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
@@ -259,6 +267,7 @@
                     <findbugsXmlWithMessages>true</findbugsXmlWithMessages>
                 </configuration>
             </plugin>
+            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
@@ -275,25 +284,12 @@
                                     <excludeFilterFile>${findbugs.exclude}</excludeFilterFile>
                                 </configuration>
                             </plugin>
-                        </plugins>                        
+                        </plugins>
                     </reporting>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.6</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-		        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
+        
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -304,6 +300,7 @@
                         <additionalparam>${javadoc.options}</additionalparam>
                     </configuration>
                 </plugin>
+                
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
@@ -327,7 +324,8 @@
             </plugins>
         </pluginManagement>
     </build>
-     <profiles>
+    
+    <profiles>
         <profile>
             <id>javadoc-jdk8+</id>
             <activation>
@@ -339,6 +337,7 @@
             </properties>
         </profile>
     </profiles>
+    
     <dependencies>
         <dependency>
             <groupId>javax.annotation</groupId>
