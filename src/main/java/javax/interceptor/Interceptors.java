@@ -16,44 +16,50 @@
 
 package javax.interceptor;
 
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.ElementType;
+import static java.lang.annotation.ElementType.CONSTRUCTOR;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-import java.lang.annotation.Target;
 import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
 /**
- * <p>Declares an ordered list of interceptors for a target class, or
- * for a method or a constructor of a target class.</p>
- * 
+ * <p>
+ * Declares an ordered list of interceptors for a target class, or for a method or a constructor of a target class.
+ * </p>
+ *
  * <pre>
  * &#064;Interceptors(ValidationInterceptor.class)
  * public class Order { ... }
  * </pre>
- * 
+ *
  * <pre>
  * &#064;Interceptors({ValidationInterceptor.class, SecurityInterceptor.class})
  * public void updateOrder(Order order) { ... }
  * </pre>
- * 
- * <p>Only business method interception or timeout method interception may be specified
- * by a method-level <tt>Interceptors</tt> declaration.</p>
  *
- * <p>Constructor interception may be specified
- * by a constructor-level <tt>Interceptors</tt> declaration.</p>
+ * <p>
+ * Only business method interception or timeout method interception may be specified by a method-level
+ * <tt>Interceptors</tt> declaration.
+ * </p>
+ *
+ * <p>
+ * Constructor interception may be specified by a constructor-level <tt>Interceptors</tt> declaration.
+ * </p>
  *
  * @see javax.interceptor.ExcludeClassInterceptors
  * @see javax.interceptor.ExcludeDefaultInterceptors
  *
  * @since Interceptors 1.0
  */
-@Target({ElementType.TYPE, ElementType.METHOD, ElementType.CONSTRUCTOR})
-@Retention(RetentionPolicy.RUNTIME)
+@Target({ TYPE, METHOD, CONSTRUCTOR })
+@Retention(RUNTIME)
 public @interface Interceptors {
 
     /**
      * An ordered list of interceptors.
-     * 
+     *
      * @return an array representing the interceptor classes
      */
     Class[] value();

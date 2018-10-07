@@ -16,48 +16,57 @@
 
 package javax.interceptor;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Target;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
 import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * <p>Designates an interceptor method that receives a callback when
- * the target class constructor is invoked.
+ * <p>
+ * Designates an interceptor method that receives a callback when the target class constructor is invoked.
  * </p>
- * <p>The method to which the <tt>AroundConstruct</tt> annotation is applied must have one of the 
- * following signatures.
+ * <p>
+ * The method to which the <tt>AroundConstruct</tt> annotation is applied must have one of the following signatures.
  * </p>
- * 
+ *
  * <pre>
- * void &#060;METHOD&#062;(InvocationContext ctx) 
+ * void &#060;METHOD&#062;(InvocationContext ctx)
  *
- * Object &#060;METHOD&#062;(InvocationContext ctx) 
+ * Object &#060;METHOD&#062;(InvocationContext ctx)
  * </pre>
- * 
- * <p>The method must not be declared as abstract, final, or static.</p>
  *
- * <p>An <tt>AroundConstruct</tt> interceptor method may be only declared in 
- * an interceptor class or superclass of an interceptor class.</p>
+ * <p>
+ * The method must not be declared as abstract, final, or static.
+ * </p>
  *
- * <p>An interceptor class must not declare more than one <tt>AroundConstruct</tt> 
- * method.</p>
- * 
- * <p> The target instance is created and its constructor injection is 
- * performed, if applicable,  when the last interceptor method in the 
- * <tt>AroundConstruct</tt> interceptor chain invokes the 
+ * <p>
+ * An <tt>AroundConstruct</tt> interceptor method may be only declared in an interceptor class or superclass of an
+ * interceptor class.
+ * </p>
+ *
+ * <p>
+ * An interceptor class must not declare more than one <tt>AroundConstruct</tt> method.
+ * </p>
+ *
+ * <p>
+ * The target instance is created and its constructor injection is performed, if applicable, when the last interceptor
+ * method in the <tt>AroundConstruct</tt> interceptor chain invokes the
  * {@link javax.interceptor.InvocationContext#proceed()} method.
  *
- * <p>An <tt>AroundConstruct</tt> interceptor method should exercise caution 
- * accessing the instance whose constructor it interposes on.</p>
+ * <p>
+ * An <tt>AroundConstruct</tt> interceptor method should exercise caution accessing the instance whose constructor it
+ * interposes on.
+ * </p>
  *
- * <p><tt>AroundConstruct</tt> methods may throw any exceptions that are 
- * allowed by the throws clause of the constructor on which they are 
- * interposing.</p>
+ * <p>
+ * <tt>AroundConstruct</tt> methods may throw any exceptions that are allowed by the throws clause of the constructor on
+ * which they are interposing.
+ * </p>
  *
- * @since Interceptors 1.2 
+ * @since Interceptors 1.2
  */
-@Target({ElementType.METHOD})
-@Retention(RetentionPolicy.RUNTIME)
+@Target(METHOD)
+@Retention(RUNTIME)
 public @interface AroundConstruct {
 }

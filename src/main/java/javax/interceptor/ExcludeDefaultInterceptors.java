@@ -16,30 +16,34 @@
 
 package javax.interceptor;
 
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.ElementType;
+import static java.lang.annotation.ElementType.CONSTRUCTOR;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-import java.lang.annotation.Target;
 import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
 /**
- * <p>Used to exclude default interceptors for a target class or for
- * a lifecycle callback method, business method, timeout method, 
- * or constructor of a target class.</p>
- * 
+ * <p>
+ * Used to exclude default interceptors for a target class or for a lifecycle callback method, business method, timeout
+ * method, or constructor of a target class.
+ * </p>
+ *
  * <pre>
  * &#064;ExcludeDefaultInterceptors
  * &#064;Interceptors(ValidationInterceptor.class)
  * public class Order { ... }
  * </pre>
- * 
+ *
  * <pre>
  * &#064;ExcludeDefaultInterceptors
  * public void updateOrder(Order order) { ... }
  * </pre>
- * 
+ *
  * @since Interceptors 1.0
  */
-@Target({ElementType.TYPE, ElementType.METHOD, ElementType.CONSTRUCTOR})
-@Retention(RetentionPolicy.RUNTIME)
-public @interface ExcludeDefaultInterceptors {}
+@Target({ TYPE, METHOD, CONSTRUCTOR })
+@Retention(RUNTIME)
+public @interface ExcludeDefaultInterceptors {
+}

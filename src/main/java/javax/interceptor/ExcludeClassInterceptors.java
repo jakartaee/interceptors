@@ -16,31 +16,34 @@
 
 package javax.interceptor;
 
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.ElementType;
+import static java.lang.annotation.ElementType.CONSTRUCTOR;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-import java.lang.annotation.Target;
 import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
 /**
- * <p>Used to exclude class-level interceptors for the 
- * lifecycle callback method, business method, timeout method, 
- * or constructor to which it is applied.</p>
- * 
- * <p>Excludes interceptors defined by means of the 
- * {@link javax.interceptor.Interceptors} annotation.
- * Use of this annotation to exclude interceptors defined by means
- * of interceptor binding annotations is not portable.</p>
+ * <p>
+ * Used to exclude class-level interceptors for the lifecycle callback method, business method, timeout method, or
+ * constructor to which it is applied.
+ * </p>
+ *
+ * <p>
+ * Excludes interceptors defined by means of the {@link javax.interceptor.Interceptors} annotation. Use of this
+ * annotation to exclude interceptors defined by means of interceptor binding annotations is not portable.
+ * </p>
  *
  * <pre>
  * &#064;ExcludeClassInterceptors
  * public void updateOrder(Order order) { ... }
  * </pre>
- * 
+ *
  * @see javax.interceptor.ExcludeDefaultInterceptors
  *
  * @since Interceptors 1.0
  */
-@Target({ElementType.METHOD, ElementType.CONSTRUCTOR})
-@Retention(RetentionPolicy.RUNTIME)
-public @interface ExcludeClassInterceptors {}
+@Target({ METHOD, CONSTRUCTOR })
+@Retention(RUNTIME)
+public @interface ExcludeClassInterceptors {
+}
