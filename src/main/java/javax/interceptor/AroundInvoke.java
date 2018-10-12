@@ -16,46 +16,51 @@
 
 package javax.interceptor;
 
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.ElementType;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-import java.lang.annotation.Target;
 import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
 /**
- * <p>Defines an interceptor method that interposes on business methods.
- * The method must take a single parameter of type 
- * {@link javax.interceptor.InvocationContext} and have a return type
- * {@link java.lang.Object}.  The method must not be declared as abstract,
- * final, or static.</p>
- * 
+ * <p>
+ * Defines an interceptor method that interposes on business methods. The method must take a single parameter of type
+ * {@link javax.interceptor.InvocationContext} and have a return type {@link java.lang.Object}. The method must not be
+ * declared as abstract, final, or static.
+ * </p>
+ *
  * <pre>
  * &#064;AroundInvoke
  * public Object intercept(InvocationContext ctx) throws Exception { ... }
  * </pre>
- * 
- * <p><tt>AroundInvoke</tt> methods may be declared in interceptor
- * classes, in the superclasses of interceptor classes, in the target
- * class, and/or in superclasses of the target class.</p>
  *
- * <p>A given class must not declare more than one <tt>AroundInvoke</tt> 
- * method.</p>
- * 
- * <p>An <tt>AroundInvoke</tt> method can invoke any component or 
- * resource that the method it is intercepting can invoke.</p>
- * 
- * <p>In general, <tt>AroundInvoke</tt> method invocations occur within the 
- * same transaction and security context as the method on which they are 
- * interposing.</p>
- * 
- * <p><tt>AroundInvoke</tt> methods may throw any exceptions that are 
- * allowed by the throws clause of the method on which they are 
- * interposing. They may catch and suppress exceptions and recover 
- * by calling {@link javax.interceptor.InvocationContext#proceed()}.</p>
+ * <p>
+ * <tt>AroundInvoke</tt> methods may be declared in interceptor classes, in the superclasses of interceptor classes, in
+ * the target class, and/or in superclasses of the target class.
+ * </p>
  *
- * @since Interceptors 1.0 
+ * <p>
+ * A given class must not declare more than one <tt>AroundInvoke</tt> method.
+ * </p>
+ *
+ * <p>
+ * An <tt>AroundInvoke</tt> method can invoke any component or resource that the method it is intercepting can invoke.
+ * </p>
+ *
+ * <p>
+ * In general, <tt>AroundInvoke</tt> method invocations occur within the same transaction and security context as the
+ * method on which they are interposing.
+ * </p>
+ *
+ * <p>
+ * <tt>AroundInvoke</tt> methods may throw any exceptions that are allowed by the throws clause of the method on which
+ * they are interposing. They may catch and suppress exceptions and recover by calling
+ * {@link javax.interceptor.InvocationContext#proceed()}.
+ * </p>
+ *
+ * @since Interceptors 1.0
  */
-@Target({ElementType.METHOD})
-@Retention(RetentionPolicy.RUNTIME)
+@Target(METHOD)
+@Retention(RUNTIME)
 public @interface AroundInvoke {
 }
