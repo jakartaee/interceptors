@@ -22,7 +22,7 @@
     <parent>
         <groupId>org.eclipse.ee4j</groupId>
         <artifactId>project</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
     </parent>
 
     <groupId>jakarta.interceptor</groupId>
@@ -155,7 +155,7 @@
                         </Bundle-Description>
                         <Specification-Vendor>Oracle Corporation</Specification-Vendor>
                         <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
-                        <Implementation-Vendor-Id>org.glassfish}</Implementation-Vendor-Id>
+                        <Implementation-Vendor-Id>org.glassfish</Implementation-Vendor-Id>
                     </instructions>
                 </configuration>
                 <executions>
@@ -181,24 +181,6 @@
                         <exclude>**/*.java</exclude>
                     </excludes>
                 </configuration>
-            </plugin>
-            
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-remote-resources-plugin</artifactId>
-                <version>1.5</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>process</goal>
-                        </goals>
-                        <configuration>
-                            <resourceBundles>
-                                <resourceBundle>org.glassfish:legal:1.1</resourceBundle>
-                            </resourceBundles>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
             
             <plugin>
@@ -299,43 +281,9 @@
                         <additionalparam>${javadoc.options}</additionalparam>
                     </configuration>
                 </plugin>
-                
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <version>2.5.3</version>
-                    <configuration>
-                        <mavenExecutorId>forked-path</mavenExecutorId>
-                        <useReleaseProfile>false</useReleaseProfile>
-                        <tagNameFormat>@{project.version}</tagNameFormat>
-                        <arguments>${release.arguments}</arguments>
-                        <preparationGoals>install</preparationGoals>
-                        <goals>deploy</goals>
-                    </configuration>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.apache.maven.scm</groupId>
-                            <artifactId>maven-scm-provider-gitexe</artifactId>
-                            <version>1.10.0</version>
-                        </dependency>
-                    </dependencies>
-                </plugin>
             </plugins>
         </pluginManagement>
     </build>
-    
-    <profiles>
-        <profile>
-            <id>javadoc-jdk8+</id>
-            <activation>
-                <jdk>[1.8,)</jdk>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <properties>
-                <javadoc.options>-Xdoclint:none</javadoc.options>
-            </properties>
-        </profile>
-    </profiles>
     
     <dependencies>
         <dependency>
