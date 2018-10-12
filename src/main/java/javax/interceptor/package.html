@@ -163,7 +163,8 @@ invoked before the target instance and all interceptor instances associated with
 destroyed.</p>
 
 <p>When a {@link javax.interceptor.AroundConstruct} lifecycle callback interceptor 
-is used, the following rules apply:
+is used, the following rules apply:</p>
+
 <ul>
   <li>The {@link javax.interceptor.AroundConstruct} lifecycle callback is invoked 
   after dependency injection has been completed on instances of all interceptor 
@@ -187,7 +188,6 @@ is used, the following rules apply:
   method should exercise caution when invoking methods of the target instance since its 
   dependency injection may not have been completed.</li>
 </ul>
-</p>
 
 <h3>Interceptors for lifecycle callbacks</h3>
 
