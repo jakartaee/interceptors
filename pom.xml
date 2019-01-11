@@ -27,7 +27,7 @@
 
     <groupId>jakarta.interceptor</groupId>
     <artifactId>jakarta.interceptor-api</artifactId>
-    <version>1.2.3-SNAPSHOT</version>
+    <version>1.2.3</version>
 
     <name>${extension.name} API</name>
     <description>Eclipse Interceptors</description>
