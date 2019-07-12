@@ -39,7 +39,7 @@ import java.lang.annotation.Target;
  * public void updateOrder(Order order) { ... }
  * </pre>
  *
- * @since Interceptors 1.0
+ * @since Jakarta Interceptors 1.0
  */
 @Target({ TYPE, METHOD, CONSTRUCTOR })
 @Retention(RUNTIME)

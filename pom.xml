@@ -31,8 +31,12 @@
     <version>1.2.4-SNAPSHOT</version>
     <packaging>pom</packaging>
     
-    <name>${extension.name} API - Parent</name>
-    <description>Eclipse Interceptors</description>
+    <name>Jakarta Interceptors - Parent</name>
+    <description>
+        Jakarta Interceptors defines a means of interposing on business method invocations
+        and specific events—such as lifecycle events and timeout events—that occur on instances
+        of Jakarta EE components and other managed classes.
+    </description>
     <url>https://github.com/eclipse-ee4j/interceptor-api</url>
 
     <scm>

@@ -56,7 +56,7 @@ import java.lang.annotation.Target;
  * {@link javax.interceptor.InvocationContext#proceed()}.
  * </p>
  *
- * @since Interceptors 1.0
+ * @since Jakarta Interceptors 1.0
  */
 @Target(METHOD)
 @Retention(RUNTIME)

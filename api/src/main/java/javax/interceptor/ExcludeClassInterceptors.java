@@ -39,7 +39,7 @@ import java.lang.annotation.Target;
  *
  * @see javax.interceptor.ExcludeDefaultInterceptors
  *
- * @since Interceptors 1.0
+ * @since Jakarta Interceptors 1.0
  */
 @Target({ METHOD, CONSTRUCTOR })
 @Retention(RUNTIME)

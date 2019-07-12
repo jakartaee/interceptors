@@ -98,7 +98,7 @@ import java.lang.annotation.Target;
  *
  * @see javax.interceptor.Interceptor
  *
- * @since Interceptors 1.1
+ * @since Jakarta Interceptors 1.1
  */
 @Target(ANNOTATION_TYPE)
 @Retention(RUNTIME)

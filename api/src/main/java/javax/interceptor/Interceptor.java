@@ -34,12 +34,12 @@ import java.lang.annotation.Target;
  * <p>
  * Use of this annotation is required when declaring an interceptor using interceptor binding annotations. It is ignored
  * during the processing of classes bound using the {@link javax.interceptor.Interceptors Interceptors} annotation (or
- * when the EJB deployment descriptor is used to associate the interceptor with the target class).
+ * when the Jakarta Enterprise Beans deployment descriptor is used to associate the interceptor with the target class).
  * </p>
  *
  * @see javax.interceptor.Interceptors
  *
- * @since Interceptors 1.1
+ * @since Jakarta Interceptors 1.1
  */
 @Retention(RUNTIME)
 @Target(TYPE)
@@ -96,7 +96,8 @@ public @interface Interceptor {
      * interceptors bound to a target using the {@link javax.interceptor.Interceptors Interceptors} annotation.
      *
      * @see javax.annotation.Priority
-     * @since Interceptors 1.2
+     * 
+     * @since Jakarta Interceptors 1.2
      */
     public static class Priority {
         private Priority() {

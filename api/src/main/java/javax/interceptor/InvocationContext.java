@@ -45,7 +45,7 @@ import java.util.Map;
  *
  * </pre>
  *
- * @since Interceptors 1.0
+ * @since Jakarta Interceptors 1.0
  */
 public interface InvocationContext {
 
@@ -59,12 +59,12 @@ public interface InvocationContext {
 
     /**
      * Returns the timer object associated with a timeout method invocation on the target class, or a null value for
-     * interceptor method types other than {@link AroundTimeout}. For example, when associated with an EJB component
-     * timeout, this method returns {@link javax.ejb.Timer}.
+     * interceptor method types other than {@link AroundTimeout}. For example, when associated with an Jakarta Enterprise
+     * Beans component timeout, this method returns {@link javax.ejb.Timer}.
      *
      * @return the timer object or a null value
      *
-     * @since Interceptors 1.1
+     * @since Jakarta Interceptors 1.1
      */
     Object getTimer();
 

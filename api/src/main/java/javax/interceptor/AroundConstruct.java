@@ -63,7 +63,7 @@ import java.lang.annotation.Target;
  * which they are interposing.
  * </p>
  *
- * @since Interceptors 1.2
+ * @since Jakarta Interceptors 1.2
  */
 @Target(METHOD)
 @Retention(RUNTIME)
