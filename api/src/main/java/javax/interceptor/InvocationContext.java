@@ -21,10 +21,8 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 /**
- * <p>
  * Exposes contextual information about the intercepted invocation and operations that enable interceptor methods to
  * control the behavior of the invocation chain.
- * </p>
  *
  * <pre>
  *
@@ -53,7 +51,7 @@ public interface InvocationContext {
 
     /**
      * Returns the target instance. For {@link AroundConstruct} lifecycle callback interceptor methods, the
-     * <tt>getTarget</tt> method returns <code>null</code> if called before the {@link #proceed} method.
+     * <code>getTarget</code> method returns <code>null</code> if called before the {@link #proceed} method.
      *
      * @return the target instance
      */

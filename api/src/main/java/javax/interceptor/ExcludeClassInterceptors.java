@@ -24,10 +24,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * <p>
  * Used to exclude class-level interceptors for the lifecycle callback method, business method, timeout method, or
  * constructor to which it is applied.
- * </p>
  *
  * <p>
  * Excludes interceptors defined by means of the {@link javax.interceptor.Interceptors} annotation. Use of this

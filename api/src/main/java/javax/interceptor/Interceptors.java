@@ -25,9 +25,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * <p>
  * Declares an ordered list of interceptors for a target class, or for a method or a constructor of a target class.
- * </p>
  *
  * <pre>
  * &#064;Interceptors(ValidationInterceptor.class)
@@ -41,11 +39,11 @@ import java.lang.annotation.Target;
  *
  * <p>
  * Only business method interception or timeout method interception may be specified by a method-level
- * <tt>Interceptors</tt> declaration.
+ * <code>Interceptors</code> declaration.
  * </p>
  *
  * <p>
- * Constructor interception may be specified by a constructor-level <tt>Interceptors</tt> declaration.
+ * Constructor interception may be specified by a constructor-level <code>Interceptors</code> declaration.
  * </p>
  *
  * @see javax.interceptor.ExcludeClassInterceptors
