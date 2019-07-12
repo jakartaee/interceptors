@@ -25,10 +25,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * <p>
  * Used to exclude default interceptors for a target class or for a lifecycle callback method, business method, timeout
  * method, or constructor of a target class.
- * </p>
  *
  * <pre>
  * &#064;ExcludeDefaultInterceptors

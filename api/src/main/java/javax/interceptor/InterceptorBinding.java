@@ -24,9 +24,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * <p>
  * Specifies that an annotation type is an interceptor binding type.
- * </p>
  *
  * <pre>
  * &#064;Inherited

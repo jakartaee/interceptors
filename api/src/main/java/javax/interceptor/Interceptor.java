@@ -24,9 +24,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * <p>
  * Specifies that a class is an interceptor.
- * </p>
  *
  * <pre>
  * &#064;Validated &#064;Interceptor

@@ -23,11 +23,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * <p>
  * Defines an interceptor method that interposes on timeout methods. The method must take a single parameter of type
  * {@link javax.interceptor.InvocationContext} and have a return type {@link java.lang.Object}. The method must not be
  * declared as abstract, final, or static.
- * </p>
  *
  * <pre>
  * &#064;AroundTimeout
@@ -35,31 +33,31 @@ import java.lang.annotation.Target;
  * </pre>
  *
  * <p>
- * <tt>AroundTimeout</tt> methods may be declared in interceptor classes, in the superclasses of interceptor classes, in
+ * <code>AroundTimeout</code> methods may be declared in interceptor classes, in the superclasses of interceptor classes, in
  * the target class, and/or in superclasses of the target class.
  * </p>
  *
  * <p>
- * A given class must not declare more than one <tt>AroundTimeout</tt> method.
+ * A given class must not declare more than one <code>AroundTimeout</code> method.
  * </p>
  *
  * <p>
- * An <tt>AroundTimeout</tt> method can invoke any component or resource that its corresponding timeout method can
+ * An <code>AroundTimeout</code> method can invoke any component or resource that its corresponding timeout method can
  * invoke.
  * </p>
  *
  * <p>
- * {@link javax.interceptor.InvocationContext#getTimer()} allows any <tt>AroundTimeout</tt> method to retrieve the timer
+ * {@link javax.interceptor.InvocationContext#getTimer()} allows any <code>AroundTimeout</code> method to retrieve the timer
  * object associated with the timeout.
  * </p>
  *
  * <p>
- * In general, <tt>AroundTimeout</tt> method invocations occur within the same transaction and security context as the
+ * In general, <code>AroundTimeout</code> method invocations occur within the same transaction and security context as the
  * timeout method on which they are interposing.
  * </p>
  *
  * <p>
- * <tt>AroundTimeout</tt> methods may throw any exceptions that are allowed by the throws clause of the timeout method
+ * <code>AroundTimeout</code> methods may throw any exceptions that are allowed by the throws clause of the timeout method
  * on which they are interposing. They may catch and suppress exceptions and recover by calling
  * {@link javax.interceptor.InvocationContext#proceed()}.
  * </p>

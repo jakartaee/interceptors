@@ -23,11 +23,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * <p>
  * Designates an interceptor method that receives a callback when the target class constructor is invoked.
- * </p>
+ * 
  * <p>
- * The method to which the <tt>AroundConstruct</tt> annotation is applied must have one of the following signatures.
+ * The method to which the <code>AroundConstruct</code> annotation is applied must have one of the following signatures.
  * </p>
  *
  * <pre>
@@ -41,26 +40,26 @@ import java.lang.annotation.Target;
  * </p>
  *
  * <p>
- * An <tt>AroundConstruct</tt> interceptor method may be only declared in an interceptor class or superclass of an
+ * An <code>AroundConstruct</code> interceptor method may be only declared in an interceptor class or superclass of an
  * interceptor class.
  * </p>
  *
  * <p>
- * An interceptor class must not declare more than one <tt>AroundConstruct</tt> method.
+ * An interceptor class must not declare more than one <code>AroundConstruct</code> method.
  * </p>
  *
  * <p>
  * The target instance is created and its constructor injection is performed, if applicable, when the last interceptor
- * method in the <tt>AroundConstruct</tt> interceptor chain invokes the
+ * method in the <code>AroundConstruct</code> interceptor chain invokes the
  * {@link javax.interceptor.InvocationContext#proceed()} method.
  *
  * <p>
- * An <tt>AroundConstruct</tt> interceptor method should exercise caution accessing the instance whose constructor it
+ * An <code>AroundConstruct</code> interceptor method should exercise caution accessing the instance whose constructor it
  * interposes on.
  * </p>
  *
  * <p>
- * <tt>AroundConstruct</tt> methods may throw any exceptions that are allowed by the throws clause of the constructor on
+ * <code>AroundConstruct</code> methods may throw any exceptions that are allowed by the throws clause of the constructor on
  * which they are interposing.
  * </p>
  *
