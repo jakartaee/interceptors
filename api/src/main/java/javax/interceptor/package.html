@@ -40,8 +40,8 @@ the target class or interceptor class.</p>
 <p> An {@link javax.interceptor.AroundConstruct} interceptor method may
 be defined only in an interceptor class or superclass of an interceptor class.</p>
 
-<p> The Interceptors specification defines the interceptor method types listed
-below.  Extension specifications may define additional interceptor method types.</p>
+<p> The Jakarta Interceptors specification defines the interceptor method types listed
+below. Extension specifications may define additional interceptor method types.</p>
 
 <ul>
 <li> {@link javax.interceptor.AroundInvoke} interceptor methods,
@@ -143,7 +143,7 @@ when it is removed.</p>
 
 <p>An interceptor class shares the enterprise naming context of its associated target 
 class. Annotations and/or XML deployment descriptor elements for dependency injection or 
-for direct JNDI lookup refer to this shared naming context.</p>
+for direct Naming and Directory Interface lookup refer to this shared naming context.</p>
 
 <p>An interceptor instance may hold state. An interceptor instance may be the target 
 of dependency injection. Dependency injection is performed when the interceptor instance 

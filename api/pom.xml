@@ -28,9 +28,12 @@
     <groupId>jakarta.interceptor</groupId>
     <artifactId>jakarta.interceptor-api</artifactId>
 
-    <name>${extension.name} API</name>
-    <description>Eclipse Interceptors</description>
-
+    <name>Jakarta Interceptors</name>
+    <description>
+        Jakarta Interceptors defines a means of interposing on business method invocations
+        and specific events—such as lifecycle events and timeout events—that occur on instances
+        of Jakarta EE components and other managed classes.
+    </description>
     <url>https://github.com/eclipse-ee4j/interceptor-api</url>
 
     <properties>
@@ -115,6 +118,7 @@
         </resources>
         
         <plugins>
+            <!-- Restricts the Java version to 1.8 -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
@@ -125,6 +129,7 @@
                 </configuration>
             </plugin>
             
+            <!-- First sets properties for the maven-bundle-plugin and later checks if they are indeed used. -->
             <plugin>
                 <groupId>org.glassfish.build</groupId>
                 <artifactId>spec-version-maven-plugin</artifactId>
@@ -149,6 +154,7 @@
                 </executions>
             </plugin>
             
+            <!-- Creates the OSGi MANIFEST.MF file -->
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
@@ -164,7 +170,7 @@
                         <Implementation-Version>${spec.implementation.version}</Implementation-Version>
                         <Specification-Version>${spec.specification.version}</Specification-Version>
                         <Bundle-Description>
-                            Java(TM) Interceptor ${spec.version} API Design Specification
+                            Jakarta Interceptors ${spec.version} Specification
                         </Bundle-Description>
                         <Specification-Vendor>Oracle Corporation</Specification-Vendor>
                         <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
@@ -182,6 +188,7 @@
                 </executions>
             </plugin>
             
+            <!-- Adds the manifest file created by the org.apache.felix:maven-bundle-plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -196,6 +203,7 @@
                 </configuration>
             </plugin>
             
+            <!-- Creates the source jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -213,6 +221,7 @@
                 </executions>
             </plugin>
             
+            <!-- Creates the javadoc jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -242,7 +251,7 @@
                         <configuration>
                             <groups>
                                 <group>
-                                    <title>Interceptor API Documentation</title>
+                                    <title>Jakarta Interceptors API Documentation</title>
                                     <packages>javax.interceptor</packages>
                                 </group>
                             </groups>
