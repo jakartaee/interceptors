@@ -28,7 +28,7 @@
 
     <groupId>org.eclipse.ee4j.interceptor-api</groupId>
     <artifactId>interceptor-api-parent</artifactId>
-    <version>1.2.4-SNAPSHOT</version>
+    <version>1.2.5-SNAPSHOT</version>
     <packaging>pom</packaging>
     
     <name>Jakarta Interceptors - Parent</name>
