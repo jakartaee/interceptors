@@ -31,7 +31,7 @@
     <version>1.2.5-SNAPSHOT</version>
     <packaging>pom</packaging>
     
-    <name>Jakarta Interceptors - Parent</name>
+    <name>Jakarta Interceptors Parent</name>
     <description>
         Jakarta Interceptors defines a means of interposing on business method invocations
         and specific events—such as lifecycle events and timeout events—that occur on instances
