@@ -2,7 +2,7 @@
 // Copyright (c) 2017, 2019 Contributors to the Eclipse Foundation
 //
 
-= Jakarta Interceptors 1.2
+= Jakarta Interceptors
 :authors: Jakarta Interceptors Team, https://projects.eclipse.org/projects/ee4j.interceptors
 :email: https://dev.eclipse.org/mailman/listinfo/interceptor-api-dev
 :version-label!:
