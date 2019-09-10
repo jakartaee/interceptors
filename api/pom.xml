@@ -28,7 +28,7 @@
 
     <groupId>jakarta.interceptor</groupId>
     <artifactId>jakarta.interceptor-api</artifactId>
-    <version>1.2.5-SNAPSHOT</version>
+    <version>1.2.6-SNAPSHOT</version>
 
     <name>Jakarta Interceptors</name>
     <description>
