@@ -14,7 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
 
-package javax.interceptor;
+package jakarta.interceptor;
 
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
@@ -51,7 +51,7 @@ import java.lang.annotation.Target;
  * <p>
  * The target instance is created and its constructor injection is performed, if applicable, when the last interceptor
  * method in the <code>AroundConstruct</code> interceptor chain invokes the
- * {@link javax.interceptor.InvocationContext#proceed()} method.
+ * {@link InvocationContext#proceed()} method.
  *
  * <p>
  * An <code>AroundConstruct</code> interceptor method should exercise caution accessing the instance whose constructor it

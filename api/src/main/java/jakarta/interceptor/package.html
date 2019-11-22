@@ -37,17 +37,17 @@ An interceptor method for a target class may be declared in the target class, in
 an interceptor class associated with the target class, or in a superclass of
 the target class or interceptor class.</p>
 
-<p> An {@link javax.interceptor.AroundConstruct} interceptor method may
+<p> An {@link jakarta.interceptor.AroundConstruct} interceptor method may
 be defined only in an interceptor class or superclass of an interceptor class.</p>
 
 <p> The Jakarta Interceptors specification defines the interceptor method types listed
 below. Extension specifications may define additional interceptor method types.</p>
 
 <ul>
-<li> {@link javax.interceptor.AroundInvoke} interceptor methods,
+<li> {@link jakarta.interceptor.AroundInvoke} interceptor methods,
 which interpose on business methods of the target class. </li>
 
-<li> {@link javax.interceptor.AroundTimeout} interceptor methods,
+<li> {@link jakarta.interceptor.AroundTimeout} interceptor methods,
 which interpose on the invocation of timeout methods, in response to timer events.</li>
 
 <li> {@link javax.annotation.PostConstruct} interceptor methods, which are invoked
@@ -57,13 +57,13 @@ after dependency injection has been completed on the target instance.</li>
 before the target instance and all interceptor instances associated with it are
 destroyed.</li>
 
-<li> {@link javax.interceptor.AroundConstruct} interceptor methods, which interpose
+<li> {@link jakarta.interceptor.AroundConstruct} interceptor methods, which interpose
 on the invocation of the constructor of the target instance.</li>
 </ul>
 
 {@link javax.annotation.PostConstruct}, {@link
 javax.annotation.PreDestroy}, and {@link
-javax.interceptor.AroundConstruct} interceptor methods are
+AroundConstruct} interceptor methods are
 collectively referred to as lifecycle callback interceptor methods.
 
 <p>An interceptor method may be defined using annotations or,
@@ -73,9 +73,9 @@ may not be declared <code>abstract</code>, <code>static</code>, or
 
 <p>An interceptor class or target class may have multiple interceptor methods. However, 
 an interceptor class or target class may have no more than one interceptor method of a
-given interceptor method type: {@link javax.interceptor.AroundInvoke}, 
-{@link javax.interceptor.AroundTimeout}, {@link javax.annotation.PostConstruct}, 
-{@link javax.annotation.PreDestroy}, {@link javax.interceptor.AroundConstruct}.</p>
+given interceptor method type: {@link jakarta.interceptor.AroundInvoke}, 
+{@link jakarta.interceptor.AroundTimeout}, {@link javax.annotation.PostConstruct}, 
+{@link javax.annotation.PreDestroy}, {@link jakarta.interceptor.AroundConstruct}.</p>
 
 <h3>Interceptor classes</h3>
 
@@ -97,11 +97,11 @@ target class in several ways:</p>
   <li>By annotating both the interceptor class and the target class with an 
   interceptor binding annotation. The set of 
   interceptor bindings for the interceptor are specified by annotating the interceptor 
-  class with the binding types and the {@link javax.interceptor.Interceptor} 
+  class with the binding types and the {@link jakarta.interceptor.Interceptor} 
   annotation.</li>
-  <li>By using the {@link javax.interceptor.Interceptors Interceptors} annotation 
-  to specify and associate one or more interceptor classes 
-  with a target class or method or constructor of a target class.</li>
+  <li>By using the {@link jakarta.interceptor.Interceptors Interceptors} annotation
+      to specify and associate one or more interceptor classes
+      with a target class or method or constructor of a target class.</li>
   <li>If a deployment descriptor is supported, it can be used to associate interceptor 
   classes with the target class and/or methods of the target class and specify the 
   order of interceptor invocation or override metadata specified by annotations.</li>
@@ -112,10 +112,10 @@ In the case of around-invoke method interceptors, the interceptor applies to all
 business methods of the target class. In the case of timeout method interceptors, 
 the interceptor applies to all timeout methods of the target class.</p>
 
-<p>The {@link javax.interceptor.ExcludeClassInterceptors} annotation or, if supported, 
-a deployment descriptor may be used to exclude the invocation of class level 
-interceptors defined by the {@link javax.interceptor.Interceptors Interceptors} annotation 
-for a method or constructor of a target class.</p>
+<p>The {@link jakarta.interceptor.ExcludeClassInterceptors} annotation or, if supported,
+    a deployment descriptor may be used to exclude the invocation of class level
+    interceptors defined by the {@link jakarta.interceptor.Interceptors Interceptors} annotation
+    for a method or constructor of a target class.</p>
 
 <p>An around-invoke interceptor may be defined to apply only to a specific method of the 
 target class. Likewise, an around-timeout interceptor may be defined to apply only to 
@@ -129,13 +129,13 @@ at the method level, the lifecycle callback interceptor methods are not invoked.
 deployment descriptor is supported, it may be used to define default interceptors and 
 their relative ordering.</p>
 
-<p>The {@link javax.interceptor.ExcludeDefaultInterceptors} annotation may be used to 
+<p>The {@link jakarta.interceptor.ExcludeDefaultInterceptors} annotation may be used to 
 exclude the invocation of default interceptors for a target class or method or constructor of a target class.</p>
 
 <h3>Interceptor lifecycle</h3>
 
 <p>The lifecycle of an interceptor instance is the same as that of the target class 
-instance with which it is associated. Except as noted below for {@link javax.interceptor.AroundConstruct}
+instance with which it is associated. Except as noted below for {@link jakarta.interceptor.AroundConstruct}
 lifecycle callback interceptors, when the target instance is created, a 
 corresponding interceptor instance is created for each associated interceptor class. 
 These interceptor instances are destroyed when the target instance fails to be created or
@@ -150,7 +150,7 @@ of dependency injection. Dependency injection is performed when the interceptor 
 is created, using the naming context of the associated target class. </p>
 
 <p>With the exception of
-of {@link javax.interceptor.AroundConstruct} lifecycle callback interceptors, 
+of {@link jakarta.interceptor.AroundConstruct} lifecycle callback interceptors, 
 no interceptor methods are invoked until after dependency injection has been
 completed on both the interceptor instances and the target instance.</p>
 
@@ -162,29 +162,29 @@ instance.</p>
 invoked before the target instance and all interceptor instances associated with it are 
 destroyed.</p>
 
-<p>When a {@link javax.interceptor.AroundConstruct} lifecycle callback interceptor 
+<p>When a {@link jakarta.interceptor.AroundConstruct} lifecycle callback interceptor 
 is used, the following rules apply:</p>
 
 <ul>
-  <li>The {@link javax.interceptor.AroundConstruct} lifecycle callback is invoked 
+  <li>The {@link jakarta.interceptor.AroundConstruct} lifecycle callback is invoked 
   after dependency injection has been completed on instances of all interceptor 
   classes associated with the target class. Injection of the target component into 
-  interceptor instances that are invoked during the {@link javax.interceptor.AroundConstruct} 
+  interceptor instances that are invoked during the {@link jakarta.interceptor.AroundConstruct} 
   lifecycle callback is not supported.</li>
   <li>The target instance is created and its constructor injection is performed, if applicable, 
-  after the last interceptor method in the {@link javax.interceptor.AroundConstruct}
-  interceptor chain invokes the {@link javax.interceptor.InvocationContext#proceed InvocationContext.proceed()} method. 
-  If the {@link javax.interceptor.InvocationContext#proceed InvocationContext.proceed()} method is not invoked by an 
+  after the last interceptor method in the {@link jakarta.interceptor.AroundConstruct}
+  interceptor chain invokes the {@link jakarta.interceptor.InvocationContext#proceed InvocationContext.proceed()} method. 
+  If the {@link jakarta.interceptor.InvocationContext#proceed InvocationContext.proceed()} method is not invoked by an 
   interceptor method, the target instance will not be created.</li>
-  <li>The {@link javax.interceptor.AroundConstruct} interceptor method can access 
-  the constructed instance using the {@link javax.interceptor.InvocationContext#getTarget InvocationContext.getTarget()}
-  method after the {@link javax.interceptor.InvocationContext#proceed InvocationContext.proceed()} completes.</li>
+  <li>The {@link jakarta.interceptor.AroundConstruct} interceptor method can access 
+  the constructed instance using the {@link jakarta.interceptor.InvocationContext#getTarget InvocationContext.getTarget()}
+  method after the {@link jakarta.interceptor.InvocationContext#proceed InvocationContext.proceed()} completes.</li>
   <li>Dependency injection on the target instance is not completed until after invocations 
-  of all interceptor methods in the {@link javax.interceptor.AroundConstruct} interceptor chain complete successfully.
+  of all interceptor methods in the {@link jakarta.interceptor.AroundConstruct} interceptor chain complete successfully.
   <li>The {@link javax.annotation.PostConstruct} lifecycle callback chain for the 
   target instance, if any, will be invoked after dependency injection has been completed 
   on the target instance.</li>
-  <li>An {@link javax.interceptor.AroundConstruct} lifecycle callback interceptor 
+  <li>An {@link jakarta.interceptor.AroundConstruct} lifecycle callback interceptor 
   method should exercise caution when invoking methods of the target instance since its 
   dependency injection may not have been completed.</li>
 </ul>
@@ -194,7 +194,7 @@ is used, the following rules apply:</p>
 <p>A lifecycle callback interceptor method is a non-final, non-static method. A 
 lifecycle callback interceptor method declared by the target class (or superclass) must 
 have no parameters. A lifecycle callback interceptor method declared by an interceptor 
-class must have a single parameter of type {@link javax.interceptor.InvocationContext}.</p>
+class must have a single parameter of type {@link jakarta.interceptor.InvocationContext}.</p>
  
 <pre>
 &#064;PostConstruct
@@ -218,15 +218,15 @@ by their target class and/or method. The transaction context may be also changed
 transactional interceptors in the invocation chain.</p>
  
 <p>Lifecycle callback interceptor methods may throw runtime exceptions but not checked
-exceptions, except for {@link javax.interceptor.AroundConstruct} methods, which may
+exceptions, except for {@link jakarta.interceptor.AroundConstruct} methods, which may
 throw may throw any exceptions that are allowed by the throws clause of the constructor 
 on which they are  interposing.</p>
 
-@see javax.interceptor.AroundConstruct
-@see javax.interceptor.AroundInvoke
-@see javax.interceptor.AroundTimeout
-@see javax.interceptor.Interceptors
-@see javax.interceptor.InvocationContext
+@see AroundConstruct
+@see AroundInvoke
+@see AroundTimeout
+@see Interceptors
+@see InvocationContext
 
 </BODY>
 </HTML>

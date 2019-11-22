@@ -14,7 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
 
-package javax.interceptor;
+package jakarta.interceptor;
 
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
 
 /**
  * Defines an interceptor method that interposes on business methods. The method must take a single parameter of type
- * {@link javax.interceptor.InvocationContext} and have a return type {@link java.lang.Object}. The method must not be
+ * {@link InvocationContext} and have a return type {@link java.lang.Object}. The method must not be
  * declared as abstract, final, or static.
  *
  * <pre>
@@ -53,7 +53,7 @@ import java.lang.annotation.Target;
  * <p>
  * <code>AroundInvoke</code> methods may throw any exceptions that are allowed by the throws clause of the method on which
  * they are interposing. They may catch and suppress exceptions and recover by calling
- * {@link javax.interceptor.InvocationContext#proceed()}.
+ * {@link InvocationContext#proceed()}.
  * </p>
  *
  * @since Jakarta Interceptors 1.0

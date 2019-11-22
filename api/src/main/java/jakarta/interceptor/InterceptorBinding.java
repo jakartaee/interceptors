@@ -14,7 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
 
-package javax.interceptor;
+package jakarta.interceptor;
 
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
@@ -41,7 +41,7 @@ import java.lang.annotation.Target;
  *
  * <p>
  * The interceptor bindings of an interceptor are specified by annotating the interceptor class with the binding types
- * and the {@link javax.interceptor.Interceptor Interceptor} annotation.
+ * and the {@link Interceptor Interceptor} annotation.
  * </p>
  *
  * <pre>
@@ -96,7 +96,7 @@ import java.lang.annotation.Target;
  * by all beans and other interceptor binding types that declare that interceptor binding type.
  * </p>
  *
- * @see javax.interceptor.Interceptor
+ * @see Interceptor
  *
  * @since Jakarta Interceptors 1.1
  */

@@ -14,7 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
 
-package javax.interceptor;
+package jakarta.interceptor;
 
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
@@ -33,11 +33,11 @@ import java.lang.annotation.Target;
  *
  * <p>
  * Use of this annotation is required when declaring an interceptor using interceptor binding annotations. It is ignored
- * during the processing of classes bound using the {@link javax.interceptor.Interceptors Interceptors} annotation (or
+ * during the processing of classes bound using the {@link Interceptors Interceptors} annotation (or
  * when the Jakarta Enterprise Beans deployment descriptor is used to associate the interceptor with the target class).
  * </p>
  *
- * @see javax.interceptor.Interceptors
+ * @see Interceptors
  *
  * @since Jakarta Interceptors 1.1
  */
@@ -93,7 +93,7 @@ public @interface Interceptor {
      * </pre>
      *
      * The {@link javax.annotation.Priority Priority} annotation is ignored when computing the invocation order of
-     * interceptors bound to a target using the {@link javax.interceptor.Interceptors Interceptors} annotation.
+     * interceptors bound to a target using the {@link Interceptors Interceptors} annotation.
      *
      * @see javax.annotation.Priority
      * 

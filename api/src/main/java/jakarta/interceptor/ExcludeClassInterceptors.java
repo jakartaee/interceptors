@@ -14,34 +14,34 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
 
-package javax.interceptor;
+package jakarta.interceptor;
 
 import static java.lang.annotation.ElementType.CONSTRUCTOR;
 import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * Used to exclude default interceptors for a target class or for a lifecycle callback method, business method, timeout
- * method, or constructor of a target class.
+ * Used to exclude class-level interceptors for the lifecycle callback method, business method, timeout method, or
+ * constructor to which it is applied.
+ *
+ * <p>
+ * Excludes interceptors defined by means of the {@link Interceptors} annotation. Use of this
+ * annotation to exclude interceptors defined by means of interceptor binding annotations is not portable.
+ * </p>
  *
  * <pre>
- * &#064;ExcludeDefaultInterceptors
- * &#064;Interceptors(ValidationInterceptor.class)
- * public class Order { ... }
- * </pre>
- *
- * <pre>
- * &#064;ExcludeDefaultInterceptors
+ * &#064;ExcludeClassInterceptors
  * public void updateOrder(Order order) { ... }
  * </pre>
  *
+ * @see ExcludeDefaultInterceptors
+ *
  * @since Jakarta Interceptors 1.0
  */
-@Target({ TYPE, METHOD, CONSTRUCTOR })
+@Target({ METHOD, CONSTRUCTOR })
 @Retention(RUNTIME)
-public @interface ExcludeDefaultInterceptors {
+public @interface ExcludeClassInterceptors {
 }
