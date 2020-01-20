@@ -14,34 +14,51 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
 
-package javax.interceptor;
+package jakarta.interceptor;
 
 import static java.lang.annotation.ElementType.CONSTRUCTOR;
 import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * Used to exclude class-level interceptors for the lifecycle callback method, business method, timeout method, or
- * constructor to which it is applied.
- *
- * <p>
- * Excludes interceptors defined by means of the {@link javax.interceptor.Interceptors} annotation. Use of this
- * annotation to exclude interceptors defined by means of interceptor binding annotations is not portable.
- * </p>
+ * Declares an ordered list of interceptors for a target class, or for a method or a constructor of a target class.
  *
  * <pre>
- * &#064;ExcludeClassInterceptors
+ * &#064;Interceptors(ValidationInterceptor.class)
+ * public class Order { ... }
+ * </pre>
+ *
+ * <pre>
+ * &#064;Interceptors({ValidationInterceptor.class, SecurityInterceptor.class})
  * public void updateOrder(Order order) { ... }
  * </pre>
  *
- * @see javax.interceptor.ExcludeDefaultInterceptors
+ * <p>
+ * Only business method interception or timeout method interception may be specified by a method-level
+ * <code>Interceptors</code> declaration.
+ * </p>
+ *
+ * <p>
+ * Constructor interception may be specified by a constructor-level <code>Interceptors</code> declaration.
+ * </p>
+ *
+ * @see ExcludeClassInterceptors
+ * @see ExcludeDefaultInterceptors
  *
  * @since Jakarta Interceptors 1.0
  */
-@Target({ METHOD, CONSTRUCTOR })
+@Target({ TYPE, METHOD, CONSTRUCTOR })
 @Retention(RUNTIME)
-public @interface ExcludeClassInterceptors {
+public @interface Interceptors {
+
+    /**
+     * An ordered list of interceptors.
+     *
+     * @return an array representing the interceptor classes
+     */
+    Class[] value();
 }

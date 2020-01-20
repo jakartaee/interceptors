@@ -14,7 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
 
-package javax.interceptor;
+package jakarta.interceptor;
 
 import static java.lang.annotation.ElementType.CONSTRUCTOR;
 import static java.lang.annotation.ElementType.METHOD;
@@ -25,40 +25,23 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * Declares an ordered list of interceptors for a target class, or for a method or a constructor of a target class.
+ * Used to exclude default interceptors for a target class or for a lifecycle callback method, business method, timeout
+ * method, or constructor of a target class.
  *
  * <pre>
+ * &#064;ExcludeDefaultInterceptors
  * &#064;Interceptors(ValidationInterceptor.class)
  * public class Order { ... }
  * </pre>
  *
  * <pre>
- * &#064;Interceptors({ValidationInterceptor.class, SecurityInterceptor.class})
+ * &#064;ExcludeDefaultInterceptors
  * public void updateOrder(Order order) { ... }
  * </pre>
- *
- * <p>
- * Only business method interception or timeout method interception may be specified by a method-level
- * <code>Interceptors</code> declaration.
- * </p>
- *
- * <p>
- * Constructor interception may be specified by a constructor-level <code>Interceptors</code> declaration.
- * </p>
- *
- * @see javax.interceptor.ExcludeClassInterceptors
- * @see javax.interceptor.ExcludeDefaultInterceptors
  *
  * @since Jakarta Interceptors 1.0
  */
 @Target({ TYPE, METHOD, CONSTRUCTOR })
 @Retention(RUNTIME)
-public @interface Interceptors {
-
-    /**
-     * An ordered list of interceptors.
-     *
-     * @return an array representing the interceptor classes
-     */
-    Class[] value();
+public @interface ExcludeDefaultInterceptors {
 }
