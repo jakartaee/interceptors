@@ -48,7 +48,7 @@ public @interface Interceptor {
     /**
      * <p>
      * Priorities that define the order in which interceptors are invoked. These values are intended to be used with the
-     * {@link javax.annotation.Priority Priority} annotation for interceptors that are defined by means of interceptor
+     * {@link jakarta.annotation.Priority Priority} annotation for interceptors that are defined by means of interceptor
      * binding.
      *
      * <p>
@@ -92,10 +92,10 @@ public @interface Interceptor {
      * public class ValidationInterceptor { ... }
      * </pre>
      *
-     * The {@link javax.annotation.Priority Priority} annotation is ignored when computing the invocation order of
+     * The {@link jakarta.annotation.Priority Priority} annotation is ignored when computing the invocation order of
      * interceptors bound to a target using the {@link Interceptors Interceptors} annotation.
      *
-     * @see javax.annotation.Priority
+     * @see jakarta.annotation.Priority
      * 
      * @since Jakarta Interceptors 1.2
      */
