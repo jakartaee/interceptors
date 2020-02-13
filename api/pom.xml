@@ -17,54 +17,28 @@
 
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"> <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
 
-    <parent>
+   <parent>
         <groupId>org.eclipse.ee4j</groupId>
         <artifactId>project</artifactId>
         <version>1.0.5</version>
         <relativePath/>
     </parent>
 
-    <groupId>jakarta.interceptor</groupId>
-    <artifactId>jakarta.interceptor-api</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+   <groupId>jakarta.interceptor</groupId>
+   <artifactId>jakarta.interceptor-api</artifactId>
+   <version>2.0.0-SNAPSHOT</version>
 
-    <name>Jakarta Interceptors</name>
-    <description>
+   <name>Jakarta Interceptors</name>
+   <description>
         Jakarta Interceptors defines a means of interposing on business method invocations
         and specific events—such as lifecycle events and timeout events—that occur on instances
         of Jakarta EE components and other managed classes.
     </description>
-    <url>https://github.com/eclipse-ee4j/interceptor-api</url>
-
-    <properties>
-        <non.final>false</non.final>
-        <extension.name>jakarta.interceptor</extension.name>
-        <spec.version>2.0</spec.version>
-        <findbugs.version>3.0.1</findbugs.version>
-        <findbugs.exclude>exclude.xml</findbugs.exclude>
-        <findbugs.threshold>Low</findbugs.threshold>
-    </properties>
-
-    <developers>
-        <developer>
-            <id>yaminikb</id>
-            <name>Yamini K B</name>
-            <organization>Oracle Corporation</organization>
-            <organizationUrl>http://www.oracle.com/</organizationUrl>
-        </developer>
-    </developers>
-
-    <contributors>
-        <contributor>
-            <name>Marina Vatkina</name>
-            <organization>Oracle Corporation</organization>
-            <organizationUrl>http://www.oracle.com/</organizationUrl>
-        </contributor>
-    </contributors>
-
-    <licenses>
+   <url>https://github.com/eclipse-ee4j/interceptor-api</url>
+   <licenses>
         <license>
             <name>EPL 2.0</name>
             <url>http://www.eclipse.org/legal/epl-2.0</url>
@@ -77,19 +51,43 @@
         </license>
     </licenses>
 
-    <issueManagement>
-        <system>Github</system>
-        <url>https://github.com/eclipse-ee4j/interceptor-api/issues</url>
-    </issueManagement>
+   <developers>
+        <developer>
+            <id>yaminikb</id>
+            <name>Yamini K B</name>
+            <organization>Oracle Corporation</organization>
+            <organizationUrl>http://www.oracle.com/</organizationUrl>
+        </developer>
+    </developers>
+   <contributors>
+        <contributor>
+            <name>Marina Vatkina</name>
+            <organization>Oracle Corporation</organization>
+            <organizationUrl>http://www.oracle.com/</organizationUrl>
+        </contributor>
+    </contributors>
 
-    <scm>
+   <scm>
         <connection>scm:git:ssh://git@github.com/eclipse-ee4j/interceptor-api.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/eclipse-ee4j/interceptor-api.git</developerConnection>
         <url>https://github.com/eclipse-ee4j/interceptor-api</url>
         <tag>HEAD</tag>
     </scm>
-    
-    <dependencies>
+   <issueManagement>
+        <system>Github</system>
+        <url>https://github.com/eclipse-ee4j/interceptor-api/issues</url>
+    </issueManagement>
+
+   <properties>
+        <non.final>false</non.final>
+        <extension.name>jakarta.interceptor</extension.name>
+        <spec.version>2.0</spec.version>
+        <findbugs.version>3.0.1</findbugs.version>
+        <findbugs.exclude>exclude.xml</findbugs.exclude>
+        <findbugs.threshold>Low</findbugs.threshold>
+    </properties>
+
+   <dependencies>
         <dependency>
             <groupId>jakarta.annotation</groupId>
             <artifactId>jakarta.annotation-api</artifactId>
@@ -97,7 +95,7 @@
         </dependency>
     </dependencies>
 
-    <build>
+   <build>
         <resources>
             <resource>
                 <directory>src/main/java</directory>
@@ -121,7 +119,6 @@
                 </excludes>
             </resource>
         </resources>
-        
         <plugins>
             <!-- Restricts the Java version to 1.8 -->
             <plugin>
@@ -298,7 +295,5 @@ Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">
                 </configuration>
             </plugin>
         </plugins>
-        
     </build>
-    
 </project>
