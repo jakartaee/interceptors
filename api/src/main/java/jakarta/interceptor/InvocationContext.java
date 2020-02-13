@@ -59,8 +59,8 @@ public interface InvocationContext {
 
     /**
      * Returns the timer object associated with a timeout method invocation on the target class, or a null value for
-     * interceptor method types other than {@link AroundTimeout}. For example, when associated with an Jakarta Enterprise
-     * Beans component timeout, this method returns {@code javax.ejb.Timer}.
+     * interceptor method types other than {@link AroundTimeout}. For example, when associated with a Jakarta Enterprise
+     * Beans component timeout, this method returns {@code jakarta.ejb.Timer}.
      *
      * @return the timer object or a null value
      *

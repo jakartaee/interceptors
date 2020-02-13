@@ -50,10 +50,10 @@ which interpose on business methods of the target class. </li>
 <li> {@link jakarta.interceptor.AroundTimeout} interceptor methods,
 which interpose on the invocation of timeout methods, in response to timer events.</li>
 
-<li> {@link javax.annotation.PostConstruct} interceptor methods, which are invoked
+<li> {@link jakarta.annotation.PostConstruct} interceptor methods, which are invoked
 after dependency injection has been completed on the target instance.</li>
 
-<li> {@link javax.annotation.PreDestroy} interceptor methods, which are invoked 
+<li> {@link jakarta.annotation.PreDestroy} interceptor methods, which are invoked 
 before the target instance and all interceptor instances associated with it are
 destroyed.</li>
 
@@ -61,8 +61,8 @@ destroyed.</li>
 on the invocation of the constructor of the target instance.</li>
 </ul>
 
-{@link javax.annotation.PostConstruct}, {@link
-javax.annotation.PreDestroy}, and {@link
+{@link jakarta.annotation.PostConstruct}, {@link
+jakarta.annotation.PreDestroy}, and {@link
 AroundConstruct} interceptor methods are
 collectively referred to as lifecycle callback interceptor methods.
 
@@ -74,8 +74,8 @@ may not be declared <code>abstract</code>, <code>static</code>, or
 <p>An interceptor class or target class may have multiple interceptor methods. However, 
 an interceptor class or target class may have no more than one interceptor method of a
 given interceptor method type: {@link jakarta.interceptor.AroundInvoke}, 
-{@link jakarta.interceptor.AroundTimeout}, {@link javax.annotation.PostConstruct}, 
-{@link javax.annotation.PreDestroy}, {@link jakarta.interceptor.AroundConstruct}.</p>
+{@link jakarta.interceptor.AroundTimeout}, {@link jakarta.annotation.PostConstruct}, 
+{@link jakarta.annotation.PreDestroy}, {@link jakarta.interceptor.AroundConstruct}.</p>
 
 <h3>Interceptor classes</h3>
 
@@ -154,11 +154,11 @@ of {@link jakarta.interceptor.AroundConstruct} lifecycle callback interceptors,
 no interceptor methods are invoked until after dependency injection has been
 completed on both the interceptor instances and the target instance.</p>
 
-<p>{@link javax.annotation.PostConstruct} interceptor methods, if any, are invoked after
+<p>{@link jakarta.annotation.PostConstruct} interceptor methods, if any, are invoked after
 dependency injection has taken place on both the interceptor instances and the target 
 instance.</p>
 
-<p>{@link javax.annotation.PreDestroy} interceptor methods, if any, are 
+<p>{@link jakarta.annotation.PreDestroy} interceptor methods, if any, are 
 invoked before the target instance and all interceptor instances associated with it are 
 destroyed.</p>
 
@@ -181,7 +181,7 @@ is used, the following rules apply:</p>
   method after the {@link jakarta.interceptor.InvocationContext#proceed InvocationContext.proceed()} completes.</li>
   <li>Dependency injection on the target instance is not completed until after invocations 
   of all interceptor methods in the {@link jakarta.interceptor.AroundConstruct} interceptor chain complete successfully.
-  <li>The {@link javax.annotation.PostConstruct} lifecycle callback chain for the 
+  <li>The {@link jakarta.annotation.PostConstruct} lifecycle callback chain for the 
   target instance, if any, will be invoked after dependency injection has been completed 
   on the target instance.</li>
   <li>An {@link jakarta.interceptor.AroundConstruct} lifecycle callback interceptor 
