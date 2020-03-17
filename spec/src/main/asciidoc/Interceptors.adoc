@@ -1,0 +1,1891 @@
+:sectnums:
+= Jakarta Interceptors Specification, Version 1.2
+
+Copyright (c) 2017, 2019 Oracle and/or its affiliates. All rights reserved.
+
+Oracle and Java are registered trademarks of Oracle and/or its 
+affiliates. Other names may be trademarks of their respective owners. 
+
+=== Overview
+
+Interceptors are used to interpose on
+business method invocations and specific events—such as lifecycle events
+and timeout events—that occur on instances of Java EE components and
+other managed classes.
+
+An interceptor method is either a method of
+the component class (called the target class) or a method of a separate
+class (called the interceptor class) that is associated with the target
+class.
+
+=== Revision History
+
+image:intercept-4.png[image]
+
+This document is an update to the
+Interceptors specification 1.2. Version 1.1 was based on the
+Interceptors chapter of the Enterprise JavaBeansTM 3.0 (EJB)
+specification link:intercept.html#a541[See Enterprise
+JavaBeansTM, version 3.0. http://jcp.org/en/jsr/detail?id=220.]. Version
+1.2 included interceptor binding definitions that were originally
+defined in the Contexts and Dependency Injection for the Java EE
+Platform (CDI) specification link:intercept.html#a543[See
+Contexts and Dependency Injection for the Java EE Platform 1.1 (CDI
+specification) http://jcp.org/en/jsr/detail?id=346.].
+
+The change log for the current version is
+found in link:intercept.html#a549[See Change Log].
+
+=== [[a7]]Relationship to Other Specifications
+
+image:intercept-4.png[image]
+
+The Java EE Platform specification requires
+support for interceptors. The use of interceptors defined by means of
+the _Interceptors_ annotation is required to be supported for EJB and
+Managed Bean components, including in the absence of CDI. When CDI is
+enabled, the use of interceptors defined both by means of interceptor
+binding annotations and by means of the _Interceptors_ annotation is
+required to be supported for component classes that support injection,
+as described in the section “Annotations and Injection” of the Java EE
+Platform specification link:intercept.html#a546[See Java
+Platform, Enterprise Edition (Java EE), v7.
+http://jcp.org/en/jsr/detail?id=342.].
+
+Both the EJB and the CDI specifications
+provide extensions to this specification. Other specifications may
+choose to do so in the future. Such specifications are referred to in
+this document as extension specifications. This document outlines
+permissible extensions to this specification and defines requirements
+for extension specifications.
+
+=== Document Conventions
+
+image:intercept-4.png[image]
+
+The regular Times font is used for
+information that is prescriptive by the Interceptors specification.
+
+The italic Times font is used for paragraphs
+that contain descriptive information, such as notes describing typical
+use, or notes clarifying the text with prescriptive specification.
+
+The Courier font is used for code examples.
+
+=== Interceptor Programming Contract
+
+=== [[a15]]Terminology
+
+image:intercept-4.png[image]
+
+The following terminology is used in this
+document:
+
+ _Interceptor class_ : a class containing
+interceptor methods that is designed to be associated with a target
+class, method, or constructor.
+
+ _Interceptor_ : instance of an interceptor
+class.
+
+ _Interceptor method_ : a method of an
+interceptor class or of a target class that is invoked to interpose on
+the invocation of a method of the target class, a constructor of the
+target class, a lifecycle event of the target class, or a timeout method
+of the target class.
+
+=== [[a20]]Definition of Interceptor Classes and Interceptor Methods
+
+image:intercept-4.png[image]
+
+An interceptor method for a target class may
+be declared in the target class, in an interceptor class associated with
+the target class, or in a superclass of the target class or interceptor
+class.
+
+Any number of interceptor classes may be
+associated with a target class. See Chapter
+link:intercept.html#a446[See Interceptor Ordering] for rules on
+interceptor ordering.
+
+An interceptor class must not be abstract and
+must have a public no-arg constructor.
+
+This specification defines the interceptor
+method types listed below. Extension specifications may define
+additional interceptor method types.
+
+Around-invoke interceptor methods (annotated
+with the _javax.interceptor.AroundInvoke_ annotation). Around-invoke
+interceptor methods interpose on the invocation of business methods.
+
+Around-timeout interceptor methods (annotated
+with the _javax.interceptor.AroundTimeout_ annotation). Around-timeout
+interceptor methods interpose on the invocation of timeout methods, in
+response to timer events.
+
+Post-construct interceptor methods (annotated
+with the _javax.annotation.PostConstruct_ annotation). Post-construct
+interceptor methods are invoked after dependency injection has been
+completed on the target instance.
+
+Pre-destroy interceptor methods (annotated
+with the _javax.annotation.PreDestroy_ annotation). Pre-destroy
+interceptor methods are invoked before the target instance and all
+interceptor instances associated with it are destroyed by the container.
+
+Around-construct interceptor methods
+(annotated with the _javax.interceptor.AroundConstruct_ annotation).
+Around-construct interceptor methods interpose on the invocation of the
+constructor of the target instance.
+
+Post-construct, pre-destroy, and
+around-construct interceptor methods are collectively referred to as
+_lifecycle callback interceptor methods_ . Extension specifications may
+define additional lifecycle callback events and lifecycle callback
+interceptor method types.
+
+Up to one interceptor method of each
+interceptor method type may be defined in the same class. More
+specifically, up to one around-invoke interceptor method, one
+around-timeout interceptor method, and one lifecycle callback
+interceptor method for each of the different lifecycle events may be
+defined in the same class. Only the interceptor methods of the
+interceptor class that are relevant for the given invocation context are
+invoked. For example, when a business method is invoked, around-invoke
+interceptor methods are invoked, but any around-construct,
+around-timeout, post-construct, or pre-destroy methods are ignored.
+
+A single interceptor method may be defined to
+interpose on any combination of business methods, timeout methods, and
+lifecycle callback events.
+
+Interceptor methods and interceptor classes
+may be defined for a class by means of metadata annotations or,
+optionally, by means of a deployment descriptor.
+
+Interceptor classes may be associated with
+the target class using either interceptor binding annotations (see
+link:intercept.html#a303[See Associating Interceptors with
+Classes and Methods using Interceptor Bindings]) or the
+_javax.interceptor.Interceptors_ annotation (see
+link:intercept.html#a423[See Associating Interceptors with
+Classes and Methods using the Interceptors Annotation]). Typically only
+one interceptor association type is used for any target class.
+
+An extension specification may use a
+deployment descriptor to specify the invocation order of interceptors or
+to override the order specified in metadata annotations. A deployment
+descriptor can optionally be used to define interceptors, to define
+default interceptors, or to associate interceptors with a target class.
+For example, the EJB specification link:intercept.html#a542[See
+Enterprise JavaBeansTM, version 3.2.
+http://jcp.org/en/jsr/detail?id=345.] requires support for the
+ejb-jar.xml deployment descriptor and the CDI specification
+link:intercept.html#a543[See Contexts and Dependency Injection
+for the Java EE Platform 1.1 (CDI specification)
+http://jcp.org/en/jsr/detail?id=346.] requires support for the beans.xml
+deployment descriptor.
+
+=== Interceptor Life Cycle
+
+image:intercept-4.png[image]
+
+The lifecycle of an interceptor instance is
+the same as that of the target instance with which it is associated.
+
+Except as noted below, when the target
+instance is created, a corresponding instance is created for each
+associated interceptor class. These interceptor instances are destroyed
+if the target instance fails to be created or when the target instance
+is destroyed by the container.
+
+An interceptor instance may be the target of
+dependency injection. Dependency injection is performed when the
+interceptor instance is created, using the naming context of the
+associated target class.
+
+With the exception of around-construct
+lifecycle callback interceptor methods, no interceptor methods are
+invoked until after dependency injection has been completed on both the
+interceptor instances and the target instancelink:#a567[1].
+
+Post-construct interceptor methods for the
+target instance are invoked after dependency injection has been
+completed on the target instance.
+
+{empty}Pre-destroy interceptor methods are
+invoked before the target instance and all interceptor instances
+associated with it are destroyed.link:#a568[2]
+
+The following rules apply specifically to
+around-construct lifecycle callback interceptor methods:
+
+Around-construct lifecycle callback
+interceptor methods are invoked after dependency injection has been
+completed on the instances of all interceptor classes associated with
+the target class. Injection of the target component into interceptor
+instances that are invoked during the around-construct lifecycle
+callback is not supported.
+
+The target instance is created _after_ the
+last interceptor method in the around-construct interceptor chain
+invokes the InvocationContext.proceed method. If the constructor for the
+target instance supports injection, such constructor injection is
+performed. If the InvocationContext.proceed method is not invoked by an
+interceptor method, the target instance will not be created.
+
+An around-construct interceptor method can
+access the constructed instance using the InvocationContext.getTarget
+method after the InvocationContext.proceed method completes.
+
+Dependency injection on the target instance
+other than constructor injection is not completed until after the
+invocations of all interceptor methods in the around-construct
+interceptor chain complete successfully. Around-construct lifecycle
+callback interceptor methods should therefore exercise caution when
+invoking methods of the target instance since dependency injection on
+the target instance will not have been completed.
+
+=== [[a48]]Interceptor Environment
+
+An interceptor class shares the enterprise
+naming context of its associated target class. Annotations and/or XML
+deployment descriptor elements for dependency injection or for direct
+JNDI lookup refer to this shared naming context.
+
+Around-invoke and around-timeout interceptor
+methods run in the same Java thread as the associated target method.
+Around-construct interceptor methods run in the same Java thread as the
+target constructor.
+
+It is possible to carry state across multiple
+interceptor method invocations for a single method invocation or
+lifecycle callback event in the context data of the _InvocationContext_
+object. The _InvocationContext_ object also provides information that
+enables interceptor methods to control the behavior of the interceptor
+invocation chain, including whether the next method in the chain is
+invoked and the values of its parameters and result.
+
+=== [[a52]]InvocationContext
+
+image:intercept-4.png[image]
+
+The _InvocationContext_ object provides
+information that enables interceptor methods to control the behavior of
+the invocation chain.
+
+public interface InvocationContext \{
+
+ public Object getTarget();
+
+ public Object getTimer();
+
+ public Method getMethod();
+
+ public Constructor<?> getConstructor();
+
+ public Object[] getParameters();
+
+ public void setParameters(Object[] params);
+
+ public java.util.Map<String, Object>
+getContextData();
+
+ public Object proceed() throws Exception;
+
+}
+
+
+
+The same _InvocationContext_ instance is
+passed to each interceptor method for a given target class method or
+lifecycle event interception.
+
+The _InvocationContext_ instance allows an
+interceptor method to save information in the _Map_ obtained via the
+_getContextData_ method. This information can subsequently be retrieved
+and/or updated by other interceptor methods in the invocation chain, and
+thus serves as a means to pass contextual data between interceptors. The
+contextual data is not sharable across separate target class method or
+or lifecycle callback event invocations. The lifecycle of the
+_InvocationContext_ instance is otherwise unspecified.
+
+If interceptor methods are invoked as a
+result of the invocation on a web service endpoint, the map returned by
+_getContextData_ will be the JAX-WS _MessageContext_
+link:intercept.html#a544[See Java API for XML Web Services
+(JAX-WS 2.0). http://jcp.org/en/jsr/detail?id=224.].
+
+The _getTarget_ method returns the associated
+target instance. For around-construct lifecycle callback interceptor
+methods, getTarget returns null if called before the proceed method
+returns.
+
+The _getTimer_ method returns the timer
+object associated with a timeout method invocation. The _getTimer_
+method returns null for interceptor method types other than
+around-timeout interceptor methods.
+
+The _getMethod_ method returns the method of
+the target class for which the current interceptor method was invoked.
+The _getMethod_ returns null in a lifecycle callback interceptor method
+for which there is no corresponding lifecycle callback method declared
+in the target class (or inherited from a superclass) or in an
+around-construct lifecycle callback interceptor method.
+
+The getConstructor method returns the
+constructor of the target class for which the current around-construct
+interceptor method was invoked. The _getConstructor_ method returns null
+for interceptor method types other than around-construct interceptor
+methods.
+
+The _getParameters_ method returns the
+parameters of the method or constructor invocation. If the
+_setParameters_ method has been called, _getParameters_ returns the
+values to which the parameters have been set.
+
+The _setParameters_ method modifies the
+parameters used for the invocation of the target class method or
+constructor. Modifying the parameter values does not affect the
+determination of the method or the constructor that is invoked on the
+target class. The parameter types must match the types for the target
+class method or constructor, and the number of parameters supplied must
+equal the number of parameters on the target class method or
+constructorlink:#a569[3], or the _IllegalArgumentException_ is
+thrown to the _setParameters_ call.
+
+The _proceed_ method causes the invocation of
+the next interceptor method in the chain or, when called from the last
+around-invoke or around-timeout interceptor method, the target class
+method. For around-construct lifecycle callback interceptor methods, the
+invocation of the _proceed_ method in the last interceptor method in the
+chain causes the target instance to be created. Interceptor methods must
+always call the _InvocationContext.proceed_ method or no subsequent
+interceptor methods, target class method, or lifecycle callback methods
+will be invoked, or—in the case of around-construct interceptor
+methods—the target instance will not be created. The _proceed_ method
+returns the result of the next method invoked. If a method is of type
+_void_ , the invocation of the _proceed_ method returns _null_ . For
+around-construct lifecycle callback interceptor methods, the invocation
+of proceed in the last interceptor method in the chain causes the target
+instance to be created. For all other lifecycle callback interceptor
+methods, if there is no lifecycle callback interceptor method defined on
+the target class, the invocation of _proceed_ in the last interceptor
+method in the chain is a no-oplink:#a570[4], and _null_ is
+returned.
+
+=== [[a75]]Exceptions
+
+image:intercept-4.png[image]
+
+Interceptor methods are allowed to throw
+runtime exceptions or any checked exceptions that the associated target
+method or constructor allows within its _throws_ clause.
+
+Interceptor methods are allowed to catch and
+suppress exceptions and to recover by calling the
+_InvocationContext.proceed_ method.
+
+The invocation of the
+_InvocationContext.proceed_ method throws the same exception as any
+thrown by the associated target method unless an interceptor method
+further down the Java call stack has caught it and thrown a different
+exception or suppressed the exception. Exceptions and initialization
+and/or cleanup operations should typically be handled in _try_ / _catch_
+/ _finally_ blocks around the _proceed_ method.
+
+=== Business Method Interceptor Methods
+
+image:intercept-4.png[image]
+
+Interceptor methods that interpose on
+business method invocations are denoted by the _AroundInvoke_
+annotation.
+
+Around-invoke methods may be declared in
+interceptor classes, in the superclasses of interceptor classes, in the
+target class, and/or in superclasses of the target class. However, only
+one around-invoke method may be declared in a given class.
+
+Around-invoke methods can have _public_ ,
+_private_ , _protected_ , or _package_ level access. An around-invoke
+method must not be declared as _abstract, final or static_ .
+
+Around-invoke methods have the following
+signature:
+
+ _Object_ __ _<METHOD>(InvocationContext)_
+
+Note: An around-invoke interceptor method may
+be declared to throw any checked exceptions that the associated target
+method allows within its throws clause. It may be declared to throw the
+java.lang.Exception, _for example, if it_ interposes on several methods
+that can throw unrelated checked exceptions.
+
+An around-invoke method can invoke any
+component or resource that the method it is intercepting can invoke.
+
+In general, an around-invoke method
+invocation occurs within the same transaction and security context as
+the method on which it is interposing. However, note that the
+transaction context may be changed by transactional interceptor methods
+in the invocation chain, such as those defined by the _Java Transaction
+API_ specification link:intercept.html#a547[See JavaTM
+Transaction API (JTA), version 1.2.
+http://jcp.org/en/jsr/detail?id=907.] .
+
+The following example defines
+MonitoringInterceptor, which is used to interpose on ShoppingCart
+business methods:
+
+@Inherited
+
+@InterceptorBinding
+
+@Target(\{TYPE, METHOD}) @Retention(RUNTIME)
+
+public @interface Monitored \{}
+
+
+
+@Monitored @Interceptor
+
+public class MonitoringInterceptor \{
+
+
+
+ @AroundInvoke
+
+ public Object
+monitorInvocation(InvocationContext ctx) \{
+
+
+
+ //... log invocation data ...
+
+
+
+ return ctx.proceed();
+
+ }
+
+
+
+}
+
+
+
+@Monitored
+
+public class ShoppingCart \{
+
+
+
+ public void placeOrder(Order o) \{
+
+ ...
+
+ }
+
+}
+
+=== Interceptor Methods for Lifecycle Event Callbacks
+
+image:intercept-4.png[image]
+
+The AroundConstruct annotation specifies a
+lifecycle callback interceptor method that interposes on the invocation
+of the target instance’s constructor.
+
+The PostConstruct annotation specifies a
+lifecycle callback interceptor method that is invoked after the target
+instance has been constructed and dependency injection on that instance
+has been completed, but before any business method or other event, such
+as a timer event, is invoked on the target instance.
+
+The PreDestroy annotation specifies a
+lifecycle callback interceptor method that interposes on the target
+instance’s removal by the container.
+
+Extension specifications are permitted to
+define additional lifecycle events and lifecycle callback interceptor
+methods types.
+
+Around-construct interceptor methods may be
+only declared in interceptor classes and/or superclasses of interceptor
+classes. Around-construct interceptor methods must not be declared in
+the target class or in its superclasses.
+
+All other lifecycle callback interceptor
+methods can be declared in an interceptor class, superclass of an
+interceptor class, in the target class, and/or in a superclass of the
+target class.
+
+A single lifecycle callback interceptor
+method may be used to interpose on multiple lifecycle callback events.
+
+A given class may not have more than one
+lifecycle callback interceptor method for the same lifecycle event. Any
+subset or combination of lifecycle callback annotations may otherwise be
+specified on methods declared in a given class.
+
+Lifecycle callback interceptor methods are
+invoked in an unspecified security context. Lifecycle callback
+interceptor methods are invoked in a transaction context determined by
+their target class and/or methodlink:#a571[5].
+
+Lifecycle callback interceptor methods can
+have _public_ , _private_ , _protected_ , or _package_ level access. A
+lifecycle callback interceptor method must not be declared as abstract
+or _final_ . A lifecycle callback interceptor method must not be
+declared as _static_ except in an application client.
+
+Lifecycle callback interceptor methods
+declared in an interceptor class or superclass of an interceptor class
+must have one of the following signatures:
+
+void <METHOD>(InvocationContext)
+
+Object <METHOD>(InvocationContext)
+
+Note: A lifecycle callback interceptor method
+may be declared to throw checked exceptions including the
+java.lang.Exception if the same interceptor method interposes on
+business or timeout methods in addition to lifecycle events. If such an
+interceptor method returns a value, the value is ignored by the
+container when the method is invoked to interpose on a lifecycle event.
+
+Lifecycle callback interceptor methods
+declared in a target class or in a superclass of a target class must
+have the following signature:
+
+void <METHOD>()
+
+The following example declares lifecycle
+callback interceptor methods in both the interceptor class and the
+target class. Rules for interceptor ordering are described in
+link:intercept.html#a446[See Interceptor Ordering].
+
+public class MyInterceptor \{
+
+ ...
+
+ @PostConstruct
+
+ public void someMethod(InvocationContext
+ctx) \{
+
+ ...
+
+ ctx.proceed();
+
+ ...
+
+ }
+
+ @PreDestroy
+
+ public void
+someOtherMethod(InvocationContext ctx) \{
+
+ ...
+
+ ctx.proceed();
+
+ ...
+
+ }
+
+}
+
+
+
+@Interceptors(MyInterceptor.class)
+
+@Stateful
+
+public class ShoppingCartBean implements
+ShoppingCart \{
+
+ private float total;
+
+ private Vector productCodes;
+
+ ...
+
+ public int someShoppingMethod() \{
+
+ ...
+
+ }
+
+
+
+ @PreDestroy void endShoppingCart() \{
+
+ ...
+
+ }
+
+}
+
+=== Exceptions
+
+When invoked to interpose on lifecycle
+events, lifecycle callback interceptor methods may throw runtime
+exceptions, but—except for around-construct methods—may not throw
+checked exceptions.
+
+In addition to the rules specified in section
+link:intercept.html#a75[See Exceptions], the following rules
+apply to the lifecycle callback interceptor methods:
+
+A lifecycle callback interceptor method
+declared in an interceptor class or in a superclass of an interceptor
+class may catch an exception thrown by another lifecycle callback
+interceptor method in the invocation chain, and clean up before
+returning.
+
+Pre-destroy interceptor methods are not
+invoked when the target instance and the interceptors are discarded as a
+result of such exceptions: the lifecycle callback interceptor methods in
+the chain should perform any necessary clean-up operations as the
+interceptor chain unwinds.
+
+=== Timeout Method Interceptor Methods
+
+image:intercept-4.png[image]
+
+Interceptor methods that interpose on timeout
+methods are denoted by the _AroundTimeout_ annotation.
+
+NOTE: Timeout methods are currently specific
+to Enterprise JavaBeans, although Timer Service functionality may be
+extended to other specifications in the future, and extension
+specifications may define events that may be interposed on by
+around-timeout methods. The EJB Timer Service, defined by the Enterprise
+JavaBeansTM specification link:intercept.html#a542[See
+Enterprise JavaBeansTM, version 3.2.
+http://jcp.org/en/jsr/detail?id=345.], is a container-provided service
+that allows the Bean Provider to register enterprise beans for timer
+callbacks according to a calendar-based schedule, at a specified time,
+after a specified elapsed time, or at specified intervals. The timer
+callbacks registered with the Timer Service are called timeout methods.
+
+Around-timeout methods may be declared in
+interceptor classes, in superclasses of interceptor classes, in the
+target class, and/or in superclasses of the target class. However, only
+one around-timeout method may be declared in a given class.
+
+Around-timeout methods can have _public_ ,
+_private_ , _protected_ , or _package_ level access. An around-timeout
+method must not be declared as abstract, _final_ or _static_ .
+
+Around-timeout methods have the following
+signature:
+
+ _Object <METHOD>(InvocationContext)_ __ __
+
+Note: An around-timeout interceptor method
+should not throw application exceptions, but it may be declared to throw
+checked exceptions or the java.lang.Exception if the same interceptor
+method interposes on business methods in addition to the timeout
+methods.
+
+An around-timeout method can invoke any
+component or resource that its corresponding timeout method can invoke.
+
+An around-timeout method invocation occurs
+within the same transactionlink:#a572[6] and security context
+as the timeout method on which it is interposing.
+
+The _InvocationContext.getTimer_ method
+allows an around-timeout method to retrieve the timer object associated
+with the timeout.
+
+In the following example around-timeout
+interceptor is associated with two timeout methods:
+
+public class MyInterceptor \{
+
+
+
+ private Logger logger = ...;
+
+
+
+ @AroundTimeout
+
+ private Object
+aroundTimeout(InvocationContext ctx)
+
+ __ _throws Exception_ \{
+
+ logger.info("processing: " +
+ctx.getTimer().getInfo());
+
+ return ctx.proceed();
+
+ ...
+
+ }
+
+}
+
+
+
+@Interceptors(MyInterceptor.class)
+
+@Singleton
+
+public class CacheBean \{
+
+
+
+ private Data data;
+
+
+
+
+@Schedule(minute="*/30",hour="*",info="update-cache")
+
+ public void refresh(Timer t) \{
+
+ data.refresh();
+
+ }
+
+
+
+
+@Schedule(dayOfMonth="1",info="validate-cache")
+
+ public void validate(Timer t) \{
+
+ data.validate();
+
+ }
+
+
+
+}
+
+=== Constructor- and Method-level Interceptors
+
+image:intercept-4.png[image]
+
+Method-level interceptors are interceptor
+classes directly associated with a specific business or timeout method
+of the target class. Constructor-level interceptors are interceptor
+classes directly associated with a constructor of the target class.
+
+For example, an around-invoke interceptor
+method may be applied only to a specific business method of the target
+class— independent of the other methods of the target class—by using a
+method-level interceptor. Likewise, an around-timeout interceptor method
+may be applied only to a specific timeout method on the target class,
+independent of the other timeout methods of the target class.
+
+Method-level interceptors may not be
+associated with a lifecycle callback method of the target class.
+
+The same interceptor may be applied to more
+than one business or timeout method of the target class.
+
+If a method-level interceptor is applied to
+more than one method of a associated target class this does not affect
+the relationship between the interceptor instance and the target
+class—only a single instance of the interceptor class is created per
+target class instance.
+
+In the following example only the placeOrder
+method will be monitored:
+
+public class ShoppingCart \{
+
+
+
+ @Monitored
+
+ public void placeOrder() \{...}
+
+
+
+}
+
+In the following example, the MyInterceptor
+interceptor is applied to a subset of the business methods of the
+session bean. _Note_ that the created and removed methods of the
+MyInterceptor interceptor will not be invoked:
+
+public class MyInterceptor \{
+
+ ...
+
+ @AroundInvoke
+
+ public Object
+around_invoke(InvocationContext ctx) \{...}
+
+
+
+ @PostConstruct
+
+ public void created(InvocationContext ctx)
+\{...}
+
+
+
+ @PreDestroy
+
+ public void removed(InvocationContext ctx)
+\{...}
+
+}
+
+
+
+@Stateless
+
+public class MyBean \{
+
+
+
+ @PostConstruct
+
+ void init() \{...}
+
+
+
+ public void notIntercepted() \{...}
+
+
+
+ @Interceptors(org.acme.MyInterceptor.class)
+
+ public void someMethod() \{
+
+ ...
+
+ }
+
+
+
+ @Interceptors(org.acme.MyInterceptor.class)
+
+ public void anotherMethod() \{
+
+ ...
+
+ }
+
+}
+
+In the following example, the
+ValidationInterceptor interceptor interposes on the bean constructor
+only, and the _validateMethod_ interceptor method will not be invoked:
+
+@Inherited
+
+@InterceptorBinding
+
+@Target(\{CONSTRUCTOR, METHOD})
+
+@Retention(RUNTIME)
+
+public @interface ValidateSpecial \{}
+
+
+
+@ValidateSpecial
+
+public class ValidationInterceptor \{
+
+
+
+ @AroundConstruct
+
+ public void
+validateConstructor(InvocationContext ctx)\{... }
+
+
+
+ @AroundInvoke
+
+ public Object
+validateMethod(InvocationContext ctx)\{... }
+
+
+
+}
+
+
+
+public class SomeBean \{
+
+
+
+ @ValidateSpecial
+
+ SomeBean(...) \{
+
+ ...
+
+ }
+
+
+
+ public void someMethod() \{
+
+ ...
+
+ }
+
+}
+
+In the following example, the
+_validateConstructor_ method of the ValidationInterceptor interceptor
+interposes on the bean constructor, and the _validateMethod_ method of
+the interceptor interposes on the _anotherMethod_ business method of the
+bean.
+
+public class SomeBean \{
+
+
+
+ @ValidateSpecial
+
+ SomeBean(...) \{
+
+ ...
+
+ }
+
+
+
+ public void someMethod() \{
+
+ ...
+
+ }
+
+
+
+ @ValidateSpecial
+
+ public void anotherMethod() \{
+
+ ...
+
+ }
+
+}
+
+
+
+
+
+=== Default Interceptors
+
+image:intercept-4.png[image]
+
+Default interceptors are interceptors that
+apply to a set of target classes. An extension specification may support
+the use of a deployment descriptor or annotations to define default
+interceptors and their relative ordering.
+
+=== [[a303]]Associating Interceptors with Classes and Methods using Interceptor Bindings
+
+Interceptor bindings are intermediate
+annotations that may be used to associate interceptors with any
+component that is not itself an interceptor or decorator
+link:intercept.html#a546[See Java Platform, Enterprise Edition
+(Java EE), v7. http://jcp.org/en/jsr/detail?id=342.].
+
+=== Interceptor Binding Types
+
+image:intercept-4.png[image]
+
+An interceptor binding type is a Java
+annotation defined as Retention(RUNTIME). Typically an interceptor
+binding is defined as Target(\{TYPE, METHOD, CONSTRUCTOR}) or any subset
+of valid target types.
+
+An interceptor binding type may be declared
+by specifying the InterceptorBinding meta-annotation.
+
+@Inherited
+
+@InterceptorBinding
+
+@Target(\{TYPE, METHOD})
+
+@Retention(RUNTIME)
+
+public @interface Monitored \{}
+
+=== [[a313]]Interceptor binding types with additional interceptor bindings
+
+An interceptor binding type may declare other
+interceptor bindings.
+
+@Inherited
+
+@InterceptorBinding
+
+@Target(\{TYPE, METHOD})
+
+@Retention(RUNTIME)
+
+@Monitored
+
+public @interface DataAccess \{}
+
+Interceptor bindings are transitive—an
+interceptor binding declared by an interceptor binding type is inherited
+by all components and other interceptor binding types that declare that
+interceptor binding type.
+
+An interceptor binding type can only be
+applied to an interceptor binding type defining a subset of its target
+types. For example, interceptor binding types declared Target(TYPE) may
+not be applied to interceptor binding types declared Target(\{TYPE,
+METHOD}).
+
+=== Other sources of interceptor bindings
+
+An extension specification may define other
+sources of interceptor bindings, such as by CDI stereotypes.
+
+=== Declaring the Interceptor Bindings of an Interceptor
+
+image:intercept-4.png[image]
+
+The interceptor bindings of an interceptor
+are specified by annotating the interceptor class with the interceptor
+binding types and the Interceptor annotation and are called the set of
+interceptor bindings for the interceptor.
+
+@Monitored @Interceptor
+
+public class MonitoringInterceptor \{
+
+
+
+ @AroundInvoke
+
+ public Object
+monitorInvocation(InvocationContext ctx)
+
+ throws Exception \{ ... }
+
+
+
+}
+
+An interceptor class may declare multiple
+interceptor bindings.
+
+Multiple interceptors may declare the same
+interceptor bindings.
+
+If an interceptor does not declare an
+Interceptor annotation, it can be bound to components using the
+Interceptors annotation.
+
+An extension specification may define other
+ways of declaring an interceptor and binding an interceptor to a
+component, such as by means of a deployment descriptor.
+
+An interceptor declared using the Interceptor
+annotation should specify at least one interceptor binding.
+
+=== Binding an Interceptor to a Component
+
+image:intercept-4.png[image]
+
+An interceptor may be bound to a component by
+annotating the component class or a method or constructor of the
+component class with the interceptor binding type.
+
+In the following example, the
+MonitoringInterceptor is applied to the target class. It will therefore
+apply to all business methods of the class.
+
+@Monitored
+
+public class ShoppingCart \{ ... }
+
+
+
+In this example, the MonitoringInterceptor is
+applied to a single method:
+
+public class ShoppingCart \{
+
+
+
+ @Monitored
+
+ public void placeOrder() \{ ... }
+
+
+
+}
+
+A component class or a method or constructor
+of a component class may declare multiple interceptor bindings.
+
+The set of interceptor bindings for a method
+or constructor are those applied to the target class combined with those
+applied at method level or constructor level. Note that the interceptor
+bindings applied to the target class may include those inherited from
+its superclasses. The CDI specification rules for the inheritance of
+type-level metadata apply to the inheritance of interceptor bindings
+from superclasses of the target class. See
+link:intercept.html#a543[See Contexts and Dependency Injection
+for the Java EE Platform 1.1 (CDI specification)
+http://jcp.org/en/jsr/detail?id=346.].
+
+An interceptor binding declared on a method
+or constructor replaces an interceptor binding of the same type declared
+at class level or inherited from a superclasslink:#a572[7].
+
+An extension specification may define
+additional rules for combining interceptor bindings, such as
+interceptors defined via a CDI stereotype.
+
+If a component class declares or inherits a
+class-level interceptor binding, it must not be declared final, or have
+any non-static, non-private, final methods. If a component has a
+class-level interceptor binding and is declared final or has a
+non-static, non-private, final method, the container automatically
+detects the problem and treats it as a definition error, and causes
+deployment to fail.
+
+If a non-static, non-private method of a
+component class declares a method-level interceptor binding, neither the
+method nor the component class may be declared final. If a non-static,
+non-private, final method of a component has a method-level interceptor
+binding, the container automatically detects the problem and treats it
+as a definition error, and causes deployment to fail.
+
+=== Interceptor Resolution
+
+image:intercept-4.png[image]
+
+The process of matching interceptors to a
+given business method, timeout method, or lifecycle event of a component
+is called _interceptor resolution_ .
+
+For a lifecycle event other than instance
+construction, the interceptor bindings include the interceptor bindings
+declared or inherited by the component at the class level, including,
+recursively, interceptor bindings declared as meta-annotations of other
+interceptor bindings.
+
+For a business method, timeout method, or
+constructor, the interceptor bindings include the interceptor bindings
+declared or inherited by the component at the class level, including,
+recursively, interceptor bindings declared as meta-annotations of other
+interceptor bindings, together with all interceptor bindings declared on
+the constructor or method, including, recursively, interceptor bindings
+declared as meta-annotations of other interceptor bindings.
+
+An interceptor is bound to a method or
+constructor if:
+
+The method or constructor has all the
+interceptor bindings of the interceptor. A method or constructor has an
+interceptor binding of an interceptor if it has an interceptor binding
+with (a) the same type and (b) the same annotation member value for each
+member. An extension specification may further refine this rule. For
+example, the CDI specification link:intercept.html#a543[See
+Contexts and Dependency Injection for the Java EE Platform 1.1 (CDI
+specification) http://jcp.org/en/jsr/detail?id=346.] adds the
+javax.enterprise.util.Nonbinding annotation, causing member values to be
+ignored by the resolution process.
+
+The interceptor intercepts the given kind of
+lifecycle event or method.
+
+The interceptor is enabled. An interceptor is
+enabled if the _Priority_ annotation is applied to the interceptor
+classlink:#a574[8]. An extension specification may define other
+means of enabling interceptors. For example, the CDI specification
+enables an interceptor if the interceptor class is listed under the
+_<interceptors>_ element of the _beans.xml_ file for the bean archive.
+
+=== Interceptors with multiple bindings
+
+An interceptor class may specify multiple
+interceptor bindings.
+
+@Monitored @Logged @Interceptor
+@Priority(1100)
+
+public class MonitoringLoggingInterceptor \{
+
+ @AroundInvoke
+
+ public Object aroundInvoke(InvocationContext
+context)
+
+ throws Exception \{ ... }
+
+
+
+}
+
+This interceptor will be bound to all methods
+of this component:
+
+@Monitored @Logged
+
+public class ShoppingCart \{ ... }
+
+The MonitoringLoggingInterceptor will not be
+bound to methods of this component, since the Logged interceptor binding
+does not appear:
+
+@Monitored
+
+public class ShoppingCart \{
+
+
+
+ public void placeOrder() \{ ... }
+
+
+
+}
+
+However, the MonitoringLoggingInterceptor
+will be bound to the placeOrder method of this component:
+
+@Monitored
+
+public class ShoppingCart \{
+
+
+
+ @Logged
+
+ public void placeOrder() \{ ... }
+
+
+
+}
+
+=== Interceptor binding types with members
+
+Interceptor binding types may have annotation
+members.
+
+@Inherited
+
+@InterceptorBinding
+
+@Target(\{TYPE, METHOD})
+
+@Retention(RUNTIME)
+
+public @interface Monitored \{
+
+
+
+ boolean persistent();
+
+
+
+}
+
+Any interceptor with that interceptor binding
+type must select a member value:
+
+@Monitored(persistent=true) @Interceptor
+@Priority(2100)
+
+public class PersistentMonitoringInterceptor
+\{
+
+
+
+ @AroundInvoke
+
+ public Object
+monitorInvocation(InvocationContext ctx)
+
+ throws Exception \{ ... }
+
+
+
+}
+
+The PersistentMonitoringInterceptor applies
+to this component:
+
+@Monitored(persistent=true)
+
+public class ShoppingCart \{ ... }
+
+But not to this component:
+
+@Monitored(persistent=false)
+
+public class SimpleShoppingCart \{ ... }
+
+Annotation member values are compared using
+the equals method.
+
+Array-valued or annotation-valued members of
+an interceptor binding type are not supported. An extension
+specification may add support for these member types. For example the
+CDI specification link:intercept.html#a543[See Contexts and
+Dependency Injection for the Java EE Platform 1.1 (CDI specification)
+http://jcp.org/en/jsr/detail?id=346.] adds the
+javax.enterprise.util.Nonbinding annotation, allowing array-valued or
+annotation-valued members to be used on the annotation type, but ignored
+by the resolution process.
+
+If the set of interceptor bindings of a
+component class or interceptor, including bindings inherited from CDI
+stereotypes link:intercept.html#a543[See Contexts and
+Dependency Injection for the Java EE Platform 1.1 (CDI specification)
+http://jcp.org/en/jsr/detail?id=346.] and other interceptor bindings,
+has two instances of a certain interceptor binding type and the
+instances have different values of some annotation member, the container
+automatically detects the problem, treats it as a definition error, and
+causes deployment to fail.
+
+=== [[a423]]Associating Interceptors with Classes and Methods using the Interceptors Annotation
+
+The _Interceptors_ annotation can be used to
+denote interceptor classes and associate one or more interceptor classes
+with a target class, and/or one or more of its methods, and/or a
+constructor of the target class.
+
+The _Interceptors_ annotation can be applied
+to the target class or to a method or a constructor declared in the
+target class or in a superclass of the target class:
+
+Method-level around-invoke and around-timeout
+interceptors can be defined by applying the _Interceptors_ annotation to
+the method for which the around-invoke or around-timeout interceptor
+methods are to be invoked.
+
+Constructor-level interceptors can be defined
+by applying the _Interceptors_ annotation to the constructor for which
+the around-construct interceptor methods are to be invoked.
+
+Constructor- and method-level interceptors
+are invoked in addition to any interceptors declared in the target
+class, in an interceptor class associated with the target class, or in a
+superclass of the target class or interceptor class, and in addition to
+any default interceptors (if supported).
+
+If multiple interceptor classes are specified
+in the _Interceptors_ annotation, the interceptor methods of these
+classes are invoked in the order in which the classes are specified. The
+ordering rules for interceptors are defined in Chapter
+link:intercept.html#a446[See Interceptor Ordering].
+
+The _Interceptor_ annotation is ignored
+during the processing of classes bound using the _Interceptors_
+annotation. It will continue to be observed on such classes when used in
+the context of interceptor binding.
+
+An extension specification may support the
+use of a deployment descriptor to associate interceptor classes with a
+target class, and/or method or constructor of a target class, and to
+specify the order of interceptor invocation or override metadata
+specified by annotations.
+
+In the following example, the around-invoke
+methods specified by both the _MyInterceptor_ and the
+_MyOtherInterceptor_ classes will be invoked when the _otherMethod_
+method is called. The rules for ordering these interceptors are defined
+in Chapter link:intercept.html#a446[See Interceptor Ordering].
+
+@Stateless
+
+@Interceptors(org.acme.MyInterceptor.class)
+
+public class MyBean \{
+
+ ...
+
+ public void someMethod() \{
+
+ ...
+
+ }
+
+
+
+
+@Interceptors(org.acme.MyOtherInterceptor.class)
+
+ public void otherMethod() \{
+
+ ...
+
+ }
+
+}
+
+=== [[a446]]Interceptor Ordering
+
+=== [[a447]]Enabling Interceptors
+
+image:intercept-4.png[image]
+
+Only interceptors that are enabled are
+eligible to be invoked.
+
+Interceptors declared using interceptor
+bindings are enabled using the Priority annotation (see Section
+link:intercept.html#a472[See Use of the Priority Annotation in
+Ordering Interceptors]). The _Priority_ annotation also controls
+interceptor ordering (see Section link:intercept.html#a453[See
+Interceptor Ordering Rules]).
+
+Interceptors declared using the
+_Interceptors_ annotation are enabled by that annotation. Using the
+_Interceptors_ annotation to associate interceptor classes with a target
+class or a method or constructor of a target class enables them for that
+target class, method, or constructor. The order in which the interceptor
+classes are specified in the _Interceptors_ annotation controls
+interceptor ordering (see Section link:intercept.html#a453[See
+Interceptor Ordering Rules]). Interceptor methods declared in the target
+class or in a superclass of the target class are enabled unless
+overridden.
+
+An extension specification may define
+alternative mechanisms (e.g., a deployment descriptor such as the CDI
+beans.xml link:intercept.html#a543[See Contexts and Dependency
+Injection for the Java EE Platform 1.1 (CDI specification)
+http://jcp.org/en/jsr/detail?id=346.] or the EJB _ejb-jar.xml_
+deployment descriptor link:intercept.html#a542[See Enterprise
+JavaBeansTM, version 3.2. http://jcp.org/en/jsr/detail?id=345.]) to
+enable and order interceptors, to override the order specified by means
+of annotations, or to disable interceptors.
+
+Note: The _InvocationContext_ object allows
+interceptor methods to control the behavior of the invocation chain,
+including whether the next method in the chain is invoked and the values
+of its parameters and result. See Section
+link:intercept.html#a52[See InvocationContext].
+
+=== [[a453]]Interceptor Ordering Rules
+
+image:intercept-4.png[image]
+
+For each interceptor method type (i.e.,
+around-invoke, around-timeout, post-construct, etc.), the following
+interceptor invocation ordering rules apply, except as specified
+otherwise by an extension specification.
+
+Default interceptors are invoked first.
+
+Default interceptors are invoked in the order
+defined by the extension specification (e.g., by their order in the
+deployment descriptor).
+
+If a default interceptor class has
+superclasses, interceptor methods declared in the interceptor class’s
+superclasses are invoked before the interceptor method declared in the
+interceptor class itself, most general superclass first.
+
+Interceptors declared by applying the
+Interceptors annotation _at class-level_ to the target class are invoked
+next.
+
+Interceptor methods declared in the
+interceptor classes listed in the _Interceptors_ annotation are invoked
+in the same order as the specification of the interceptor classes in
+that annotation.
+
+If an interceptor class declared by applying
+the Interceptors annotation _at class-level_ has superclasses,
+interceptor methods declared in the interceptor class’s superclasses are
+invoked before the interceptor method declared in the interceptor class
+itself, most general superclass first.
+
+ _NOTE:_ _This specification does not define
+the semantics of applying the Interceptors annotation to a superclass of
+the target class, and thus the corresponding interceptor methods may or
+may not be invoked. Applications that specify the Interceptors
+annotation on a superclass of the target class will not be portable._
+
+Interceptors declared by applying the
+Interceptors annotation _at method- or constructor-level_ are invoked
+next.
+
+Interceptor methods declared in the
+interceptor classes listed in the _Interceptors_ annotation are invoked
+in the same order as the specification of the interceptor classes in
+that annotation.
+
+If an interceptor class declared by applying
+the Interceptors annotation _at method- or constructor-level_ has
+superclasses, interceptor methods declared in the interceptor class’s
+superclasses are invoked before the interceptor method declared in the
+interceptor class itself, most general superclass first.
+
+Interceptors declared using interceptor
+bindings are invoked next.
+
+All interceptors specified using interceptor
+binding annotations visible on the target class (e.g., specified on the
+class or visible on the class because they were declared with the
+_Inherited_ annotation) are combined with all binding annotations on the
+target method and sorted by the priorities specified by the _Priority_
+annotation; and then the interceptor methods are invoked in order of
+priority. The _Priority_ annotation is described in Section
+link:intercept.html#a472[See Use of the Priority Annotation in
+Ordering Interceptors].
+
+If an interceptor class declared using
+interceptor bindings has superclasses, interceptor methods declared in
+the interceptor class’s superclasses are invoked before the interceptor
+method declared in the interceptor class itself, most general superclass
+first.
+
+Interceptor methods declared in the target
+class or in any superclass of the target class are invoked last.
+
+If the target class has superclasses,
+interceptor methods declared in the target class’s superclasses are
+invoked before an interceptor method declared in the target class
+itself, most general superclass first.
+
+If an interceptor method is overridden by
+another method (regardless whether that method is itself an interceptor
+method), it will not be invoked.
+
+=== [[a472]]Use of the Priority Annotation in Ordering Interceptors
+
+The _Priority_ annotation can be used to
+enable and order interceptors associated with components that use
+interceptor bindings. The required _value_ element of the _Priority_
+annotation determines the ordering. Interceptors with smaller priority
+values are called first. If more than one interceptor has the same
+priority, the relative order of those interceptors is undefined.
+
+@Monitored @Interceptor @Priority(100)
+
+public class MonitoringInterceptor \{
+
+
+
+ @AroundInvoke
+
+ public Object
+monitorInvocation(InvocationContext ctx)
+
+ throws Exception \{ ... }
+
+
+
+}
+
+The Priority annotation is ignored when
+computing the invocation order of interceptors bound to a component
+using the Interceptors annotation.
+
+The following priority values are defined for
+interceptor ordering when used with the Priority annotation.
+Interceptors with lower priority values are invoked earlier in the
+interceptor chain.
+
+Interceptor.Priority.PLATFORM_BEFORE = 0
+
+Interceptor.Priority.LIBRARY_BEFORE = 1000
+
+Interceptor.Priority.APPLICATION = 2000
+
+Interceptor.Priority.LIBRARY_AFTER = 3000
+
+Interceptor.Priority.PLATFORM_AFTER = 4000
+
+These values define the following interceptor
+ranges to order interceptors for a specific interposed method or event
+in the interceptor chain:
+
+Interceptors defined by the Java EE Platform
+specifications that are to be executed at the beginning of the
+interceptor chain should have priority values in the range
+PLATFORM_BEFORE up until LIBRARY_BEFORE.
+
+Interceptors defined by extension libraries
+that are intended to be executed earlier in the interceptor chain, but
+after interceptors in the range up until _LIBRARY_BEFORE_ should have
+priority values in the range LIBRARY_BEFORE up until APPLICATION.
+
+Interceptors defined by applications should
+be in the range APPLICATION up until LIBRARY_AFTER.
+
+Interceptors defined by extension libraries
+that are intended to be executed later in the interceptor chain should
+have priority values in the range LIBRARY_AFTER up until PLATFORM_AFTER.
+
+Interceptors defined by the Java EE Platform
+specifications that are to be executed at the end of the interceptor
+chain should have priority values at PLATFORM_AFTER or higher.
+
+An interceptor that must be invoked before or
+after another defined interceptor can choose any appropriate value.
+
+Negative priority values are reserved for
+future use by this specification and should not be used.
+
+The following example defines an extension
+library interceptor that is to be executed before any application
+interceptor, but after any early platform interceptor:
+
+@Priority(Interceptor.Priority.LIBRARY_BEFORE+10)
+
+@Validated @Interceptor
+
+public class ValidationInterceptor \{ ... }
+
+
+
+=== [[a502]]Excluding Interceptors
+
+image:intercept-4.png[image]
+
+Interceptors may be excluded from execution
+by means of the _ExcludeClassInterceptors_ annotation and the
+_ExcludeDefaultInterceptors_ annotation.
+
+The _ExcludeClassInterceptors_ annotation can
+be used to exclude the invocation of the class-level interceptors
+defined by means of the _Interceptors_ annotation.
+
+The _ExcludeDefaultInterceptors_ annotation
+can be used to exclude the invocation of default interceptors for a
+target class or—when applied to a target class constructor or method—to
+exclude the invocation of default interceptors for a particular
+constructor or method.
+
+An extension specification may define other
+means for excluding interceptors from execution, such as by means of a
+deployment descriptor.
+
+
+
+In the following example interceptors will be
+invoked in the following order when _someMethod_ is called:
+SomeInterceptor, AnotherInterceptor, MyInterceptor.
+
+@Stateless
+
+@Interceptors(\{org.acme.SomeInterceptor.class,
+
+ org.acme.AnotherInterceptor.class})
+
+public class MyBean \{
+
+ ...
+
+ @Interceptors(org.acme.MyInterceptor.class)
+
+ public void someMethod() \{
+
+ ...
+
+ }
+
+}
+
+In the following example only the interceptor
+_MyInterceptor_ will be invoked when _someMethod_ is called. The
+_ExcludeClassInterceptors_ annotation is used to exclude the invocation
+of the class-level interceptors.
+
+@Stateless
+
+@Interceptors(org.acme.AnotherInterceptor.class)
+
+public class MyBean \{
+
+ ...
+
+ @Interceptors(org.acme.MyInterceptor.class)
+
+ @ExcludeClassInterceptors
+
+ public void someMethod() \{
+
+ ...
+
+ }
+
+}
+
+In the next example, only the interceptor
+_MyInterceptor_ will be invoked when _someMethod_ is called. The
+_ExcludeDefaultInterceptors_ annotation is used to exclude the
+invocation of the default interceptors (if any).
+
+@Stateless
+
+public class MyBean \{
+
+ ...
+
+ @ExcludeDefaultInterceptors
+
+ @Interceptors(org.acme.MyInterceptor.class)
+
+ public void someMethod() \{
+
+ ...
+
+ }
+
+}
+
+=== Related Documents
+
+[[a541]]Enterprise JavaBeansTM,
+version 3.0. http://jcp.org/en/jsr/detail?id=220.
+
+[[a542]]Enterprise JavaBeansTM,
+version 3.2. http://jcp.org/en/jsr/detail?id=345.
+
+[[a543]]Contexts and Dependency
+Injection for the Java EE Platform 1.1 (CDI specification)
+http://jcp.org/en/jsr/detail?id=346.
+
+[[a544]]Java API for XML Web
+Services (JAX-WS 2.0). _http://jcp.org/en/jsr/detail?id=224_ .
+
+[[a545]]Common Annotations for the
+Java Platform Specification 1.2. http://jcp.org/en/jsr/detail?id=250.
+
+[[a546]]Java Platform, Enterprise
+Edition (Java EE), v7. _http://jcp.org/en/jsr/detail?id=342_ .
+
+[[a547]]JavaTM Transaction API
+(JTA), version 1.2.
+_http://jcp.org/en/jsr/detail?id=907[]http://jcp.org/en/jsr/detail?id=907._
+
+
+
+=== [[a549]]Change Log
+
+Clarified
+link:intercept.html#a7[See Relationship to Other
+Specifications] to be consistent with the Java EE Platform specification
+with regard to when interceptors defined by means of the _Interceptors_
+annotation and interceptors defined by means of interceptor bindings are
+required to be supported.
+
+Clarified terminology in sections
+link:intercept.html#a15[See Terminology] and
+link:intercept.html#a20[See Definition of Interceptor Classes
+and Interceptor Methods].
+
+Noted that around-construct interceptors run
+in the same thread as the target constructor in section
+link:intercept.html#a48[See Interceptor Environment].
+
+Clarified that around-construct interceptor
+methods may throw checked exceptions.
+
+Clarified distinction between core
+requirements and the latitude available to extension specifications.
+
+Reworded to indicate that deployment
+descriptors are specific to extension specifications.
+
+Clarified that interceptor binding may not be
+used to associate interceptors with decorators.
+
+Corrected bug in section
+link:intercept.html#a313[See Interceptor binding types with
+additional interceptor bindings]: An interceptor binding type can only
+be applied to an interceptor binding type defining a subset of its
+target types.
+
+Removed inconsistency whereby only
+around-construct lifecycle callback interceptors could declare
+interceptor binding types defined other than as _Target(TYPE)_ .
+
+Clarified when _Priority_ annotation is
+ignored.
+
+Added section
+link:intercept.html#a447[See Enabling Interceptors] to
+link:intercept.html#a446[See Interceptor Ordering] to
+centralize existing requirements on enabling interceptors and separate
+concept of the enabling of interceptors from the ordering of
+interceptors.
+
+Combined interceptor ordering rules into a
+single algorithm in section link:intercept.html#a453[See
+Interceptor Ordering Rules].
+
+Factored out section
+link:intercept.html#a502[See Excluding Interceptors] on
+excluding interceptors.
+
+Clarified that _ExcludeClassInterceptors_
+applies only to interceptors defined by means of the _Interceptors_
+annotation.
+
+Made numerous editorial cleanup changes, and
+reorganized document for clarity.
+
+
+
+
+
+'''''
+
+[.footnoteNumber]# 1.# [[a567]]If a _PostConstruct_
+interceptor method is declared in the interceptor class or a superclass
+of the interceptor class, it is not invoked when the interceptor
+instance itself is created.
+
+[.footnoteNumber]# 2.# [[a568]]If a _PreDestroy_
+interceptor method is declared in the interceptor class or a superclass
+of the interceptor class, it is not invoked when the interceptor
+instance itself is destroyed.
+
+[.footnoteNumber]# 3.# [[a569]]If the last parameter
+is a vararg parameter of type T, it is considered be equivalent to a
+parameter of type T[].
+
+[.footnoteNumber]# 4.# [[a570]]In case of the
+PostConstruct interceptor, if there is no callback method defined on the
+target class, the invocation of _InvocationContext.proceed_ method in
+the last interceptor method in the chain validates the target instance.
+
+[.footnoteNumber]# 5.# [[a571]]In general, a
+lifecycle callback interceptor method will be invoked in an unspecified
+transaction context. Note however that singleton and stateful session
+beans support the use of a transaction context for the invocation of
+lifecycle callback interceptor methods (see the Enterprise JavaBeansTM
+specification link:intercept.html#a542[See Enterprise
+JavaBeansTM, version 3.2. http://jcp.org/en/jsr/detail?id=345.]). The
+transaction context may be also changed by transactional interceptors in
+the invocation chain.
+
+[.footnoteNumber]# 6.# [[a572]]Note that the
+transaction context may be changed by transactional interceptors in the
+invocation chain.
+
+[.footnoteNumber]# 7.#
+This requirement follows
+the rules from the Common Annotations specification, section 2.1 (see
+link:intercept.html#a545[See Common Annotations for the Java
+Platform Specification 1.2. http://jcp.org/en/jsr/detail?id=250.]).
+
+[.footnoteNumber]# 8.# [[a574]]The _Priority_
+annotation also orders interceptors. See Chapter
+link:intercept.html#a446[See Interceptor Ordering].
