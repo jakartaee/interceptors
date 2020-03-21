@@ -1,16 +1,14 @@
 :sectnums:
 = Jakarta Interceptors Specification, Version 1.2
 
-Copyright (c) 2017, 2019 Oracle and/or its affiliates. All rights reserved.
+Copyright (c) 2020 Eclipse Foundation.
 
-Oracle and Java are registered trademarks of Oracle and/or its 
-affiliates. Other names may be trademarks of their respective owners. 
 
 === Overview
 
 Interceptors are used to interpose on
 business method invocations and specific events—such as lifecycle events
-and timeout events—that occur on instances of Java EE components and
+and timeout events—that occur on instances of Jakarta EE components and
 other managed classes.
 
 An interceptor method is either a method of
@@ -40,17 +38,16 @@ found in link:intercept.html#a549[See Change Log].
 
 image:intercept-4.png[image]
 
-The Java EE Platform specification requires
+The Jakarta EE Platform specification requires
 support for interceptors. The use of interceptors defined by means of
 the _Interceptors_ annotation is required to be supported for EJB and
 Managed Bean components, including in the absence of CDI. When CDI is
 enabled, the use of interceptors defined both by means of interceptor
 binding annotations and by means of the _Interceptors_ annotation is
 required to be supported for component classes that support injection,
-as described in the section “Annotations and Injection” of the Java EE
-Platform specification link:intercept.html#a546[See Java
-Platform, Enterprise Edition (Java EE), v7.
-http://jcp.org/en/jsr/detail?id=342.].
+as described in the section “Annotations and Injection” of the Jakarta EE
+Platform specification link:intercept.html#a546[See Jakarta EE Platform 9.
+https://jakarta.ee/specifications/platform/9/.].
 
 Both the EJB and the CDI specifications
 provide extensions to this specification. Other specifications may
@@ -116,26 +113,26 @@ method types listed below. Extension specifications may define
 additional interceptor method types.
 
 Around-invoke interceptor methods (annotated
-with the _javax.interceptor.AroundInvoke_ annotation). Around-invoke
+with the _jakarta.interceptor.AroundInvoke_ annotation). Around-invoke
 interceptor methods interpose on the invocation of business methods.
 
 Around-timeout interceptor methods (annotated
-with the _javax.interceptor.AroundTimeout_ annotation). Around-timeout
+with the _jakarta.interceptor.AroundTimeout_ annotation). Around-timeout
 interceptor methods interpose on the invocation of timeout methods, in
 response to timer events.
 
 Post-construct interceptor methods (annotated
-with the _javax.annotation.PostConstruct_ annotation). Post-construct
+with the _jakarta.annotation.PostConstruct_ annotation). Post-construct
 interceptor methods are invoked after dependency injection has been
 completed on the target instance.
 
 Pre-destroy interceptor methods (annotated
-with the _javax.annotation.PreDestroy_ annotation). Pre-destroy
+with the _jakarta.annotation.PreDestroy_ annotation). Pre-destroy
 interceptor methods are invoked before the target instance and all
 interceptor instances associated with it are destroyed by the container.
 
 Around-construct interceptor methods
-(annotated with the _javax.interceptor.AroundConstruct_ annotation).
+(annotated with the _jakarta.interceptor.AroundConstruct_ annotation).
 Around-construct interceptor methods interpose on the invocation of the
 constructor of the target instance.
 
@@ -168,7 +165,7 @@ Interceptor classes may be associated with
 the target class using either interceptor binding annotations (see
 link:intercept.html#a303[See Associating Interceptors with
 Classes and Methods using Interceptor Bindings]) or the
-_javax.interceptor.Interceptors_ annotation (see
+_jakarta.interceptor.Interceptors_ annotation (see
 link:intercept.html#a423[See Associating Interceptors with
 Classes and Methods using the Interceptors Annotation]). Typically only
 one interceptor association type is used for any target class.
@@ -179,12 +176,12 @@ to override the order specified in metadata annotations. A deployment
 descriptor can optionally be used to define interceptors, to define
 default interceptors, or to associate interceptors with a target class.
 For example, the EJB specification link:intercept.html#a542[See
-Enterprise JavaBeansTM, version 3.2.
-http://jcp.org/en/jsr/detail?id=345.] requires support for the
+Jakarta Enterprise Beans, version 4.0.
+https://jakarta.ee/specifications/enterprise-beans/4.0/.] requires support for the
 ejb-jar.xml deployment descriptor and the CDI specification
-link:intercept.html#a543[See Contexts and Dependency Injection
-for the Java EE Platform 1.1 (CDI specification)
-http://jcp.org/en/jsr/detail?id=346.] requires support for the beans.xml
+link:intercept.html#a543[See
+Jakarta Contexts and Dependency Injection (CDI specification), version 3.0.
+https://jakarta.ee/specifications/cdi/3.0/.] requires support for the beans.xml
 deployment descriptor.
 
 === Interceptor Life Cycle
@@ -314,8 +311,9 @@ _InvocationContext_ instance is otherwise unspecified.
 If interceptor methods are invoked as a
 result of the invocation on a web service endpoint, the map returned by
 _getContextData_ will be the JAX-WS _MessageContext_
-link:intercept.html#a544[See Java API for XML Web Services
-(JAX-WS 2.0). http://jcp.org/en/jsr/detail?id=224.].
+link:intercept.html#a544[See
+Jakarta XML Web Services (JAX-WS 3.0) version 3.0.
+https://jakarta.ee/specifications/xml-web-services/3.0/.].
 
 The _getTarget_ method returns the associated
 target instance. For around-construct lifecycle callback interceptor
@@ -431,9 +429,9 @@ invocation occurs within the same transaction and security context as
 the method on which it is interposing. However, note that the
 transaction context may be changed by transactional interceptor methods
 in the invocation chain, such as those defined by the _Java Transaction
-API_ specification link:intercept.html#a547[See JavaTM
-Transaction API (JTA), version 1.2.
-http://jcp.org/en/jsr/detail?id=907.] .
+API_ specification link:intercept.html#a547[See Jakarta Transaction (JTA)
+version 2.0.
+https://jakarta.ee/specifications/transactions/2.0/.] .
 
 The following example defines
 MonitoringInterceptor, which is used to interpose on ShoppingCart
@@ -666,8 +664,8 @@ extended to other specifications in the future, and extension
 specifications may define events that may be interposed on by
 around-timeout methods. The EJB Timer Service, defined by the Enterprise
 JavaBeansTM specification link:intercept.html#a542[See
-Enterprise JavaBeansTM, version 3.2.
-http://jcp.org/en/jsr/detail?id=345.], is a container-provided service
+Jakarta Enterprise Beans, version 4.0.
+https://jakarta.ee/specifications/enterprise-beans/4.0/.], is a container-provided service
 that allows the Bean Provider to register enterprise beans for timer
 callbacks according to a calendar-based schedule, at a specified time,
 after a specified elapsed time, or at specified intervals. The timer
@@ -1000,8 +998,8 @@ interceptors and their relative ordering.
 Interceptor bindings are intermediate
 annotations that may be used to associate interceptors with any
 component that is not itself an interceptor or decorator
-link:intercept.html#a546[See Java Platform, Enterprise Edition
-(Java EE), v7. http://jcp.org/en/jsr/detail?id=342.].
+link:intercept.html#a546[See Jakarta EE Platform 9.
+https://jakarta.ee/specifications/platform/9/.].
 
 === Interceptor Binding Types
 
@@ -1144,9 +1142,9 @@ bindings applied to the target class may include those inherited from
 its superclasses. The CDI specification rules for the inheritance of
 type-level metadata apply to the inheritance of interceptor bindings
 from superclasses of the target class. See
-link:intercept.html#a543[See Contexts and Dependency Injection
-for the Java EE Platform 1.1 (CDI specification)
-http://jcp.org/en/jsr/detail?id=346.].
+link:intercept.html#a543[See
+Jakarta Contexts and Dependency Injection (CDI specification), version 3.0.
+https://jakarta.ee/specifications/cdi/3.0/.].
 
 An interceptor binding declared on a method
 or constructor replaces an interceptor binding of the same type declared
@@ -1202,9 +1200,9 @@ interceptor binding of an interceptor if it has an interceptor binding
 with (a) the same type and (b) the same annotation member value for each
 member. An extension specification may further refine this rule. For
 example, the CDI specification link:intercept.html#a543[See
-Contexts and Dependency Injection for the Java EE Platform 1.1 (CDI
-specification) http://jcp.org/en/jsr/detail?id=346.] adds the
-javax.enterprise.util.Nonbinding annotation, causing member values to be
+Jakarta Contexts and Dependency Injection (CDI specification), version 3.0.
+https://jakarta.ee/specifications/cdi/3.0/.] adds the
+jakarta.enterprise.util.Nonbinding annotation, causing member values to be
 ignored by the resolution process.
 
 The interceptor intercepts the given kind of
@@ -1342,18 +1340,18 @@ the equals method.
 Array-valued or annotation-valued members of
 an interceptor binding type are not supported. An extension
 specification may add support for these member types. For example the
-CDI specification link:intercept.html#a543[See Contexts and
-Dependency Injection for the Java EE Platform 1.1 (CDI specification)
-http://jcp.org/en/jsr/detail?id=346.] adds the
-javax.enterprise.util.Nonbinding annotation, allowing array-valued or
+CDI specification link:intercept.html#a543[See
+Jakarta Contexts and Dependency Injection (CDI specification), version 3.0.
+https://jakarta.ee/specifications/cdi/3.0/.] adds the
+jakarta.enterprise.util.Nonbinding annotation, allowing array-valued or
 annotation-valued members to be used on the annotation type, but ignored
 by the resolution process.
 
 If the set of interceptor bindings of a
 component class or interceptor, including bindings inherited from CDI
-stereotypes link:intercept.html#a543[See Contexts and
-Dependency Injection for the Java EE Platform 1.1 (CDI specification)
-http://jcp.org/en/jsr/detail?id=346.] and other interceptor bindings,
+stereotypes link:intercept.html#a543[See
+Jakarta Contexts and Dependency Injection (CDI specification), version 3.0.
+https://jakarta.ee/specifications/cdi/3.0/.] and other interceptor bindings,
 has two instances of a certain interceptor binding type and the
 instances have different values of some annotation member, the container
 automatically detects the problem, treats it as a definition error, and
@@ -1464,11 +1462,12 @@ overridden.
 
 An extension specification may define
 alternative mechanisms (e.g., a deployment descriptor such as the CDI
-beans.xml link:intercept.html#a543[See Contexts and Dependency
-Injection for the Java EE Platform 1.1 (CDI specification)
-http://jcp.org/en/jsr/detail?id=346.] or the EJB _ejb-jar.xml_
-deployment descriptor link:intercept.html#a542[See Enterprise
-JavaBeansTM, version 3.2. http://jcp.org/en/jsr/detail?id=345.]) to
+beans.xml link:intercept.html#a543[See
+Jakarta Contexts and Dependency Injection (CDI specification), version 3.0.
+https://jakarta.ee/specifications/cdi/3.0/.] or the EJB _ejb-jar.xml_
+deployment descriptor link:intercept.html#a542[See Jakarta Enterprise
+Beans, version 4.0.
+https://jakarta.ee/specifications/enterprise-beans/4.0/.]) to
 enable and order interceptors, to override the order specified by means
 of annotations, or to disable interceptors.
 
@@ -1614,7 +1613,7 @@ These values define the following interceptor
 ranges to order interceptors for a specific interposed method or event
 in the interceptor chain:
 
-Interceptors defined by the Java EE Platform
+Interceptors defined by the Jakarta EE Platform
 specifications that are to be executed at the beginning of the
 interceptor chain should have priority values in the range
 PLATFORM_BEFORE up until LIBRARY_BEFORE.
@@ -1631,7 +1630,7 @@ Interceptors defined by extension libraries
 that are intended to be executed later in the interceptor chain should
 have priority values in the range LIBRARY_AFTER up until PLATFORM_AFTER.
 
-Interceptors defined by the Java EE Platform
+Interceptors defined by the Jakarta EE Platform
 specifications that are to be executed at the end of the interceptor
 chain should have priority values at PLATFORM_AFTER or higher.
 
@@ -1752,35 +1751,30 @@ public class MyBean \{
 === Related Documents
 
 [[a541]]Enterprise JavaBeansTM,
-version 3.0. http://jcp.org/en/jsr/detail?id=220.
+version 3.0 . http://jcp.org/en/jsr/detail?id=220.
 
-[[a542]]Enterprise JavaBeansTM,
-version 3.2. http://jcp.org/en/jsr/detail?id=345.
+[[a542]]Jakarta Enterprise Beans,
+version 4.0 . https://jakarta.ee/specifications/enterprise-beans/4.0/.
 
-[[a543]]Contexts and Dependency
-Injection for the Java EE Platform 1.1 (CDI specification)
-http://jcp.org/en/jsr/detail?id=346.
+[[a543]]Jakarta Contexts and Dependency Injection (CDI specification)
+version 3.0 . https://jakarta.ee/specifications/cdi/3.0/ .
 
-[[a544]]Java API for XML Web
-Services (JAX-WS 2.0). _http://jcp.org/en/jsr/detail?id=224_ .
+[[a544]]Jakarta XML Web Services (JAX-WS 3.0)
+version 3.0 . https://jakarta.ee/specifications/xml-web-services/3.0/ .
 
-[[a545]]Common Annotations for the
-Java Platform Specification 1.2. http://jcp.org/en/jsr/detail?id=250.
+[[a545]]Jakarta Annotations version 2.0 . https://jakarta.ee/specifications/annotations/2.0/.
 
-[[a546]]Java Platform, Enterprise
-Edition (Java EE), v7. _http://jcp.org/en/jsr/detail?id=342_ .
+[[a546]]Jakarta EE Platform 9 . https://jakarta.ee/specifications/platform/9/ .
 
-[[a547]]JavaTM Transaction API
-(JTA), version 1.2.
-_http://jcp.org/en/jsr/detail?id=907[]http://jcp.org/en/jsr/detail?id=907._
-
+[[a547]]Jakarta Transaction  (JTA)
+version 2.0 . https://jakarta.ee/specifications/transactions/2.0/ .
 
 
 === [[a549]]Change Log
 
 Clarified
 link:intercept.html#a7[See Relationship to Other
-Specifications] to be consistent with the Java EE Platform specification
+Specifications] to be consistent with the Jakarta EE Platform specification
 with regard to when interceptors defined by means of the _Interceptors_
 annotation and interceptors defined by means of interceptor bindings are
 required to be supported.
@@ -1871,8 +1865,8 @@ lifecycle callback interceptor method will be invoked in an unspecified
 transaction context. Note however that singleton and stateful session
 beans support the use of a transaction context for the invocation of
 lifecycle callback interceptor methods (see the Enterprise JavaBeansTM
-specification link:intercept.html#a542[See Enterprise
-JavaBeansTM, version 3.2. http://jcp.org/en/jsr/detail?id=345.]). The
+specification link:intercept.html#a542[See Jakarta Enterprise
+Beans, version 4.0. https://jakarta.ee/specifications/enterprise-beans/4.0/.]). The
 transaction context may be also changed by transactional interceptors in
 the invocation chain.
 
@@ -1882,9 +1876,9 @@ invocation chain.
 
 [.footnoteNumber]# 7.#
 This requirement follows
-the rules from the Common Annotations specification, section 2.1 (see
-link:intercept.html#a545[See Common Annotations for the Java
-Platform Specification 1.2. http://jcp.org/en/jsr/detail?id=250.]).
+the rules from the Jakarta Annotations specification, section 2.1 (
+link:intercept.html#a545[See Jakarta Annotations, version 2.0 .
+ https://jakarta.ee/specifications/annotations/2.0/.]).
 
 [.footnoteNumber]# 8.# [[a574]]The _Priority_
 annotation also orders interceptors. See Chapter
