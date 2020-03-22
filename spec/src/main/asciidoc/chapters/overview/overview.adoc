@@ -11,6 +11,8 @@
 [[overview]]
 == Overview
 
+include::scope.adoc[]
+
 include::revision_history.adoc[]
 
 include::relationship_to_other_specifications.adoc[]
