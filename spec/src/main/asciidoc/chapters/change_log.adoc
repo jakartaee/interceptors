@@ -1,0 +1,76 @@
+////
+*******************************************************************
+* Copyright (c) 2019 Eclipse Foundation
+*
+* This specification document is made available under the terms
+* of the Eclipse Foundation Specification License v1.0, which is
+* available at https://www.eclipse.org/legal/efsl.php.
+*******************************************************************
+////
+
+[[change_log]]
+== Change Log
+
+Clarified
+link:intercept.html#a7[See Relationship to Other
+Specifications] to be consistent with the Jakarta EE Platform specification
+with regard to when interceptors defined by means of the _Interceptors_
+annotation and interceptors defined by means of interceptor bindings are
+required to be supported.
+
+Clarified terminology in sections
+link:intercept.html#a15[See Terminology] and
+link:intercept.html#a20[See Definition of Interceptor Classes
+and Interceptor Methods].
+
+Noted that around-construct interceptors run
+in the same thread as the target constructor in section
+link:intercept.html#a48[See Interceptor Environment].
+
+Clarified that around-construct interceptor
+methods may throw checked exceptions.
+
+Clarified distinction between core
+requirements and the latitude available to extension specifications.
+
+Reworded to indicate that deployment
+descriptors are specific to extension specifications.
+
+Clarified that interceptor binding may not be
+used to associate interceptors with decorators.
+
+Corrected bug in section
+link:intercept.html#a313[See Interceptor binding types with
+additional interceptor bindings]: An interceptor binding type can only
+be applied to an interceptor binding type defining a subset of its
+target types.
+
+Removed inconsistency whereby only
+around-construct lifecycle callback interceptors could declare
+interceptor binding types defined other than as _Target(TYPE)_ .
+
+Clarified when _Priority_ annotation is
+ignored.
+
+Added section
+link:intercept.html#a447[See Enabling Interceptors] to
+link:intercept.html#a446[See Interceptor Ordering] to
+centralize existing requirements on enabling interceptors and separate
+concept of the enabling of interceptors from the ordering of
+interceptors.
+
+Combined interceptor ordering rules into a
+single algorithm in section link:intercept.html#a453[See
+Interceptor Ordering Rules].
+
+Factored out section
+link:intercept.html#a502[See Excluding Interceptors] on
+excluding interceptors.
+
+Clarified that _ExcludeClassInterceptors_
+applies only to interceptors defined by means of the _Interceptors_
+annotation.
+
+Made numerous editorial cleanup changes, and
+reorganized document for clarity.
+
