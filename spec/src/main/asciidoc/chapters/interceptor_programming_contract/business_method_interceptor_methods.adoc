@@ -53,54 +53,30 @@ The following example defines
 MonitoringInterceptor, which is used to interpose on ShoppingCart
 business methods:
 
+[source, java]
+----
 @Inherited
-
 @InterceptorBinding
-
-@Target(\{TYPE, METHOD}) @Retention(RUNTIME)
-
-public @interface Monitored \{}
-
-
-
-@Monitored @Interceptor
-
-public class MonitoringInterceptor \{
-
-
-
- @AroundInvoke
-
- public Object
-monitorInvocation(InvocationContext ctx) \{
-
-
-
- //... log invocation data ...
-
-
-
- return ctx.proceed();
-
- }
-
-
-
-}
-
+@Target({TYPE, METHOD})
+@Retention(RUNTIME)
+public @interface Monitored {}
 
 
 @Monitored
-
-public class ShoppingCart \{
-
-
-
- public void placeOrder(Order o) \{
-
- ...
-
- }
-
+@Interceptor
+public class MonitoringInterceptor {
+    @AroundInvoke
+    public Object monitorInvocation(InvocationContext ctx) {
+        //... log invocation data ...
+        return ctx.proceed();
+    }
 }
 
+
+@Monitored
+public class ShoppingCart {
+    public void placeOrder(Order o) {
+        ...
+    }
+}
+----

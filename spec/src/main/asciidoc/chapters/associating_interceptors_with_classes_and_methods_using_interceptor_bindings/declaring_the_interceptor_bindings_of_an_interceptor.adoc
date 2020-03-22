@@ -16,23 +16,18 @@ are specified by annotating the interceptor class with the interceptor
 binding types and the Interceptor annotation and are called the set of
 interceptor bindings for the interceptor.
 
-@Monitored @Interceptor
-
-public class MonitoringInterceptor \{
-
-
-
- @AroundInvoke
-
- public Object
-monitorInvocation(InvocationContext ctx)
-
- throws Exception \{ ... }
-
-
-
+[source, java]
+----
+@Monitored
+@Interceptor
+public class MonitoringInterceptor {
+    @AroundInvoke
+    public Object monitorInvocation(InvocationContext ctx)
+        throws Exception {
+        ...
+    }
 }
-
+----
 An interceptor class may declare multiple
 interceptor bindings.
 

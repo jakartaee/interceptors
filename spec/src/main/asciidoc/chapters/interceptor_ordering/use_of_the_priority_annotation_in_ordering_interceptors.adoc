@@ -18,22 +18,19 @@ annotation determines the ordering. Interceptors with smaller priority
 values are called first. If more than one interceptor has the same
 priority, the relative order of those interceptors is undefined.
 
-@Monitored @Interceptor @Priority(100)
-
-public class MonitoringInterceptor \{
-
-
-
- @AroundInvoke
-
- public Object
-monitorInvocation(InvocationContext ctx)
-
- throws Exception \{ ... }
-
-
-
+[source, java]
+----
+@Monitored
+@Interceptor
+@Priority(100)
+public class MonitoringInterceptor {
+    @AroundInvoke
+    public Object monitorInvocation(InvocationContext ctx)
+        throws Exception {
+        ...
+    }
 }
+----
 
 The Priority annotation is ignored when
 computing the invocation order of interceptors bound to a component
@@ -89,8 +86,10 @@ The following example defines an extension
 library interceptor that is to be executed before any application
 interceptor, but after any early platform interceptor:
 
+[source, java]
+----
 @Priority(Interceptor.Priority.LIBRARY_BEFORE+10)
-
-@Validated @Interceptor
-
-public class ValidationInterceptor \{ ... }
+@Validated
+@Interceptor
+public class ValidationInterceptor { ... }
+----

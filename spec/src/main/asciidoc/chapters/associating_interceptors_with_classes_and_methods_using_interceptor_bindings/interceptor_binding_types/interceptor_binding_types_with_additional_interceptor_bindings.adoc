@@ -14,17 +14,15 @@
 An interceptor binding type may declare other
 interceptor bindings.
 
+[source, java]
+----
 @Inherited
-
 @InterceptorBinding
-
-@Target(\{TYPE, METHOD})
-
+@Target({TYPE, METHOD})
 @Retention(RUNTIME)
-
 @Monitored
-
-public @interface DataAccess \{}
+public @interface DataAccess {}
+----
 
 Interceptor bindings are transitive—an
 interceptor binding declared by an interceptor binding type is inherited

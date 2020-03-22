@@ -85,67 +85,43 @@ callback interceptor methods in both the interceptor class and the
 target class. Rules for interceptor ordering are described in
 link:intercept.html#a446[See Interceptor Ordering].
 
-public class MyInterceptor \{
+[source, java]
+----
+public class MyInterceptor {
+    ...
 
- ...
+    @PostConstruct
+    public void someMethod(InvocationContext ctx) {
+        ...
+        ctx.proceed();
+        ...
+    }
 
- @PostConstruct
-
- public void someMethod(InvocationContext
-ctx) \{
-
- ...
-
- ctx.proceed();
-
- ...
-
- }
-
- @PreDestroy
-
- public void
-someOtherMethod(InvocationContext ctx) \{
-
- ...
-
- ctx.proceed();
-
- ...
-
- }
-
+     @PreDestroy
+     public void someOtherMethod(InvocationContext ctx) {
+        ...
+        ctx.proceed();
+        ...
+     }
 }
-
 
 
 @Interceptors(MyInterceptor.class)
-
 @Stateful
+public class ShoppingCartBean implements ShoppingCart {
+    private float total;
+    private Vector productCodes;
 
-public class ShoppingCartBean implements
-ShoppingCart \{
+    ...
 
- private float total;
+    public int someShoppingMethod() {
+        ...
+    }
 
- private Vector productCodes;
-
- ...
-
- public int someShoppingMethod() \{
-
- ...
-
- }
-
-
-
- @PreDestroy void endShoppingCart() \{
-
- ...
-
- }
-
+    @PreDestroy void endShoppingCart() {
+        ...
+    }
 }
+----
 
 include::exceptions.adoc[]

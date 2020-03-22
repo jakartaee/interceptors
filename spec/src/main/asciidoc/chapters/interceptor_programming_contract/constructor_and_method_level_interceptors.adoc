@@ -38,147 +38,103 @@ target class instance.
 In the following example only the placeOrder
 method will be monitored:
 
-public class ShoppingCart \{
-
-
-
- @Monitored
-
- public void placeOrder() \{...}
-
-
-
+[source, java]
+----
+public class ShoppingCart {
+    @Monitored
+    public void placeOrder() {
+         ...
+    }
 }
+----
 
 In the following example, the MyInterceptor
 interceptor is applied to a subset of the business methods of the
 session bean. _Note_ that the created and removed methods of the
 MyInterceptor interceptor will not be invoked:
 
-public class MyInterceptor \{
+[source, java]
+----
+public class MyInterceptor {
+    ...
 
- ...
+    @AroundInvoke
+    public Object around_invoke(InvocationContext ctx) {
+         ...
+    }
 
- @AroundInvoke
+     @PostConstruct
+     public void created(InvocationContext ctx) {
+         ...
+     }
 
- public Object
-around_invoke(InvocationContext ctx) \{...}
-
-
-
- @PostConstruct
-
- public void created(InvocationContext ctx)
-\{...}
-
-
-
- @PreDestroy
-
- public void removed(InvocationContext ctx)
-\{...}
-
+     @PreDestroy
+     public void removed(InvocationContext ctx) {
+         ...
+     }
 }
-
 
 
 @Stateless
+public class MyBean {
+     @PostConstruct
+     void init() {
+         ...
+     }
 
-public class MyBean \{
+     public void notIntercepted() {
+         ...
+     }
 
+     @Interceptors(org.acme.MyInterceptor.class)
+     public void someMethod() {
+        ...
+     }
 
-
- @PostConstruct
-
- void init() \{...}
-
-
-
- public void notIntercepted() \{...}
-
-
-
- @Interceptors(org.acme.MyInterceptor.class)
-
- public void someMethod() \{
-
- ...
-
- }
-
-
-
- @Interceptors(org.acme.MyInterceptor.class)
-
- public void anotherMethod() \{
-
- ...
-
- }
-
+     @Interceptors(org.acme.MyInterceptor.class)
+     public void anotherMethod() {
+        ...
+     }
 }
+----
 
 In the following example, the
 ValidationInterceptor interceptor interposes on the bean constructor
 only, and the _validateMethod_ interceptor method will not be invoked:
 
+[source, java]
+----
 @Inherited
-
 @InterceptorBinding
-
-@Target(\{CONSTRUCTOR, METHOD})
-
+@Target({CONSTRUCTOR, METHOD})
 @Retention(RUNTIME)
-
-public @interface ValidateSpecial \{}
-
-
+public @interface ValidateSpecial {}
 
 @ValidateSpecial
+public class ValidationInterceptor {
+     @AroundConstruct
+     public void validateConstructor(InvocationContext ctx) {
+         ...
+     }
 
-public class ValidationInterceptor \{
-
-
-
- @AroundConstruct
-
- public void
-validateConstructor(InvocationContext ctx)\{... }
-
-
-
- @AroundInvoke
-
- public Object
-validateMethod(InvocationContext ctx)\{... }
-
-
-
+     @AroundInvoke
+    public Object validateMethod(InvocationContext ctx) {
+         ...
+     }
 }
 
 
+public class SomeBean {
+    @ValidateSpecial
+    SomeBean(...) {
+        ...
+    }
 
-public class SomeBean \{
-
-
-
- @ValidateSpecial
-
- SomeBean(...) \{
-
- ...
-
- }
-
-
-
- public void someMethod() \{
-
- ...
-
- }
-
+    public void someMethod() {
+        ...
+    }
 }
+----
 
 In the following example, the
 _validateConstructor_ method of the ValidationInterceptor interceptor
@@ -186,38 +142,24 @@ interposes on the bean constructor, and the _validateMethod_ method of
 the interceptor interposes on the _anotherMethod_ business method of the
 bean.
 
-public class SomeBean \{
+[source, java]
+----
+public class SomeBean {
+    @ValidateSpecial
+    SomeBean(...) {
+        ...
+    }
 
+    public void someMethod() {
+        ...
+    }
 
-
- @ValidateSpecial
-
- SomeBean(...) \{
-
- ...
-
- }
-
-
-
- public void someMethod() \{
-
- ...
-
- }
-
-
-
- @ValidateSpecial
-
- public void anotherMethod() \{
-
- ...
-
- }
-
+    @ValidateSpecial
+    public void anotherMethod() {
+        ...
+    }
 }
-
+----
 
 
 

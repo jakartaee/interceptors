@@ -58,29 +58,20 @@ _MyOtherInterceptor_ classes will be invoked when the _otherMethod_
 method is called. The rules for ordering these interceptors are defined
 in Chapter link:intercept.html#a446[See Interceptor Ordering].
 
+[source, java]
+----
 @Stateless
-
 @Interceptors(org.acme.MyInterceptor.class)
+public class MyBean {
+    ...
 
-public class MyBean \{
+    public void someMethod() {
+        ...
+    }
 
- ...
-
- public void someMethod() \{
-
- ...
-
- }
-
-
-
-
-@Interceptors(org.acme.MyOtherInterceptor.class)
-
- public void otherMethod() \{
-
- ...
-
- }
-
+    @Interceptors(org.acme.MyOtherInterceptor.class)
+    public void otherMethod() {
+        ...
+    }
 }
+----

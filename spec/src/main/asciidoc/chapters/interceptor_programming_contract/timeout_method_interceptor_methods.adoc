@@ -61,66 +61,34 @@ with the timeout.
 In the following example around-timeout
 interceptor is associated with two timeout methods:
 
-public class MyInterceptor \{
+[source, java]
+----
+public class MyInterceptor {
+    private Logger logger = ...;
 
-
-
- private Logger logger = ...;
-
-
-
- @AroundTimeout
-
- private Object
-aroundTimeout(InvocationContext ctx)
-
- __ _throws Exception_ \{
-
- logger.info("processing: " +
-ctx.getTimer().getInfo());
-
- return ctx.proceed();
-
- ...
-
- }
-
+    @AroundTimeout
+    private Object aroundTimeout(InvocationContext ctx)
+            throws Exception {
+        logger.info("processing: " + ctx.getTimer().getInfo());
+        return ctx.proceed();
+        ...
+    }
 }
-
 
 
 @Interceptors(MyInterceptor.class)
-
 @Singleton
+public class CacheBean {
+    private Data data;
 
-public class CacheBean \{
+    @Schedule(minute="*/30",hour="*",info="update-cache")
+    public void refresh(Timer t) {
+        data.refresh();
+    }
 
-
-
- private Data data;
-
-
-
-
-@Schedule(minute="*/30",hour="*",info="update-cache")
-
- public void refresh(Timer t) \{
-
- data.refresh();
-
- }
-
-
-
-
-@Schedule(dayOfMonth="1",info="validate-cache")
-
- public void validate(Timer t) \{
-
- data.validate();
-
- }
-
-
-
+    @Schedule(dayOfMonth="1",info="validate-cache")
+    public void validate(Timer t) {
+        data.validate();
+    }
 }
+----

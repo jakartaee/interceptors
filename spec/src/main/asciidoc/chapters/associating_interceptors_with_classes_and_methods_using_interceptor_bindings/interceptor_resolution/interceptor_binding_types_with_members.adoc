@@ -14,58 +14,50 @@
 Interceptor binding types may have annotation
 members.
 
+[source, java]
+----
 @Inherited
-
 @InterceptorBinding
-
-@Target(\{TYPE, METHOD})
-
+@Target({TYPE, METHOD})
 @Retention(RUNTIME)
-
-public @interface Monitored \{
-
-
-
- boolean persistent();
-
-
-
+public @interface Monitored {
+    boolean persistent();
 }
+----
 
 Any interceptor with that interceptor binding
 type must select a member value:
 
-@Monitored(persistent=true) @Interceptor
+[source, java]
+----
+@Monitored(persistent=true)
+@Interceptor
 @Priority(2100)
-
-public class PersistentMonitoringInterceptor
-\{
-
-
-
- @AroundInvoke
-
- public Object
-monitorInvocation(InvocationContext ctx)
-
- throws Exception \{ ... }
-
-
-
+public class PersistentMonitoringInterceptor {
+    @AroundInvoke
+    public Object monitorInvocation(InvocationContext ctx)
+        throws Exception {
+        ...
+    }
 }
+----
 
 The PersistentMonitoringInterceptor applies
 to this component:
 
+[soucr, java]
+----
 @Monitored(persistent=true)
-
-public class ShoppingCart \{ ... }
+public class ShoppingCart { ... }
+----
 
 But not to this component:
 
+[source, java]
+----
 @Monitored(persistent=false)
-
-public class SimpleShoppingCart \{ ... }
+public class SimpleShoppingCart { ... }
+----
 
 Annotation member values are compared using
 the equals method.

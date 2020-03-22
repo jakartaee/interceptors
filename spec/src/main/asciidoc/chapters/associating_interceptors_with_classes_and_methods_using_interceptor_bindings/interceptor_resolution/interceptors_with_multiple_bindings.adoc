@@ -14,59 +14,53 @@
 An interceptor class may specify multiple
 interceptor bindings.
 
+[source, java]
+----
 @Monitored @Logged @Interceptor
 @Priority(1100)
-
-public class MonitoringLoggingInterceptor \{
-
- @AroundInvoke
-
- public Object aroundInvoke(InvocationContext
-context)
-
- throws Exception \{ ... }
-
-
-
+public class MonitoringLoggingInterceptor {
+    @AroundInvoke
+    public Object aroundInvoke(InvocationContext context)
+        throws Exception {
+        ...
+    }
 }
+----
 
 This interceptor will be bound to all methods
 of this component:
 
-@Monitored @Logged
-
-public class ShoppingCart \{ ... }
+[source, java]
+----
+@Monitored
+@Logged
+public class ShoppingCart { ... }
+----
 
 The MonitoringLoggingInterceptor will not be
 bound to methods of this component, since the Logged interceptor binding
 does not appear:
 
+[source, java]
+----
 @Monitored
-
-public class ShoppingCart \{
-
-
-
- public void placeOrder() \{ ... }
-
-
-
+public class ShoppingCart {
+    public void placeOrder() {
+        ...
+    }
 }
+----
 
 However, the MonitoringLoggingInterceptor
 will be bound to the placeOrder method of this component:
 
+[source, java]
+----
 @Monitored
-
-public class ShoppingCart \{
-
-
-
+public class ShoppingCart {
  @Logged
-
- public void placeOrder() \{ ... }
-
-
-
+ public void placeOrder() {
+     ...
+ }
 }
-
+----

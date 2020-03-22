@@ -19,26 +19,27 @@ In the following example, the
 MonitoringInterceptor is applied to the target class. It will therefore
 apply to all business methods of the class.
 
+[source, java]
+----
 @Monitored
-
-public class ShoppingCart \{ ... }
-
+public class ShoppingCart { ... }
+----
 
 
 In this example, the MonitoringInterceptor is
 applied to a single method:
 
-public class ShoppingCart \{
+[source, java]
+----
+public class ShoppingCart {
 
-
-
- @Monitored
-
- public void placeOrder() \{ ... }
-
-
+    @Monitored
+    public void placeOrder() {
+        ...
+    }
 
 }
+----
 
 A component class or a method or constructor
 of a component class may declare multiple interceptor bindings.

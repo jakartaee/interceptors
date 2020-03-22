@@ -35,70 +35,56 @@ In the following example interceptors will be
 invoked in the following order when _someMethod_ is called:
 SomeInterceptor, AnotherInterceptor, MyInterceptor.
 
+[source, java]
+----
 @Stateless
+@Interceptors({org.acme.SomeInterceptor.class,
+    org.acme.AnotherInterceptor.class})
+public class MyBean {
+    ...
 
-@Interceptors(\{org.acme.SomeInterceptor.class,
-
- org.acme.AnotherInterceptor.class})
-
-public class MyBean \{
-
- ...
-
- @Interceptors(org.acme.MyInterceptor.class)
-
- public void someMethod() \{
-
- ...
-
- }
-
+    @Interceptors(org.acme.MyInterceptor.class)
+    public void someMethod() {
+        ...
+    }
 }
+----
 
 In the following example only the interceptor
 _MyInterceptor_ will be invoked when _someMethod_ is called. The
 _ExcludeClassInterceptors_ annotation is used to exclude the invocation
 of the class-level interceptors.
 
+[source, java]
+----
 @Stateless
-
 @Interceptors(org.acme.AnotherInterceptor.class)
+public class MyBean {
+    ...
 
-public class MyBean \{
-
- ...
-
- @Interceptors(org.acme.MyInterceptor.class)
-
- @ExcludeClassInterceptors
-
- public void someMethod() \{
-
- ...
-
- }
-
+    @Interceptors(org.acme.MyInterceptor.class)
+    @ExcludeClassInterceptors
+    public void someMethod() {
+        ...
+    }
 }
+----
 
 In the next example, only the interceptor
 _MyInterceptor_ will be invoked when _someMethod_ is called. The
 _ExcludeDefaultInterceptors_ annotation is used to exclude the
 invocation of the default interceptors (if any).
 
+[source, java]
+----
 @Stateless
+public class MyBean {
+    ...
 
-public class MyBean \{
-
- ...
-
- @ExcludeDefaultInterceptors
-
- @Interceptors(org.acme.MyInterceptor.class)
-
- public void someMethod() \{
-
- ...
-
- }
-
+    @ExcludeDefaultInterceptors
+    @Interceptors(org.acme.MyInterceptor.class)
+    public void someMethod() {
+        ...
+    }
 }
+----

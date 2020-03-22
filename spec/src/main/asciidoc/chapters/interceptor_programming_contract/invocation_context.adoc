@@ -14,8 +14,9 @@ The _InvocationContext_ object provides
 information that enables interceptor methods to control the behavior of
 the invocation chain.
 
-public interface InvocationContext \{
-
+[source, java]
+----
+public interface InvocationContext {
  public Object getTarget();
 
  public Object getTimer();
@@ -28,13 +29,11 @@ public interface InvocationContext \{
 
  public void setParameters(Object[] params);
 
- public java.util.Map<String, Object>
-getContextData();
+ public java.util.Map<String, Object> getContextData();
 
  public Object proceed() throws Exception;
-
 }
-
+----
 
 
 The same _InvocationContext_ instance is
