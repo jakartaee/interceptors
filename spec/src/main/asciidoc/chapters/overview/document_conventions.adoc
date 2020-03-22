@@ -1,0 +1,21 @@
+////
+*******************************************************************
+* Copyright (c) 2019 Eclipse Foundation
+*
+* This specification document is made available under the terms
+* of the Eclipse Foundation Specification License v1.0, which is
+* available at https://www.eclipse.org/legal/efsl.php.
+*******************************************************************
+////
+
+[[document_conventions]]
+=== Document Conventions
+
+The regular Times font is used for
+information that is prescriptive by the Interceptors specification.
+
+The italic Times font is used for paragraphs
+that contain descriptive information, such as notes describing typical
+use, or notes clarifying the text with prescriptive specification.
+
+The Courier font is used for code examples.
