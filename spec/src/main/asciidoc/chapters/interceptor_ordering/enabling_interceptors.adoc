@@ -1,0 +1,52 @@
+////
+*******************************************************************
+* Copyright (c) 2019 Eclipse Foundation
+*
+* This specification document is made available under the terms
+* of the Eclipse Foundation Specification License v1.0, which is
+* available at https://www.eclipse.org/legal/efsl.php.
+*******************************************************************
+////
+
+[[enabling_interceptors]]
+== Enabling Interceptors
+
+image:intercept-4.png[image]
+
+Only interceptors that are enabled are
+eligible to be invoked.
+
+Interceptors declared using interceptor
+bindings are enabled using the Priority annotation (see Section
+link:intercept.html#a472[See Use of the Priority Annotation in
+Ordering Interceptors]). The _Priority_ annotation also controls
+interceptor ordering (see Section link:intercept.html#a453[See
+Interceptor Ordering Rules]).
+
+Interceptors declared using the
+_Interceptors_ annotation are enabled by that annotation. Using the
+_Interceptors_ annotation to associate interceptor classes with a target
+class or a method or constructor of a target class enables them for that
+target class, method, or constructor. The order in which the interceptor
+classes are specified in the _Interceptors_ annotation controls
+interceptor ordering (see Section link:intercept.html#a453[See
+Interceptor Ordering Rules]). Interceptor methods declared in the target
+class or in a superclass of the target class are enabled unless
+overridden.
+
+An extension specification may define
+alternative mechanisms (e.g., a deployment descriptor such as the CDI
+beans.xml link:intercept.html#a543[See
+Jakarta Contexts and Dependency Injection (CDI specification), version 3.0.
+https://jakarta.ee/specifications/cdi/3.0/.] or the EJB _ejb-jar.xml_
+deployment descriptor link:intercept.html#a542[See Jakarta Enterprise
+Beans, version 4.0.
+https://jakarta.ee/specifications/enterprise-beans/4.0/.]) to
+enable and order interceptors, to override the order specified by means
+of annotations, or to disable interceptors.
+
+Note: The _InvocationContext_ object allows
+interceptor methods to control the behavior of the invocation chain,
+including whether the next method in the chain is invoked and the values
+of its parameters and result. See Section
+link:intercept.html#a52[See InvocationContext].
