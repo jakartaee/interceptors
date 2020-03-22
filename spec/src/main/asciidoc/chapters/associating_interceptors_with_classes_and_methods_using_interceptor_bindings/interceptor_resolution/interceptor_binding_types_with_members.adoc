@@ -45,7 +45,7 @@ public class PersistentMonitoringInterceptor {
 The PersistentMonitoringInterceptor applies
 to this component:
 
-[soucr, java]
+[source, java]
 ----
 @Monitored(persistent=true)
 public class ShoppingCart { ... }
