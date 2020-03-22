@@ -12,3 +12,5 @@
 == Interceptor Programming Contract
 
 include::terminology.adoc[]
+
+include::definition_of_interceptor_classes_and_interceptor_methods.adoc[]
