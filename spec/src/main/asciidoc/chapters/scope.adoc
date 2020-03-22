@@ -1,0 +1,14 @@
+////
+*******************************************************************
+* Copyright (c) 2019 Eclipse Foundation
+*
+* This specification document is made available under the terms
+* of the Eclipse Foundation Specification License v1.0, which is
+* available at https://www.eclipse.org/legal/efsl.php.
+*******************************************************************
+////
+
+== Specification Scope
+
+Jakarta Interceptors defines a means of interposing on business method invocations and specific events—such as lifecycle
+events and timeout events—that occur on instances of Jakarta EE components and other managed classes.
