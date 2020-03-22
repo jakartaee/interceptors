@@ -20,3 +20,6 @@ include::interceptor_life_cycle.adoc[]
 include::interceptor_environment.adoc[]
 
 include::invocation_context.adoc[]
+
+include::exceptions.adoc[]
+
