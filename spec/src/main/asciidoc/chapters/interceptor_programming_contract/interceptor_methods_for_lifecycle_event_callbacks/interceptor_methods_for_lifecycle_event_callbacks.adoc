@@ -10,8 +10,6 @@
 
 === Interceptor Methods for Lifecycle Event Callbacks
 
-image:intercept-4.png[image]
-
 The AroundConstruct annotation specifies a
 lifecycle callback interceptor method that interposes on the invocation
 of the target instance’s constructor.

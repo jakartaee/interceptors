@@ -11,8 +11,6 @@
 [[enabling_interceptors]]
 === Enabling Interceptors
 
-image:intercept-4.png[image]
-
 Only interceptors that are enabled are
 eligible to be invoked.
 

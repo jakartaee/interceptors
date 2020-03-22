@@ -11,8 +11,6 @@
 [[business_method_interceptor_methods]]
 === Business Method Interceptor Methods
 
-image:intercept-4.png[image]
-
 Interceptor methods that interpose on
 business method invocations are denoted by the _AroundInvoke_
 annotation.
