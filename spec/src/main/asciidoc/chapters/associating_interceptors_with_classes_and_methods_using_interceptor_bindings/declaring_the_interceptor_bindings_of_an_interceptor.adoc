@@ -1,0 +1,51 @@
+////
+*******************************************************************
+* Copyright (c) 2019 Eclipse Foundation
+*
+* This specification document is made available under the terms
+* of the Eclipse Foundation Specification License v1.0, which is
+* available at https://www.eclipse.org/legal/efsl.php.
+*******************************************************************
+////
+
+[[declaring_the_interceptor_bindings_of_an_interceptor]]
+== Declaring the Interceptor Bindings of an Interceptor
+
+The interceptor bindings of an interceptor
+are specified by annotating the interceptor class with the interceptor
+binding types and the Interceptor annotation and are called the set of
+interceptor bindings for the interceptor.
+
+@Monitored @Interceptor
+
+public class MonitoringInterceptor \{
+
+
+
+ @AroundInvoke
+
+ public Object
+monitorInvocation(InvocationContext ctx)
+
+ throws Exception \{ ... }
+
+
+
+}
+
+An interceptor class may declare multiple
+interceptor bindings.
+
+Multiple interceptors may declare the same
+interceptor bindings.
+
+If an interceptor does not declare an
+Interceptor annotation, it can be bound to components using the
+Interceptors annotation.
+
+An extension specification may define other
+ways of declaring an interceptor and binding an interceptor to a
+component, such as by means of a deployment descriptor.
+
+An interceptor declared using the Interceptor
+annotation should specify at least one interceptor binding.
