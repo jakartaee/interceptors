@@ -54,3 +54,5 @@ enables an interceptor if the interceptor class is listed under the
 _<interceptors>_ element of the _beans.xml_ file for the bean archive.
 
 include::interceptors_with_multiple_bindings.adoc[]
+
+include::interceptor_binding_types_with_members.adoc[]

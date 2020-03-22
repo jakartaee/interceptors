@@ -1,0 +1,92 @@
+////
+*******************************************************************
+* Copyright (c) 2019 Eclipse Foundation
+*
+* This specification document is made available under the terms
+* of the Eclipse Foundation Specification License v1.0, which is
+* available at https://www.eclipse.org/legal/efsl.php.
+*******************************************************************
+////
+
+[[interceptor_binding_types_with_members]]
+== Interceptor binding types with members
+
+Interceptor binding types may have annotation
+members.
+
+@Inherited
+
+@InterceptorBinding
+
+@Target(\{TYPE, METHOD})
+
+@Retention(RUNTIME)
+
+public @interface Monitored \{
+
+
+
+ boolean persistent();
+
+
+
+}
+
+Any interceptor with that interceptor binding
+type must select a member value:
+
+@Monitored(persistent=true) @Interceptor
+@Priority(2100)
+
+public class PersistentMonitoringInterceptor
+\{
+
+
+
+ @AroundInvoke
+
+ public Object
+monitorInvocation(InvocationContext ctx)
+
+ throws Exception \{ ... }
+
+
+
+}
+
+The PersistentMonitoringInterceptor applies
+to this component:
+
+@Monitored(persistent=true)
+
+public class ShoppingCart \{ ... }
+
+But not to this component:
+
+@Monitored(persistent=false)
+
+public class SimpleShoppingCart \{ ... }
+
+Annotation member values are compared using
+the equals method.
+
+Array-valued or annotation-valued members of
+an interceptor binding type are not supported. An extension
+specification may add support for these member types. For example the
+CDI specification link:intercept.html#a543[See
+Jakarta Contexts and Dependency Injection (CDI specification), version 3.0.
+https://jakarta.ee/specifications/cdi/3.0/.] adds the
+jakarta.enterprise.util.Nonbinding annotation, allowing array-valued or
+annotation-valued members to be used on the annotation type, but ignored
+by the resolution process.
+
+If the set of interceptor bindings of a
+component class or interceptor, including bindings inherited from CDI
+stereotypes link:intercept.html#a543[See
+Jakarta Contexts and Dependency Injection (CDI specification), version 3.0.
+https://jakarta.ee/specifications/cdi/3.0/.] and other interceptor bindings,
+has two instances of a certain interceptor binding type and the
+instances have different values of some annotation member, the container
+automatically detects the problem, treats it as a definition error, and
+causes deployment to fail.
+
