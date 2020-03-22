@@ -1,0 +1,224 @@
+////
+*******************************************************************
+* Copyright (c) 2019 Eclipse Foundation
+*
+* This specification document is made available under the terms
+* of the Eclipse Foundation Specification License v1.0, which is
+* available at https://www.eclipse.org/legal/efsl.php.
+*******************************************************************
+////
+
+[[constructor_and_method_level_interceptors]]
+== Constructor- and Method-level Interceptors
+
+Method-level interceptors are interceptor
+classes directly associated with a specific business or timeout method
+of the target class. Constructor-level interceptors are interceptor
+classes directly associated with a constructor of the target class.
+
+For example, an around-invoke interceptor
+method may be applied only to a specific business method of the target
+class— independent of the other methods of the target class—by using a
+method-level interceptor. Likewise, an around-timeout interceptor method
+may be applied only to a specific timeout method on the target class,
+independent of the other timeout methods of the target class.
+
+Method-level interceptors may not be
+associated with a lifecycle callback method of the target class.
+
+The same interceptor may be applied to more
+than one business or timeout method of the target class.
+
+If a method-level interceptor is applied to
+more than one method of a associated target class this does not affect
+the relationship between the interceptor instance and the target
+class—only a single instance of the interceptor class is created per
+target class instance.
+
+In the following example only the placeOrder
+method will be monitored:
+
+public class ShoppingCart \{
+
+
+
+ @Monitored
+
+ public void placeOrder() \{...}
+
+
+
+}
+
+In the following example, the MyInterceptor
+interceptor is applied to a subset of the business methods of the
+session bean. _Note_ that the created and removed methods of the
+MyInterceptor interceptor will not be invoked:
+
+public class MyInterceptor \{
+
+ ...
+
+ @AroundInvoke
+
+ public Object
+around_invoke(InvocationContext ctx) \{...}
+
+
+
+ @PostConstruct
+
+ public void created(InvocationContext ctx)
+\{...}
+
+
+
+ @PreDestroy
+
+ public void removed(InvocationContext ctx)
+\{...}
+
+}
+
+
+
+@Stateless
+
+public class MyBean \{
+
+
+
+ @PostConstruct
+
+ void init() \{...}
+
+
+
+ public void notIntercepted() \{...}
+
+
+
+ @Interceptors(org.acme.MyInterceptor.class)
+
+ public void someMethod() \{
+
+ ...
+
+ }
+
+
+
+ @Interceptors(org.acme.MyInterceptor.class)
+
+ public void anotherMethod() \{
+
+ ...
+
+ }
+
+}
+
+In the following example, the
+ValidationInterceptor interceptor interposes on the bean constructor
+only, and the _validateMethod_ interceptor method will not be invoked:
+
+@Inherited
+
+@InterceptorBinding
+
+@Target(\{CONSTRUCTOR, METHOD})
+
+@Retention(RUNTIME)
+
+public @interface ValidateSpecial \{}
+
+
+
+@ValidateSpecial
+
+public class ValidationInterceptor \{
+
+
+
+ @AroundConstruct
+
+ public void
+validateConstructor(InvocationContext ctx)\{... }
+
+
+
+ @AroundInvoke
+
+ public Object
+validateMethod(InvocationContext ctx)\{... }
+
+
+
+}
+
+
+
+public class SomeBean \{
+
+
+
+ @ValidateSpecial
+
+ SomeBean(...) \{
+
+ ...
+
+ }
+
+
+
+ public void someMethod() \{
+
+ ...
+
+ }
+
+}
+
+In the following example, the
+_validateConstructor_ method of the ValidationInterceptor interceptor
+interposes on the bean constructor, and the _validateMethod_ method of
+the interceptor interposes on the _anotherMethod_ business method of the
+bean.
+
+public class SomeBean \{
+
+
+
+ @ValidateSpecial
+
+ SomeBean(...) \{
+
+ ...
+
+ }
+
+
+
+ public void someMethod() \{
+
+ ...
+
+ }
+
+
+
+ @ValidateSpecial
+
+ public void anotherMethod() \{
+
+ ...
+
+ }
+
+}
+
+
+
+
+
