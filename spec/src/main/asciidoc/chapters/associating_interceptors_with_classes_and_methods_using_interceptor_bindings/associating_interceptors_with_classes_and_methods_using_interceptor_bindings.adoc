@@ -20,3 +20,5 @@ https://jakarta.ee/specifications/platform/9/.].
 include::interceptor_binding_types/interceptor_binding_types.adoc[]
 
 include::declaring_the_interceptor_bindings_of_an_interceptor.adoc[]
+
+include::binding_an_interceptor_to_a_component.adoc[]
