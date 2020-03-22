@@ -9,7 +9,7 @@
 ////
 
 [[relationship_to_other_specifications]]
-== Relationship to Other Specifications
+=== Relationship to Other Specifications
 
 The Jakarta EE Platform specification requires
 support for interceptors. The use of interceptors defined by means of

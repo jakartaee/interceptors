@@ -9,7 +9,7 @@
 ////
 
 [[revision_history]]
-== Revision History
+=== Revision History
 
 This document is an update to the
 Interceptors specification 1.2. Version 1.1 was based on the
