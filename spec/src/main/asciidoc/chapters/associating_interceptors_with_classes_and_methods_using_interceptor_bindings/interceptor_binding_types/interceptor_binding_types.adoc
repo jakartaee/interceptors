@@ -1,0 +1,32 @@
+////
+*******************************************************************
+* Copyright (c) 2019 Eclipse Foundation
+*
+* This specification document is made available under the terms
+* of the Eclipse Foundation Specification License v1.0, which is
+* available at https://www.eclipse.org/legal/efsl.php.
+*******************************************************************
+////
+
+[[interceptor_binding_types]]
+== Interceptor Binding Types
+
+image:intercept-4.png[image]
+
+An interceptor binding type is a Java
+annotation defined as Retention(RUNTIME). Typically an interceptor
+binding is defined as Target(\{TYPE, METHOD, CONSTRUCTOR}) or any subset
+of valid target types.
+
+An interceptor binding type may be declared
+by specifying the InterceptorBinding meta-annotation.
+
+@Inherited
+
+@InterceptorBinding
+
+@Target(\{TYPE, METHOD})
+
+@Retention(RUNTIME)
+
+public @interface Monitored \{}

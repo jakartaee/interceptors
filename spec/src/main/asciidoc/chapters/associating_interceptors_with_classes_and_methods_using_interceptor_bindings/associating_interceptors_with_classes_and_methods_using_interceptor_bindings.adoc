@@ -16,3 +16,5 @@ annotations that may be used to associate interceptors with any
 component that is not itself an interceptor or decorator
 link:intercept.html#a546[See Jakarta EE Platform 9.
 https://jakarta.ee/specifications/platform/9/.].
+
+include::interceptor_binding_types/interceptor_binding_types.adoc[]
