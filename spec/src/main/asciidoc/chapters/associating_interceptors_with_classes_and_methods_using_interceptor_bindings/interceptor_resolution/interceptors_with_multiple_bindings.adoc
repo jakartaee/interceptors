@@ -9,7 +9,7 @@
 ////
 
 [[interceptors_with_multiple_bindings]]
-== Interceptors with multiple bindings
+==== Interceptors with multiple bindings
 
 An interceptor class may specify multiple
 interceptor bindings.

@@ -9,7 +9,7 @@
 ////
 
 [[business_method_interceptor_methods]]
-== Business Method Interceptor Methods
+=== Business Method Interceptor Methods
 
 image:intercept-4.png[image]
 

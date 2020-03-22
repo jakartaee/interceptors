@@ -9,7 +9,7 @@
 ////
 
 [[enabling_interceptors]]
-== Enabling Interceptors
+=== Enabling Interceptors
 
 image:intercept-4.png[image]
 

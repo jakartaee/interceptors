@@ -9,7 +9,7 @@
 ////
 
 [[definition_of_interceptor_classes_and_interceptor_methods]]
-== Definition of Interceptor Classes and Interceptor Methods
+=== Definition of Interceptor Classes and Interceptor Methods
 
 An interceptor method for a target class may
 be declared in the target class, in an interceptor class associated with

@@ -9,7 +9,7 @@
 ////
 
 [[interceptor_life_cycle]]
-== Interceptor Life Cycle
+=== Interceptor Life Cycle
 
 The lifecycle of an interceptor instance is
 the same as that of the target instance with which it is associated.

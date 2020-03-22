@@ -9,7 +9,7 @@
 ////
 
 [[interceptor_resolution]]
-== Interceptor Resolution
+=== Interceptor Resolution
 
 The process of matching interceptors to a
 given business method, timeout method, or lifecycle event of a component

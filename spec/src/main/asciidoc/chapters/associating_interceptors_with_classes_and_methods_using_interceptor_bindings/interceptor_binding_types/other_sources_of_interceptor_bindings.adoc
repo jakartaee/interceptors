@@ -9,7 +9,7 @@
 ////
 
 [[other_sources_of_interceptor_bindings]]
-=== Other sources of interceptor bindings
+==== Other sources of interceptor bindings
 
 An extension specification may define other
 sources of interceptor bindings, such as by CDI stereotypes.

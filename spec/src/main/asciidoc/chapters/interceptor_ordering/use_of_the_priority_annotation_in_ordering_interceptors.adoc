@@ -9,7 +9,7 @@
 ////
 
 [[use_of_the_priority_annotation_in_ordering_interceptors]]
-== Use of the Priority Annotation in Ordering Interceptors
+=== Use of the Priority Annotation in Ordering Interceptors
 
 The _Priority_ annotation can be used to
 enable and order interceptors associated with components that use

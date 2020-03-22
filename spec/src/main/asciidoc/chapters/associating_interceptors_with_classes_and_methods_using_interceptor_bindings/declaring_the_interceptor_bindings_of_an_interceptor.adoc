@@ -9,7 +9,7 @@
 ////
 
 [[declaring_the_interceptor_bindings_of_an_interceptor]]
-== Declaring the Interceptor Bindings of an Interceptor
+=== Declaring the Interceptor Bindings of an Interceptor
 
 The interceptor bindings of an interceptor
 are specified by annotating the interceptor class with the interceptor

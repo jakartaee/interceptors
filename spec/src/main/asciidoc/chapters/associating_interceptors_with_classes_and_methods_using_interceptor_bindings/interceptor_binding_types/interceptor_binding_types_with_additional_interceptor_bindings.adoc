@@ -9,7 +9,7 @@
 ////
 
 [[interceptor_binding_types_with_additional_interceptor_bindings]]
-=== Interceptor binding types with additional interceptor bindings
+==== Interceptor binding types with additional interceptor bindings
 
 An interceptor binding type may declare other
 interceptor bindings.

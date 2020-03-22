@@ -8,7 +8,7 @@
 *******************************************************************
 ////
 
-== Interceptor Methods for Lifecycle Event Callbacks
+=== Interceptor Methods for Lifecycle Event Callbacks
 
 image:intercept-4.png[image]
 

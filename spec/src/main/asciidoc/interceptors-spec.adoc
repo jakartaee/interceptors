@@ -21,8 +21,20 @@ endif::[]
 
 // == License
 :sectnums!:
-include::license-efsl.adoc[]
+include::chapters/license/license_efsl.adoc[]
 
-// == Scope
 :sectnums:
-include::scope.adoc[]
+
+include::chapters/overview/overview.adoc[]
+
+include::chapters/interceptor_programming_contract/interceptor_programming_contract.adoc[]
+
+include::chapters/associating_interceptors_with_classes_and_methods_using_interceptor_bindings/associating_interceptors_with_classes_and_methods_using_interceptor_bindings.adoc[]
+
+include::chapters/associating_interceptors_with_classes_and_methods_using_the_interceptors_annotation/associating_interceptors_with_classes_and_methods_using_the_interceptors_annotation.adoc[]
+
+include::chapters/interceptor_ordering/interceptor_ordering.adoc[]
+
+include::chapters/related_documents/related_documents.adoc[]
+
+include::chapters/change_log/change_log.adoc[]

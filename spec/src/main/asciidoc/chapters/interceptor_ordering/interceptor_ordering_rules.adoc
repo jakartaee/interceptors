@@ -9,7 +9,7 @@
 ////
 
 [[interceptor_ordering_rules]]
-== Interceptor Ordering Rules
+=== Interceptor Ordering Rules
 
 For each interceptor method type (i.e.,
 around-invoke, around-timeout, post-construct, etc.), the following

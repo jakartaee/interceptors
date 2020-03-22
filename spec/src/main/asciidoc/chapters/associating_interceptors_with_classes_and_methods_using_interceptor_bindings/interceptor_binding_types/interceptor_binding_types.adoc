@@ -9,7 +9,7 @@
 ////
 
 [[interceptor_binding_types]]
-== Interceptor Binding Types
+=== Interceptor Binding Types
 
 image:intercept-4.png[image]
 

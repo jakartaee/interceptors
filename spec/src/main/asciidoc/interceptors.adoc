@@ -1,22 +1,4 @@
-:sectnums:
-= Jakarta Interceptors Specification, Version 1.2
-
-Copyright (c) 2020 Eclipse Foundation.
-
-
-=== Overview
-
-Interceptors are used to interpose on
-business method invocations and specific events—such as lifecycle events
-and timeout events—that occur on instances of Jakarta EE components and
-other managed classes.
-
-An interceptor method is either a method of
-the component class (called the target class) or a method of a separate
-class (called the interceptor class) that is associated with the target
-class.
-
-=== Revision History
+== Revision History
 
 image:intercept-4.png[image]
 
@@ -34,7 +16,7 @@ specification) http://jcp.org/en/jsr/detail?id=346.].
 The change log for the current version is
 found in link:intercept.html#a549[See Change Log].
 
-=== [[a7]]Relationship to Other Specifications
+== [[a7]]Relationship to Other Specifications
 
 image:intercept-4.png[image]
 
@@ -56,7 +38,7 @@ this document as extension specifications. This document outlines
 permissible extensions to this specification and defines requirements
 for extension specifications.
 
-=== Document Conventions
+== Document Conventions
 
 image:intercept-4.png[image]
 
@@ -69,9 +51,9 @@ use, or notes clarifying the text with prescriptive specification.
 
 The Courier font is used for code examples.
 
-=== Interceptor Programming Contract
+== Interceptor Programming Contract
 
-=== [[a15]]Terminology
+== [[a15]]Terminology
 
 image:intercept-4.png[image]
 
@@ -91,7 +73,7 @@ the invocation of a method of the target class, a constructor of the
 target class, a lifecycle event of the target class, or a timeout method
 of the target class.
 
-=== [[a20]]Definition of Interceptor Classes and Interceptor Methods
+== [[a20]]Definition of Interceptor Classes and Interceptor Methods
 
 image:intercept-4.png[image]
 
@@ -184,7 +166,7 @@ Jakarta Contexts and Dependency Injection (CDI specification), version 3.0.
 https://jakarta.ee/specifications/cdi/3.0/.] requires support for the beans.xml
 deployment descriptor.
 
-=== Interceptor Life Cycle
+== Interceptor Life Cycle
 
 image:intercept-4.png[image]
 
@@ -244,7 +226,7 @@ callback interceptor methods should therefore exercise caution when
 invoking methods of the target instance since dependency injection on
 the target instance will not have been completed.
 
-=== [[a48]]Interceptor Environment
+== [[a48]]Interceptor Environment
 
 An interceptor class shares the enterprise
 naming context of its associated target class. Annotations and/or XML
@@ -264,7 +246,7 @@ enables interceptor methods to control the behavior of the interceptor
 invocation chain, including whether the next method in the chain is
 invoked and the values of its parameters and result.
 
-=== [[a52]]InvocationContext
+== [[a52]]InvocationContext
 
 image:intercept-4.png[image]
 
@@ -373,7 +355,7 @@ the target class, the invocation of _proceed_ in the last interceptor
 method in the chain is a no-oplink:#a570[4], and _null_ is
 returned.
 
-=== [[a75]]Exceptions
+== [[a75]]Exceptions
 
 image:intercept-4.png[image]
 
@@ -393,7 +375,7 @@ exception or suppressed the exception. Exceptions and initialization
 and/or cleanup operations should typically be handled in _try_ / _catch_
 / _finally_ blocks around the _proceed_ method.
 
-=== Business Method Interceptor Methods
+== Business Method Interceptor Methods
 
 image:intercept-4.png[image]
 
@@ -488,7 +470,7 @@ public class ShoppingCart \{
 
 }
 
-=== Interceptor Methods for Lifecycle Event Callbacks
+== Interceptor Methods for Lifecycle Event Callbacks
 
 image:intercept-4.png[image]
 
@@ -628,7 +610,7 @@ ShoppingCart \{
 
 }
 
-=== Exceptions
+== Exceptions
 
 When invoked to interpose on lifecycle
 events, lifecycle callback interceptor methods may throw runtime
@@ -651,7 +633,7 @@ result of such exceptions: the lifecycle callback interceptor methods in
 the chain should perform any necessary clean-up operations as the
 interceptor chain unwinds.
 
-=== Timeout Method Interceptor Methods
+== Timeout Method Interceptor Methods
 
 image:intercept-4.png[image]
 
@@ -769,7 +751,7 @@ public class CacheBean \{
 
 }
 
-=== Constructor- and Method-level Interceptors
+== Constructor- and Method-level Interceptors
 
 image:intercept-4.png[image]
 
@@ -984,7 +966,7 @@ public class SomeBean \{
 
 
 
-=== Default Interceptors
+== Default Interceptors
 
 image:intercept-4.png[image]
 
@@ -993,7 +975,7 @@ apply to a set of target classes. An extension specification may support
 the use of a deployment descriptor or annotations to define default
 interceptors and their relative ordering.
 
-=== [[a303]]Associating Interceptors with Classes and Methods using Interceptor Bindings
+== [[a303]]Associating Interceptors with Classes and Methods using Interceptor Bindings
 
 Interceptor bindings are intermediate
 annotations that may be used to associate interceptors with any
@@ -1001,7 +983,7 @@ component that is not itself an interceptor or decorator
 link:intercept.html#a546[See Jakarta EE Platform 9.
 https://jakarta.ee/specifications/platform/9/.].
 
-=== Interceptor Binding Types
+== Interceptor Binding Types
 
 image:intercept-4.png[image]
 
@@ -1023,7 +1005,7 @@ by specifying the InterceptorBinding meta-annotation.
 
 public @interface Monitored \{}
 
-=== [[a313]]Interceptor binding types with additional interceptor bindings
+== [[a313]]Interceptor binding types with additional interceptor bindings
 
 An interceptor binding type may declare other
 interceptor bindings.
@@ -1051,12 +1033,12 @@ types. For example, interceptor binding types declared Target(TYPE) may
 not be applied to interceptor binding types declared Target(\{TYPE,
 METHOD}).
 
-=== Other sources of interceptor bindings
+== Other sources of interceptor bindings
 
 An extension specification may define other
 sources of interceptor bindings, such as by CDI stereotypes.
 
-=== Declaring the Interceptor Bindings of an Interceptor
+== Declaring the Interceptor Bindings of an Interceptor
 
 image:intercept-4.png[image]
 
@@ -1099,7 +1081,7 @@ component, such as by means of a deployment descriptor.
 An interceptor declared using the Interceptor
 annotation should specify at least one interceptor binding.
 
-=== Binding an Interceptor to a Component
+== Binding an Interceptor to a Component
 
 image:intercept-4.png[image]
 
@@ -1169,7 +1151,7 @@ non-private, final method of a component has a method-level interceptor
 binding, the container automatically detects the problem and treats it
 as a definition error, and causes deployment to fail.
 
-=== Interceptor Resolution
+== Interceptor Resolution
 
 image:intercept-4.png[image]
 
@@ -1215,7 +1197,7 @@ means of enabling interceptors. For example, the CDI specification
 enables an interceptor if the interceptor class is listed under the
 _<interceptors>_ element of the _beans.xml_ file for the bean archive.
 
-=== Interceptors with multiple bindings
+== Interceptors with multiple bindings
 
 An interceptor class may specify multiple
 interceptor bindings.
@@ -1276,7 +1258,7 @@ public class ShoppingCart \{
 
 }
 
-=== Interceptor binding types with members
+== Interceptor binding types with members
 
 Interceptor binding types may have annotation
 members.
@@ -1357,7 +1339,7 @@ instances have different values of some annotation member, the container
 automatically detects the problem, treats it as a definition error, and
 causes deployment to fail.
 
-=== [[a423]]Associating Interceptors with Classes and Methods using the Interceptors Annotation
+== [[a423]]Associating Interceptors with Classes and Methods using the Interceptors Annotation
 
 The _Interceptors_ annotation can be used to
 denote interceptor classes and associate one or more interceptor classes
@@ -1433,9 +1415,9 @@ public class MyBean \{
 
 }
 
-=== [[a446]]Interceptor Ordering
+== [[a446]]Interceptor Ordering
 
-=== [[a447]]Enabling Interceptors
+== [[a447]]Enabling Interceptors
 
 image:intercept-4.png[image]
 
@@ -1477,7 +1459,7 @@ including whether the next method in the chain is invoked and the values
 of its parameters and result. See Section
 link:intercept.html#a52[See InvocationContext].
 
-=== [[a453]]Interceptor Ordering Rules
+== [[a453]]Interceptor Ordering Rules
 
 image:intercept-4.png[image]
 
@@ -1564,7 +1546,7 @@ If an interceptor method is overridden by
 another method (regardless whether that method is itself an interceptor
 method), it will not be invoked.
 
-=== [[a472]]Use of the Priority Annotation in Ordering Interceptors
+== [[a472]]Use of the Priority Annotation in Ordering Interceptors
 
 The _Priority_ annotation can be used to
 enable and order interceptors associated with components that use
@@ -1652,7 +1634,7 @@ public class ValidationInterceptor \{ ... }
 
 
 
-=== [[a502]]Excluding Interceptors
+== [[a502]]Excluding Interceptors
 
 image:intercept-4.png[image]
 
@@ -1748,7 +1730,7 @@ public class MyBean \{
 
 }
 
-=== Related Documents
+== Related Documents
 
 [[a541]]Enterprise JavaBeansTM,
 version 3.0 . http://jcp.org/en/jsr/detail?id=220.
@@ -1770,7 +1752,7 @@ version 3.0 . https://jakarta.ee/specifications/xml-web-services/3.0/ .
 version 2.0 . https://jakarta.ee/specifications/transactions/2.0/ .
 
 
-=== [[a549]]Change Log
+== [[a549]]Change Log
 
 Clarified
 link:intercept.html#a7[See Relationship to Other

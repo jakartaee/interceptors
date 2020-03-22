@@ -9,7 +9,7 @@
 ////
 
 [[excluding_interceptors]]
-== Excluding Interceptors
+=== Excluding Interceptors
 
 Interceptors may be excluded from execution
 by means of the _ExcludeClassInterceptors_ annotation and the

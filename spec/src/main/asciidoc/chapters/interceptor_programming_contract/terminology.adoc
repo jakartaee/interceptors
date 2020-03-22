@@ -9,7 +9,7 @@
 ////
 
 [[terminology]]
-== Terminology
+=== Terminology
 
 The following terminology is used in this
 document:

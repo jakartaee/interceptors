@@ -9,7 +9,7 @@
 ////
 
 [[interceptor_environment]]
-=== Interceptor Environment
+==== Interceptor Environment
 
 An interceptor class shares the enterprise
 naming context of its associated target class. Annotations and/or XML

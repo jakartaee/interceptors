@@ -9,7 +9,7 @@
 ////
 
 [[constructor_and_method_level_interceptors]]
-== Constructor- and Method-level Interceptors
+=== Constructor- and Method-level Interceptors
 
 Method-level interceptors are interceptor
 classes directly associated with a specific business or timeout method

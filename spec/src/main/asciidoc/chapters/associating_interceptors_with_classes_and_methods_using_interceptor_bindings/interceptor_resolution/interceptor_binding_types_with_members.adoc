@@ -9,7 +9,7 @@
 ////
 
 [[interceptor_binding_types_with_members]]
-== Interceptor binding types with members
+==== Interceptor binding types with members
 
 Interceptor binding types may have annotation
 members.

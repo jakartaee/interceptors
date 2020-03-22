@@ -9,7 +9,7 @@
 ////
 
 [[exceptions_life_cicle_event_callbacks]]
-=== Exceptions
+==== Exceptions
 
 When invoked to interpose on lifecycle
 events, lifecycle callback interceptor methods may throw runtime

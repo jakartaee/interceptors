@@ -9,7 +9,7 @@
 ////
 
 [[default_interceptors]]
-== Default Interceptors
+=== Default Interceptors
 
 Default interceptors are interceptors that
 apply to a set of target classes. An extension specification may support

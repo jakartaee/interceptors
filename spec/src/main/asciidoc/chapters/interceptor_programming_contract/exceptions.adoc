@@ -9,7 +9,7 @@
 ////
 
 [[exceptions]]
-== Exceptions
+=== Exceptions
 
 Interceptor methods are allowed to throw
 runtime exceptions or any checked exceptions that the associated target

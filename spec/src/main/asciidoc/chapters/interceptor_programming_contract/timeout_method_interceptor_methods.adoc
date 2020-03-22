@@ -9,7 +9,7 @@
 ////
 
 [[timeout_method_interceptor_methods]]
-== Timeout Method Interceptor Methods
+=== Timeout Method Interceptor Methods
 
 Interceptor methods that interpose on timeout
 methods are denoted by the _AroundTimeout_ annotation.

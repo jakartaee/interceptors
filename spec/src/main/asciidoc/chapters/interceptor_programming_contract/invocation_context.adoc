@@ -8,7 +8,7 @@
 *******************************************************************
 ////
 [[invocation_context]]
-== Invocation Context
+=== Invocation Context
 
 The _InvocationContext_ object provides
 information that enables interceptor methods to control the behavior of

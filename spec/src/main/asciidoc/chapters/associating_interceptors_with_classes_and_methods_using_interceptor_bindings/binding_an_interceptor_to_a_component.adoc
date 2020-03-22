@@ -9,7 +9,7 @@
 ////
 
 [[binding_an_interceptor_to_a_component]]
-== Binding an Interceptor to a Component
+=== Binding an Interceptor to a Component
 
 An interceptor may be bound to a component by
 annotating the component class or a method or constructor of the
