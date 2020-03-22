@@ -30,3 +30,5 @@ by specifying the InterceptorBinding meta-annotation.
 @Retention(RUNTIME)
 
 public @interface Monitored \{}
+
+include::interceptor_binding_types_with_additional_interceptor_bindings.adoc
