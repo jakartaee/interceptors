@@ -53,3 +53,4 @@ means of enabling interceptors. For example, the CDI specification
 enables an interceptor if the interceptor class is listed under the
 _<interceptors>_ element of the _beans.xml_ file for the bean archive.
 
+include::interceptors_with_multiple_bindings.adoc[]
