@@ -15,4 +15,6 @@ include::terminology.adoc[]
 
 include::definition_of_interceptor_classes_and_interceptor_methods.adoc[]
 
-include::interceptor_life_cycle.adoc
+include::interceptor_life_cycle.adoc[]
+
+include::interceptor_environment.adoc[]
