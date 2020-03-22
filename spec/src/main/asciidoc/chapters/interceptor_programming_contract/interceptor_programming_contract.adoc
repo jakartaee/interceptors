@@ -10,3 +10,5 @@
 
 [[interceptor_programming_contract]]
 == Interceptor Programming Contract
+
+include::terminology.adoc[]
