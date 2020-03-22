@@ -24,3 +24,5 @@ include::exceptions.adoc[]
 include::business_method_interceptor_methods.adoc[]
 
 include::interceptor_methods_for_lifecycle_event_callbacks/interceptor_methods_for_lifecycle_event_callbacks.adoc[]
+
+include::timeout_method_interceptor_methods.adoc[]

@@ -1,0 +1,126 @@
+////
+*******************************************************************
+* Copyright (c) 2019 Eclipse Foundation
+*
+* This specification document is made available under the terms
+* of the Eclipse Foundation Specification License v1.0, which is
+* available at https://www.eclipse.org/legal/efsl.php.
+*******************************************************************
+////
+
+[[timeout_method_interceptor_methods]]
+== Timeout Method Interceptor Methods
+
+Interceptor methods that interpose on timeout
+methods are denoted by the _AroundTimeout_ annotation.
+
+NOTE: Timeout methods are currently specific
+to Enterprise JavaBeans, although Timer Service functionality may be
+extended to other specifications in the future, and extension
+specifications may define events that may be interposed on by
+around-timeout methods. The EJB Timer Service, defined by the Enterprise
+JavaBeansTM specification link:intercept.html#a542[See
+Jakarta Enterprise Beans, version 4.0.
+https://jakarta.ee/specifications/enterprise-beans/4.0/.], is a container-provided service
+that allows the Bean Provider to register enterprise beans for timer
+callbacks according to a calendar-based schedule, at a specified time,
+after a specified elapsed time, or at specified intervals. The timer
+callbacks registered with the Timer Service are called timeout methods.
+
+Around-timeout methods may be declared in
+interceptor classes, in superclasses of interceptor classes, in the
+target class, and/or in superclasses of the target class. However, only
+one around-timeout method may be declared in a given class.
+
+Around-timeout methods can have _public_ ,
+_private_ , _protected_ , or _package_ level access. An around-timeout
+method must not be declared as abstract, _final_ or _static_ .
+
+Around-timeout methods have the following
+signature:
+
+ _Object <METHOD>(InvocationContext)_ __ __
+
+Note: An around-timeout interceptor method
+should not throw application exceptions, but it may be declared to throw
+checked exceptions or the java.lang.Exception if the same interceptor
+method interposes on business methods in addition to the timeout
+methods.
+
+An around-timeout method can invoke any
+component or resource that its corresponding timeout method can invoke.
+
+An around-timeout method invocation occurs
+within the same transactionlink:#a572[6] and security context
+as the timeout method on which it is interposing.
+
+The _InvocationContext.getTimer_ method
+allows an around-timeout method to retrieve the timer object associated
+with the timeout.
+
+In the following example around-timeout
+interceptor is associated with two timeout methods:
+
+public class MyInterceptor \{
+
+
+
+ private Logger logger = ...;
+
+
+
+ @AroundTimeout
+
+ private Object
+aroundTimeout(InvocationContext ctx)
+
+ __ _throws Exception_ \{
+
+ logger.info("processing: " +
+ctx.getTimer().getInfo());
+
+ return ctx.proceed();
+
+ ...
+
+ }
+
+}
+
+
+
+@Interceptors(MyInterceptor.class)
+
+@Singleton
+
+public class CacheBean \{
+
+
+
+ private Data data;
+
+
+
+
+@Schedule(minute="*/30",hour="*",info="update-cache")
+
+ public void refresh(Timer t) \{
+
+ data.refresh();
+
+ }
+
+
+
+
+@Schedule(dayOfMonth="1",info="validate-cache")
+
+ public void validate(Timer t) \{
+
+ data.validate();
+
+ }
+
+
+
+}
