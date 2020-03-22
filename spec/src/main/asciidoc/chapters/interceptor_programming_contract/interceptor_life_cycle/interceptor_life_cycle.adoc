@@ -66,3 +66,5 @@ interceptor chain complete successfully. Around-construct lifecycle
 callback interceptor methods should therefore exercise caution when
 invoking methods of the target instance since dependency injection on
 the target instance will not have been completed.
+
+include::interceptor_environment.adoc[]
