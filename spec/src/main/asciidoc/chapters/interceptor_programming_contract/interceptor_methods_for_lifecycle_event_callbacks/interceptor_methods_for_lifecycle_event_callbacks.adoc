@@ -148,3 +148,4 @@ ShoppingCart \{
 
 }
 
+include::exceptions.adoc[]

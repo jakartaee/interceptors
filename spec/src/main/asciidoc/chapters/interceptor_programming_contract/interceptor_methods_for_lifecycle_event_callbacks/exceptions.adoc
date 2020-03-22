@@ -1,0 +1,33 @@
+////
+*******************************************************************
+* Copyright (c) 2019 Eclipse Foundation
+*
+* This specification document is made available under the terms
+* of the Eclipse Foundation Specification License v1.0, which is
+* available at https://www.eclipse.org/legal/efsl.php.
+*******************************************************************
+////
+
+[[exceptions_life_cicle_event_callbacks]]
+== Exceptions
+
+When invoked to interpose on lifecycle
+events, lifecycle callback interceptor methods may throw runtime
+exceptions, but—except for around-construct methods—may not throw
+checked exceptions.
+
+In addition to the rules specified in section
+link:intercept.html#a75[See Exceptions], the following rules
+apply to the lifecycle callback interceptor methods:
+
+A lifecycle callback interceptor method
+declared in an interceptor class or in a superclass of an interceptor
+class may catch an exception thrown by another lifecycle callback
+interceptor method in the invocation chain, and clean up before
+returning.
+
+Pre-destroy interceptor methods are not
+invoked when the target instance and the interceptors are discarded as a
+result of such exceptions: the lifecycle callback interceptor methods in
+the chain should perform any necessary clean-up operations as the
+interceptor chain unwinds.
