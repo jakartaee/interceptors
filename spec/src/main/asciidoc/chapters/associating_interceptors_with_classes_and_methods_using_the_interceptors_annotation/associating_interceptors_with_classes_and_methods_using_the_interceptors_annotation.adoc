@@ -1,0 +1,86 @@
+////
+*******************************************************************
+* Copyright (c) 2019 Eclipse Foundation
+*
+* This specification document is made available under the terms
+* of the Eclipse Foundation Specification License v1.0, which is
+* available at https://www.eclipse.org/legal/efsl.php.
+*******************************************************************
+////
+
+[[associating_interceptors_with_classes_and_methods_using_the_interceptors_annotation]]
+== Associating Interceptors with Classes and Methods using the Interceptors Annotation
+
+The _Interceptors_ annotation can be used to
+denote interceptor classes and associate one or more interceptor classes
+with a target class, and/or one or more of its methods, and/or a
+constructor of the target class.
+
+The _Interceptors_ annotation can be applied
+to the target class or to a method or a constructor declared in the
+target class or in a superclass of the target class:
+
+Method-level around-invoke and around-timeout
+interceptors can be defined by applying the _Interceptors_ annotation to
+the method for which the around-invoke or around-timeout interceptor
+methods are to be invoked.
+
+Constructor-level interceptors can be defined
+by applying the _Interceptors_ annotation to the constructor for which
+the around-construct interceptor methods are to be invoked.
+
+Constructor- and method-level interceptors
+are invoked in addition to any interceptors declared in the target
+class, in an interceptor class associated with the target class, or in a
+superclass of the target class or interceptor class, and in addition to
+any default interceptors (if supported).
+
+If multiple interceptor classes are specified
+in the _Interceptors_ annotation, the interceptor methods of these
+classes are invoked in the order in which the classes are specified. The
+ordering rules for interceptors are defined in Chapter
+link:intercept.html#a446[See Interceptor Ordering].
+
+The _Interceptor_ annotation is ignored
+during the processing of classes bound using the _Interceptors_
+annotation. It will continue to be observed on such classes when used in
+the context of interceptor binding.
+
+An extension specification may support the
+use of a deployment descriptor to associate interceptor classes with a
+target class, and/or method or constructor of a target class, and to
+specify the order of interceptor invocation or override metadata
+specified by annotations.
+
+In the following example, the around-invoke
+methods specified by both the _MyInterceptor_ and the
+_MyOtherInterceptor_ classes will be invoked when the _otherMethod_
+method is called. The rules for ordering these interceptors are defined
+in Chapter link:intercept.html#a446[See Interceptor Ordering].
+
+@Stateless
+
+@Interceptors(org.acme.MyInterceptor.class)
+
+public class MyBean \{
+
+ ...
+
+ public void someMethod() \{
+
+ ...
+
+ }
+
+
+
+
+@Interceptors(org.acme.MyOtherInterceptor.class)
+
+ public void otherMethod() \{
+
+ ...
+
+ }
+
+}
