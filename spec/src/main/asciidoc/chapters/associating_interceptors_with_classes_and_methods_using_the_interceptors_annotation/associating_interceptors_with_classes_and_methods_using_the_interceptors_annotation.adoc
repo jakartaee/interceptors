@@ -9,7 +9,7 @@
 ////
 
 [[associating_interceptors_with_classes_and_methods_using_the_interceptors_annotation]]
-=== Associating Interceptors with Classes and Methods using the Interceptors Annotation
+== Associating Interceptors with Classes and Methods using the Interceptors Annotation
 
 The _Interceptors_ annotation can be used to
 denote interceptor classes and associate one or more interceptor classes
