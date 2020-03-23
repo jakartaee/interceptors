@@ -18,10 +18,8 @@ NOTE: Timeout methods are currently specific
 to Enterprise JavaBeans, although Timer Service functionality may be
 extended to other specifications in the future, and extension
 specifications may define events that may be interposed on by
-around-timeout methods. The EJB Timer Service, defined by the Enterprise
-JavaBeansTM specification link:intercept.html#a542[See
-Jakarta Enterprise Beans, version 4.0.
-https://jakarta.ee/specifications/enterprise-beans/4.0/.], is a container-provided service
+around-timeout methods. The EJB Timer Service, defined by the Jakarta Enterprise
+Beans specification <<bib2>>, is a container-provided service
 that allows the Bean Provider to register enterprise beans for timer
 callbacks according to a calendar-based schedule, at a specified time,
 after a specified elapsed time, or at specified intervals. The timer

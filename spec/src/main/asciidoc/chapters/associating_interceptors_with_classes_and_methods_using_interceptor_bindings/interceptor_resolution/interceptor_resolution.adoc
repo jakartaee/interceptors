@@ -32,21 +32,19 @@ declared as meta-annotations of other interceptor bindings.
 An interceptor is bound to a method or
 constructor if:
 
-The method or constructor has all the
+- The method or constructor has all the
 interceptor bindings of the interceptor. A method or constructor has an
 interceptor binding of an interceptor if it has an interceptor binding
 with (a) the same type and (b) the same annotation member value for each
 member. An extension specification may further refine this rule. For
-example, the CDI specification link:intercept.html#a543[See
-Jakarta Contexts and Dependency Injection (CDI specification), version 3.0.
-https://jakarta.ee/specifications/cdi/3.0/.] adds the
+example, the CDI specification <<bib3>> adds the
 jakarta.enterprise.util.Nonbinding annotation, causing member values to be
 ignored by the resolution process.
 
-The interceptor intercepts the given kind of
+- The interceptor intercepts the given kind of
 lifecycle event or method.
 
-The interceptor is enabled. An interceptor is
+- The interceptor is enabled. An interceptor is
 enabled if the _Priority_ annotation is applied to the interceptor
 classlink:#a574[8]. An extension specification may define other
 means of enabling interceptors. For example, the CDI specification

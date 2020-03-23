@@ -12,21 +12,17 @@
 [[change_log]]
 == Change Log
 
-Clarified
-link:intercept.html#a7[See Relationship to Other
-Specifications] to be consistent with the Jakarta EE Platform specification
+Clarified <<relationship_to_other_specifications>> to be consistent with the Jakarta EE Platform specification
 with regard to when interceptors defined by means of the _Interceptors_
 annotation and interceptors defined by means of interceptor bindings are
 required to be supported.
 
-Clarified terminology in sections
-link:intercept.html#a15[See Terminology] and
-link:intercept.html#a20[See Definition of Interceptor Classes
-and Interceptor Methods].
+Clarified terminology in sections <<terminology>> and
+<<definition_of_interceptor_classes_and_interceptor_methods>>.
 
 Noted that around-construct interceptors run
 in the same thread as the target constructor in section
-link:intercept.html#a48[See Interceptor Environment].
+<<interceptor_environment>>.
 
 Clarified that around-construct interceptor
 methods may throw checked exceptions.
@@ -41,8 +37,8 @@ Clarified that interceptor binding may not be
 used to associate interceptors with decorators.
 
 Corrected bug in section
-link:intercept.html#a313[See Interceptor binding types with
-additional interceptor bindings]: An interceptor binding type can only
+<<interceptor_binding_types_with_additional_interceptor_bindings>>:
+An interceptor binding type can only
 be applied to an interceptor binding type defining a subset of its
 target types.
 
@@ -54,18 +50,17 @@ Clarified when _Priority_ annotation is
 ignored.
 
 Added section
-link:intercept.html#a447[See Enabling Interceptors] to
-link:intercept.html#a446[See Interceptor Ordering] to
+<<enabling_interceptors>> to
+<<interceptor_ordering>> to
 centralize existing requirements on enabling interceptors and separate
 concept of the enabling of interceptors from the ordering of
 interceptors.
 
 Combined interceptor ordering rules into a
-single algorithm in section link:intercept.html#a453[See
-Interceptor Ordering Rules].
+single algorithm in section <<interceptor_ordering_rules>>.
 
 Factored out section
-link:intercept.html#a502[See Excluding Interceptors] on
+<<excluding_interceptors>> on
 excluding interceptors.
 
 Clarified that _ExcludeClassInterceptors_

@@ -50,10 +50,7 @@ applied at method level or constructor level. Note that the interceptor
 bindings applied to the target class may include those inherited from
 its superclasses. The CDI specification rules for the inheritance of
 type-level metadata apply to the inheritance of interceptor bindings
-from superclasses of the target class. See
-link:intercept.html#a543[See
-Jakarta Contexts and Dependency Injection (CDI specification), version 3.0.
-https://jakarta.ee/specifications/cdi/3.0/.].
+from superclasses of the target class. See <<bib3>>.
 
 An interceptor binding declared on a method
 or constructor replaces an interceptor binding of the same type declared

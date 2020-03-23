@@ -51,10 +51,7 @@ _InvocationContext_ instance is otherwise unspecified.
 
 If interceptor methods are invoked as a
 result of the invocation on a web service endpoint, the map returned by
-_getContextData_ will be the JAX-WS _MessageContext_
-link:intercept.html#a544[See
-Jakarta XML Web Services (JAX-WS 3.0) version 3.0.
-https://jakarta.ee/specifications/xml-web-services/3.0/.].
+_getContextData_ will be the JAX-WS _MessageContext_ <<bib4>>.
 
 The _getTarget_ method returns the associated
 target instance. For around-construct lifecycle callback interceptor

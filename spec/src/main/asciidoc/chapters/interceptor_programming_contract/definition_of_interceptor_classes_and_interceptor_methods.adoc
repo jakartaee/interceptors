@@ -18,7 +18,7 @@ class.
 
 Any number of interceptor classes may be
 associated with a target class. See Chapter
-link:intercept.html#a446[See Interceptor Ordering] for rules on
+<<interceptor_ordering>> for rules on
 interceptor ordering.
 
 An interceptor class must not be abstract and
@@ -79,11 +79,9 @@ optionally, by means of a deployment descriptor.
 
 Interceptor classes may be associated with
 the target class using either interceptor binding annotations (see
-link:intercept.html#a303[See Associating Interceptors with
-Classes and Methods using Interceptor Bindings]) or the
+<<associating_interceptors_with_classes_and_methods_using_interceptor_bindings>>) or the
 _jakarta.interceptor.Interceptors_ annotation (see
-link:intercept.html#a423[See Associating Interceptors with
-Classes and Methods using the Interceptors Annotation]). Typically only
+<<associating_interceptors_with_classes_and_methods_using_the_interceptors_annotation>>). Typically only
 one interceptor association type is used for any target class.
 
 An extension specification may use a
@@ -91,11 +89,7 @@ deployment descriptor to specify the invocation order of interceptors or
 to override the order specified in metadata annotations. A deployment
 descriptor can optionally be used to define interceptors, to define
 default interceptors, or to associate interceptors with a target class.
-For example, the EJB specification link:intercept.html#a542[See
-Jakarta Enterprise Beans, version 4.0.
-https://jakarta.ee/specifications/enterprise-beans/4.0/.] requires support for the
+For example, the EJB specification <<bib2>> requires support for the
 ejb-jar.xml deployment descriptor and the CDI specification
-link:intercept.html#a543[See
-Jakarta Contexts and Dependency Injection (CDI specification), version 3.0.
-https://jakarta.ee/specifications/cdi/3.0/.] requires support for the beans.xml
+<<bib3>> requires support for the beans.xml
 deployment descriptor.

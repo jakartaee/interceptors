@@ -49,7 +49,7 @@ specified on methods declared in a given class.
 Lifecycle callback interceptor methods are
 invoked in an unspecified security context. Lifecycle callback
 interceptor methods are invoked in a transaction context determined by
-their target class and/or methodlink:#a571[5].
+their target class and/or method.footnote.
 
 Lifecycle callback interceptor methods can
 have _public_ , _private_ , _protected_ , or _package_ level access. A
@@ -61,9 +61,8 @@ Lifecycle callback interceptor methods
 declared in an interceptor class or superclass of an interceptor class
 must have one of the following signatures:
 
-void <METHOD>(InvocationContext)
-
-Object <METHOD>(InvocationContext)
+_void <METHOD>(InvocationContext)_
+_Object <METHOD>(InvocationContext)_
 
 Note: A lifecycle callback interceptor method
 may be declared to throw checked exceptions including the
@@ -76,12 +75,12 @@ Lifecycle callback interceptor methods
 declared in a target class or in a superclass of a target class must
 have the following signature:
 
-void <METHOD>()
+_void <METHOD>()_
 
 The following example declares lifecycle
 callback interceptor methods in both the interceptor class and the
 target class. Rules for interceptor ordering are described in
-link:intercept.html#a446[See Interceptor Ordering].
+<<interceptor_ordering>>.
 
 [source, java]
 ----

@@ -17,16 +17,16 @@ exceptions, but—except for around-construct methods—may not throw
 checked exceptions.
 
 In addition to the rules specified in section
-link:intercept.html#a75[See Exceptions], the following rules
+<<exceptions>>, the following rules
 apply to the lifecycle callback interceptor methods:
 
-A lifecycle callback interceptor method
+- A lifecycle callback interceptor method
 declared in an interceptor class or in a superclass of an interceptor
 class may catch an exception thrown by another lifecycle callback
 interceptor method in the invocation chain, and clean up before
 returning.
 
-Pre-destroy interceptor methods are not
+- Pre-destroy interceptor methods are not
 invoked when the target instance and the interceptors are discarded as a
 result of such exceptions: the lifecycle callback interceptor methods in
 the chain should perform any necessary clean-up operations as the

@@ -14,14 +14,14 @@
 The following terminology is used in this
 document:
 
- _Interceptor class_ : a class containing
+-  _Interceptor class_ : a class containing
 interceptor methods that is designed to be associated with a target
 class, method, or constructor.
 
- _Interceptor_ : instance of an interceptor
+-  _Interceptor_ : instance of an interceptor
 class.
 
- _Interceptor method_ : a method of an
+- _Interceptor method_ : a method of an
 interceptor class or of a target class that is invoked to interpose on
 the invocation of a method of the target class, a constructor of the
 target class, a lifecycle event of the target class, or a timeout method

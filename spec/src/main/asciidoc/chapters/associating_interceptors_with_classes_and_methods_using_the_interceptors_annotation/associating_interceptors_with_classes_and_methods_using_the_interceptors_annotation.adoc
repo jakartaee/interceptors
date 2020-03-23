@@ -38,8 +38,7 @@ any default interceptors (if supported).
 If multiple interceptor classes are specified
 in the _Interceptors_ annotation, the interceptor methods of these
 classes are invoked in the order in which the classes are specified. The
-ordering rules for interceptors are defined in Chapter
-link:intercept.html#a446[See Interceptor Ordering].
+ordering rules for interceptors are defined in Chapter <<interceptor_ordering>>.
 
 The _Interceptor_ annotation is ignored
 during the processing of classes bound using the _Interceptors_
@@ -56,7 +55,7 @@ In the following example, the around-invoke
 methods specified by both the _MyInterceptor_ and the
 _MyOtherInterceptor_ classes will be invoked when the _otherMethod_
 method is called. The rules for ordering these interceptors are defined
-in Chapter link:intercept.html#a446[See Interceptor Ordering].
+in Chapter <<interceptor_ordering>>.
 
 [source, java]
 ----

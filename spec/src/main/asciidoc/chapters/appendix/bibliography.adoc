@@ -9,7 +9,7 @@
 ////
 
 [appendix]
-[bibliography]
+[[bibliography]]
 == Bibliography
 
 - [[[bib1,1]]] Enterprise JavaBeansTM, version 3.0 . http://jcp.org/en/jsr/detail?id=220.

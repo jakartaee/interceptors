@@ -42,10 +42,8 @@ In general, an around-invoke method
 invocation occurs within the same transaction and security context as
 the method on which it is interposing. However, note that the
 transaction context may be changed by transactional interceptor methods
-in the invocation chain, such as those defined by the _Java Transaction
-API_ specification link:intercept.html#a547[See Jakarta Transaction (JTA)
-version 2.0.
-https://jakarta.ee/specifications/transactions/2.0/.] .
+in the invocation chain, such as those defined by the _Jakarta Transaction
+API_ specification <<bib7>> .
 
 The following example defines
 MonitoringInterceptor, which is used to interpose on ShoppingCart

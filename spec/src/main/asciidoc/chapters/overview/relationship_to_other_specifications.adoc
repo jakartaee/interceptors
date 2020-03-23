@@ -19,8 +19,7 @@ enabled, the use of interceptors defined both by means of interceptor
 binding annotations and by means of the _Interceptors_ annotation is
 required to be supported for component classes that support injection,
 as described in the section “Annotations and Injection” of the Jakarta EE
-Platform specification link:intercept.html#a546[See Jakarta EE Platform 9.
-https://jakarta.ee/specifications/platform/9/.].
+Platform specification <<bib6>>.
 
 Both the EJB and the CDI specifications
 provide extensions to this specification. Other specifications may

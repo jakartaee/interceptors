@@ -65,18 +65,14 @@ the equals method.
 Array-valued or annotation-valued members of
 an interceptor binding type are not supported. An extension
 specification may add support for these member types. For example the
-CDI specification link:intercept.html#a543[See
-Jakarta Contexts and Dependency Injection (CDI specification), version 3.0.
-https://jakarta.ee/specifications/cdi/3.0/.] adds the
+CDI specification <<bib3>> adds the
 jakarta.enterprise.util.Nonbinding annotation, allowing array-valued or
 annotation-valued members to be used on the annotation type, but ignored
 by the resolution process.
 
 If the set of interceptor bindings of a
 component class or interceptor, including bindings inherited from CDI
-stereotypes link:intercept.html#a543[See
-Jakarta Contexts and Dependency Injection (CDI specification), version 3.0.
-https://jakarta.ee/specifications/cdi/3.0/.] and other interceptor bindings,
+stereotypes <<bib3>> and other interceptor bindings,
 has two instances of a certain interceptor binding type and the
 instances have different values of some annotation member, the container
 automatically detects the problem, treats it as a definition error, and

@@ -41,15 +41,15 @@ interceptor ordering when used with the Priority annotation.
 Interceptors with lower priority values are invoked earlier in the
 interceptor chain.
 
-Interceptor.Priority.PLATFORM_BEFORE = 0
+- Interceptor.Priority.PLATFORM_BEFORE = 0
 
-Interceptor.Priority.LIBRARY_BEFORE = 1000
+- Interceptor.Priority.LIBRARY_BEFORE = 1000
 
-Interceptor.Priority.APPLICATION = 2000
+- Interceptor.Priority.APPLICATION = 2000
 
-Interceptor.Priority.LIBRARY_AFTER = 3000
+- Interceptor.Priority.LIBRARY_AFTER = 3000
 
-Interceptor.Priority.PLATFORM_AFTER = 4000
+- Interceptor.Priority.PLATFORM_AFTER = 4000
 
 These values define the following interceptor
 ranges to order interceptors for a specific interposed method or event
