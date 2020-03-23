@@ -28,7 +28,7 @@ associated target class.
 With the exception of around-construct
 lifecycle callback interceptor methods, no interceptor methods are
 invoked until after dependency injection has been completed on both the
-interceptor instances and the target instancelink:#a567[1].
+interceptor instances and the target {fn-1}.
 
 Post-construct interceptor methods for the
 target instance are invoked after dependency injection has been
@@ -36,7 +36,7 @@ completed on the target instance.
 
 {empty}Pre-destroy interceptor methods are
 invoked before the target instance and all interceptor instances
-associated with it are destroyed.link:#a568[2]
+associated with it are destroyed.{fn-2}
 
 The following rules apply specifically to
 around-construct lifecycle callback interceptor methods:

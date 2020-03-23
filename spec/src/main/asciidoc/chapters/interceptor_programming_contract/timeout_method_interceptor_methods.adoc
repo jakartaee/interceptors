@@ -49,7 +49,7 @@ An around-timeout method can invoke any
 component or resource that its corresponding timeout method can invoke.
 
 An around-timeout method invocation occurs
-within the same transactionlink:#a572[6] and security context
+within the same transaction{fn-6} and security context
 as the timeout method on which it is interposing.
 
 The _InvocationContext.getTimer_ method

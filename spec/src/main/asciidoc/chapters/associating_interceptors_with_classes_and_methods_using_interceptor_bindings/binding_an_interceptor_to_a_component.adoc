@@ -54,7 +54,7 @@ from superclasses of the target class. See <<bib3>>.
 
 An interceptor binding declared on a method
 or constructor replaces an interceptor binding of the same type declared
-at class level or inherited from a superclasslink:#a572[7].
+at class level or inherited from a superclass{fn-7}.
 
 An extension specification may define
 additional rules for combining interceptor bindings, such as

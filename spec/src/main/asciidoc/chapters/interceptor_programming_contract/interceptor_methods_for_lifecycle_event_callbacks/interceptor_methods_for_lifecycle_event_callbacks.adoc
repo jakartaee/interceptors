@@ -49,7 +49,7 @@ specified on methods declared in a given class.
 Lifecycle callback interceptor methods are
 invoked in an unspecified security context. Lifecycle callback
 interceptor methods are invoked in a transaction context determined by
-their target class and/or method.footnote.
+their target class and/or method{fn-5}.
 
 Lifecycle callback interceptor methods can
 have _public_ , _private_ , _protected_ , or _package_ level access. A

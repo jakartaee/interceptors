@@ -88,7 +88,7 @@ determination of the method or the constructor that is invoked on the
 target class. The parameter types must match the types for the target
 class method or constructor, and the number of parameters supplied must
 equal the number of parameters on the target class method or
-constructorlink:#a569[3], or the _IllegalArgumentException_ is
+{fn-3}, or the _IllegalArgumentException_ is
 thrown to the _setParameters_ call.
 
 The _proceed_ method causes the invocation of
@@ -108,5 +108,5 @@ of proceed in the last interceptor method in the chain causes the target
 instance to be created. For all other lifecycle callback interceptor
 methods, if there is no lifecycle callback interceptor method defined on
 the target class, the invocation of _proceed_ in the last interceptor
-method in the chain is a no-oplink:#a570[4], and _null_ is
+method in the chain is a no-{fn-4}, and _null_ is
 returned.
