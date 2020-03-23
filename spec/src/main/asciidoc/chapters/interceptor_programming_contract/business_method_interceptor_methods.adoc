@@ -58,8 +58,7 @@ business methods:
 public @interface Monitored {}
 
 
-@Monitored
-@Interceptor
+@Monitored @Interceptor
 public class MonitoringInterceptor {
     @AroundInvoke
     public Object monitorInvocation(InvocationContext ctx) {

@@ -30,8 +30,7 @@ type must select a member value:
 
 [source, java]
 ----
-@Monitored(persistent=true)
-@Interceptor
+@Monitored(persistent=true) @Interceptor
 @Priority(2100)
 public class PersistentMonitoringInterceptor {
     @AroundInvoke

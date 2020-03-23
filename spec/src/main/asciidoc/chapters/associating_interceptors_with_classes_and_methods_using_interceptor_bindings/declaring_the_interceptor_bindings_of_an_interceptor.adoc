@@ -18,8 +18,7 @@ interceptor bindings for the interceptor.
 
 [source, java]
 ----
-@Monitored
-@Interceptor
+@Monitored @Interceptor
 public class MonitoringInterceptor {
     @AroundInvoke
     public Object monitorInvocation(InvocationContext ctx)
