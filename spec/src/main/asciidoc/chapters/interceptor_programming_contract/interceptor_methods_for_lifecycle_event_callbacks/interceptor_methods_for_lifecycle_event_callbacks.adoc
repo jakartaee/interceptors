@@ -61,8 +61,9 @@ Lifecycle callback interceptor methods
 declared in an interceptor class or superclass of an interceptor class
 must have one of the following signatures:
 
-_void <METHOD>(InvocationContext)_
-_Object <METHOD>(InvocationContext)_
+ _void <METHOD>(InvocationContext)_
+
+ _Object <METHOD>(InvocationContext)_
 
 Note: A lifecycle callback interceptor method
 may be declared to throw checked exceptions including the
@@ -75,7 +76,7 @@ Lifecycle callback interceptor methods
 declared in a target class or in a superclass of a target class must
 have the following signature:
 
-_void <METHOD>()_
+ _void <METHOD>()_
 
 The following example declares lifecycle
 callback interceptor methods in both the interceptor class and the
