@@ -12,14 +12,11 @@
 === Revision History
 
 This document is an update to the
-Interceptors specification 1.2. Version 1.1 was based on the
+Jakarta Interceptors specification 1.2. Version 1.1 was based on the
 Interceptors chapter of the Enterprise JavaBeansTM 3.0 (EJB)
-specification link:intercept.html#a541[See Enterprise
-JavaBeansTM, version 3.0. http://jcp.org/en/jsr/detail?id=220.]. Version
+specification <<bib1>>. Version
 1.2 included interceptor binding definitions that were originally
-defined in the Contexts and Dependency Injection for the Java EE
-Platform (CDI) specification link:intercept.html#a543[See
-Contexts and Dependency Injection for the Java EE Platform 1.1 (CDI
-specification) http://jcp.org/en/jsr/detail?id=346.].
+defined in the Contexts and Dependency Injection for the Jakarta EE
+Platform (CDI) specification <<bib3>>.
 
 The change log for the current version is found in <<change_log>>.
