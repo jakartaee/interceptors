@@ -42,11 +42,11 @@ interceptor methods declared in the interceptor class’s superclasses are
 invoked before the interceptor method declared in the interceptor class
 itself, most general superclass first.
 
- _NOTE:_ _This specification does not define
+ NOTE: This specification does not define
 the semantics of applying the Interceptors annotation to a superclass of
 the target class, and thus the corresponding interceptor methods may or
 may not be invoked. Applications that specify the Interceptors
-annotation on a superclass of the target class will not be portable._
+annotation on a superclass of the target class will not be portable.
 
 Interceptors declared by applying the
 Interceptors annotation _at method- or constructor-level_ are invoked
