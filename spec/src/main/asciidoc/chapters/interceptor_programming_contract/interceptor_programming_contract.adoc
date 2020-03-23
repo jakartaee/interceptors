@@ -28,5 +28,3 @@ include::interceptor_methods_for_lifecycle_event_callbacks/interceptor_methods_f
 include::timeout_method_interceptor_methods.adoc[]
 
 include::constructor_and_method_level_interceptors.adoc[]
-
-include::default_interceptors.adoc[]
