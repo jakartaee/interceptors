@@ -35,6 +35,6 @@ include::chapters/associating_interceptors_with_classes_and_methods_using_the_in
 
 include::chapters/interceptor_ordering/interceptor_ordering.adoc[]
 
-include::chapters/related_documents/related_documents.adoc[]
+include::chapters/appendix/bibliography.adoc[]
 
-include::chapters/change_log/change_log.adoc[]
+include::chapters/appendix/change_log.adoc[]
