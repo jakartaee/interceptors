@@ -12,17 +12,17 @@
 [[bibliography]]
 == Bibliography
 
-- [[[bib1,1]]] Enterprise JavaBeansTM, version 3.0 . http://jcp.org/en/jsr/detail?id=220.
+- [[bib1,1]] Enterprise JavaBeansTM, version 3.0 . http://jcp.org/en/jsr/detail?id=220.
 
-- [[[bib2,2]]] Jakarta™ Enterprise Beans, version 4.0 . https://jakarta.ee/specifications/enterprise-beans/4.0/.
+- [[bib2,2]] Jakarta™ Enterprise Beans, version 4.0 . https://jakarta.ee/specifications/enterprise-beans/4.0/.
 
-- [[[bib3,3]]] Jakarta™ Contexts and Dependency Injection (CDI specification) version 3.0 . https://jakarta.ee/specifications/cdi/3.0/ .
+- [[bib3,3]] Jakarta™ Contexts and Dependency Injection (CDI specification) version 3.0 . https://jakarta.ee/specifications/cdi/3.0/ .
 
-- [[[bib4,4]]] Jakarta™ XML Web Services (JAX-WS 3.0) version 3.0 . https://jakarta.ee/specifications/xml-web-services/3.0/ .
+- [[bib4,4]] Jakarta™ XML Web Services (JAX-WS 3.0) version 3.0 . https://jakarta.ee/specifications/xml-web-services/3.0/ .
 
-- [[[bib5,5]]] Jakarta™ Annotations version 2.0 . https://jakarta.ee/specifications/annotations/2.0/.
+- [[bib5,5]] Jakarta™ Annotations version 2.0 . https://jakarta.ee/specifications/annotations/2.0/.
 
-- [[[bib6,6]]] Jakarta™ EE Platform 9 . https://jakarta.ee/specifications/platform/9/ .
+- [[bib6,6]] Jakarta™ EE Platform 9 . https://jakarta.ee/specifications/platform/9/ .
 
-- [[[bib7,7]]] Jakarta™ Transaction  (JTA) version 2.0 . https://jakarta.ee/specifications/transactions/2.0/ .
+- [[bib7,7]] Jakarta™ Transaction  (JTA) version 2.0 . https://jakarta.ee/specifications/transactions/2.0/ .
 
