@@ -16,7 +16,7 @@ eligible to be invoked.
 
 Interceptors declared using interceptor
 bindings are enabled using the Priority annotation (see Section
-<<use_of_the_priority_annotation_in_ordering_interceptors>>).
+<<ordering_interceptors_using_the_priority_annotation>>).
 The _Priority_ annotation also controls
 interceptor ordering (see Section <<interceptor_ordering_rules>>).
 
@@ -38,8 +38,8 @@ deployment descriptor <<bib2>>) to
 enable and order interceptors, to override the order specified by means
 of annotations, or to disable interceptors.
 
-Note: The _InvocationContext_ object allows
+_Note: The InvocationContext object allows
 interceptor methods to control the behavior of the invocation chain,
 including whether the next method in the chain is invoked and the values
 of its parameters and result. See Section
-<<invocation_context>>.
+<<invocation_context>>._

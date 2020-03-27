@@ -15,7 +15,7 @@ Interceptor methods that interpose on timeout
 methods are denoted by the _AroundTimeout_ annotation.
 
 NOTE: Timeout methods are currently specific
-to Enterprise JavaBeans, although Timer Service functionality may be
+to Jakarta Enterprise Beans, although Timer Service functionality may be
 extended to other specifications in the future, and extension
 specifications may define events that may be interposed on by
 around-timeout methods. The EJB Timer Service, defined by the Jakarta Enterprise
@@ -37,7 +37,7 @@ method must not be declared as abstract, _final_ or _static_ .
 Around-timeout methods have the following
 signature:
 
- _Object <METHOD>(InvocationContext)_ __ __
+ Object <METHOD>(InvocationContext) throws Exception
 
 Note: An around-timeout interceptor method
 should not throw application exceptions, but it may be declared to throw

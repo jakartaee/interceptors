@@ -27,13 +27,13 @@ method must not be declared as _abstract, final or static_ .
 Around-invoke methods have the following
 signature:
 
- _Object_ __ _<METHOD>(InvocationContext)_
+ Object <METHOD>(InvocationContext) throws Exception
 
-Note: An around-invoke interceptor method may
+_Note: An around-invoke interceptor method may
 be declared to throw any checked exceptions that the associated target
 method allows within its throws clause. It may be declared to throw the
-java.lang.Exception, _for example, if it_ interposes on several methods
-that can throw unrelated checked exceptions.
+java.lang.Exception, for example, if it interposes on several methods
+that can throw unrelated checked exceptions._
 
 An around-invoke method can invoke any
 component or resource that the method it is intercepting can invoke.

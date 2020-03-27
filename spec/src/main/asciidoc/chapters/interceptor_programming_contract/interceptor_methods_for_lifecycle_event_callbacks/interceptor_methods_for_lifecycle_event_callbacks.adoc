@@ -61,22 +61,21 @@ Lifecycle callback interceptor methods
 declared in an interceptor class or superclass of an interceptor class
 must have one of the following signatures:
 
- _void <METHOD>(InvocationContext)_
+ void <METHOD>(InvocationContext)
+ Object <METHOD>(InvocationContext)
 
- _Object <METHOD>(InvocationContext)_
-
-Note: A lifecycle callback interceptor method
+_Note: A lifecycle callback interceptor method
 may be declared to throw checked exceptions including the
 java.lang.Exception if the same interceptor method interposes on
 business or timeout methods in addition to lifecycle events. If such an
 interceptor method returns a value, the value is ignored by the
-container when the method is invoked to interpose on a lifecycle event.
+container when the method is invoked to interpose on a lifecycle event._
 
 Lifecycle callback interceptor methods
 declared in a target class or in a superclass of a target class must
 have the following signature:
 
- _void <METHOD>()_
+ void <METHOD>()
 
 The following example declares lifecycle
 callback interceptor methods in both the interceptor class and the

@@ -16,80 +16,80 @@ around-invoke, around-timeout, post-construct, etc.), the following
 interceptor invocation ordering rules apply, except as specified
 otherwise by an extension specification.
 
-Default interceptors are invoked first.
+- Default interceptors are invoked first.
 
-Default interceptors are invoked in the order
+- Default interceptors are invoked in the order
 defined by the extension specification (e.g., by their order in the
 deployment descriptor).
 
-If a default interceptor class has
+- If a default interceptor class has
 superclasses, interceptor methods declared in the interceptor class’s
 superclasses are invoked before the interceptor method declared in the
 interceptor class itself, most general superclass first.
 
-Interceptors declared by applying the
+- Interceptors declared by applying the
 Interceptors annotation _at class-level_ to the target class are invoked
 next.
 
-Interceptor methods declared in the
+- Interceptor methods declared in the
 interceptor classes listed in the _Interceptors_ annotation are invoked
 in the same order as the specification of the interceptor classes in
 that annotation.
 
-If an interceptor class declared by applying
+- If an interceptor class declared by applying
 the Interceptors annotation _at class-level_ has superclasses,
 interceptor methods declared in the interceptor class’s superclasses are
 invoked before the interceptor method declared in the interceptor class
 itself, most general superclass first.
 
- NOTE: This specification does not define
+NOTE: This specification does not define
 the semantics of applying the Interceptors annotation to a superclass of
 the target class, and thus the corresponding interceptor methods may or
 may not be invoked. Applications that specify the Interceptors
 annotation on a superclass of the target class will not be portable.
 
-Interceptors declared by applying the
+- Interceptors declared by applying the
 Interceptors annotation _at method- or constructor-level_ are invoked
 next.
 
-Interceptor methods declared in the
+- Interceptor methods declared in the
 interceptor classes listed in the _Interceptors_ annotation are invoked
 in the same order as the specification of the interceptor classes in
 that annotation.
 
-If an interceptor class declared by applying
+- If an interceptor class declared by applying
 the Interceptors annotation _at method- or constructor-level_ has
 superclasses, interceptor methods declared in the interceptor class’s
 superclasses are invoked before the interceptor method declared in the
 interceptor class itself, most general superclass first.
 
-Interceptors declared using interceptor
+- Interceptors declared using interceptor
 bindings are invoked next.
 
-All interceptors specified using interceptor
+- All interceptors specified using interceptor
 binding annotations visible on the target class (e.g., specified on the
 class or visible on the class because they were declared with the
 _Inherited_ annotation) are combined with all binding annotations on the
 target method and sorted by the priorities specified by the _Priority_
 annotation; and then the interceptor methods are invoked in order of
 priority. The _Priority_ annotation is described in Section
-<<use_of_the_priority_annotation_in_ordering_interceptors>>.
+<<ordering_interceptors_using_the_priority_annotation>>.
 
-If an interceptor class declared using
+- If an interceptor class declared using
 interceptor bindings has superclasses, interceptor methods declared in
 the interceptor class’s superclasses are invoked before the interceptor
 method declared in the interceptor class itself, most general superclass
 first.
 
-Interceptor methods declared in the target
+- Interceptor methods declared in the target
 class or in any superclass of the target class are invoked last.
 
-If the target class has superclasses,
+- If the target class has superclasses,
 interceptor methods declared in the target class’s superclasses are
 invoked before an interceptor method declared in the target class
 itself, most general superclass first.
 
-If an interceptor method is overridden by
+- If an interceptor method is overridden by
 another method (regardless whether that method is itself an interceptor
 method), it will not be invoked.
 
