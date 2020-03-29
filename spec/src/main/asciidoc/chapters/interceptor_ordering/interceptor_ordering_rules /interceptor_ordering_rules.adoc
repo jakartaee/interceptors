@@ -73,7 +73,7 @@ _Inherited_ annotation) are combined with all binding annotations on the
 target method and sorted by the priorities specified by the _Priority_
 annotation; and then the interceptor methods are invoked in order of
 priority. The _Priority_ annotation is described in Section
-<<ordering_interceptors_using_the_priority_annotation>>.
+<<use_of_the_priority_annotation_in_ordering_interceptors>>.
 
 - If an interceptor class declared using
 interceptor bindings has superclasses, interceptor methods declared in
@@ -93,3 +93,4 @@ itself, most general superclass first.
 another method (regardless whether that method is itself an interceptor
 method), it will not be invoked.
 
+include::use_of_the_priority_annotation_in_ordering_interceptors.adoc[]

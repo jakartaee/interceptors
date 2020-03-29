@@ -13,8 +13,6 @@
 
 include::enabling_interceptors.adoc[]
 
-include::interceptor_ordering_rules.adoc[]
-
-include::ordering_interceptors_using_the_priority_annotation.adoc[]
+include::interceptor_ordering_rules /interceptor_ordering_rules.adoc[]
 
 include::excluding_interceptors.adoc[]
