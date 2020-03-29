@@ -16,7 +16,7 @@ annotating the component class or a method or constructor of the
 component class with the interceptor binding type.
 
 In the following example, the
-MonitoringInterceptor is applied to the target class. It will therefore
+_MonitoringInterceptor_ is applied to the target class. It will therefore
 apply to all business methods of the class.
 
 [source, java]
@@ -26,7 +26,7 @@ public class ShoppingCart { ... }
 ----
 
 
-In this example, the MonitoringInterceptor is
+In this example, the _MonitoringInterceptor_ is
 applied to a single method:
 
 [source, java]
@@ -50,7 +50,7 @@ applied at method level or constructor level. Note that the interceptor
 bindings applied to the target class may include those inherited from
 its superclasses. The CDI specification rules for the inheritance of
 type-level metadata apply to the inheritance of interceptor bindings
-from superclasses of the target class. See <<bib3>>.
+from superclasses of the target class. See [<<bib3>>].
 
 An interceptor binding declared on a method
 or constructor replaces an interceptor binding of the same type declared
@@ -61,16 +61,16 @@ additional rules for combining interceptor bindings, such as
 interceptors defined via a CDI stereotype.
 
 If a component class declares or inherits a
-class-level interceptor binding, it must not be declared final, or have
-any non-static, non-private, final methods. If a component has a
-class-level interceptor binding and is declared final or has a
-non-static, non-private, final method, the container automatically
+class-level interceptor binding, it must not be declared _final_, or have
+any non-_static_, non-_private_, _final_ methods. If a component has a
+class-level interceptor binding and is declared _final_ or has a
+non-_static_, non-_private_, _final_ method, the container automatically
 detects the problem and treats it as a definition error, and causes
 deployment to fail.
 
-If a non-static, non-private method of a
+If a non-_static_, non-_private_ method of a
 component class declares a method-level interceptor binding, neither the
-method nor the component class may be declared final. If a non-static,
-non-private, final method of a component has a method-level interceptor
+method nor the component class may be declared final. If a non-_static_,
+non-_private_, _final_ method of a component has a method-level interceptor
 binding, the container automatically detects the problem and treats it
 as a definition error, and causes deployment to fail.

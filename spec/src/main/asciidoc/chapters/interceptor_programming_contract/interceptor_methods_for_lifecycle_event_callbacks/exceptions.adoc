@@ -16,7 +16,7 @@ events, lifecycle callback interceptor methods may throw runtime
 exceptions, but—except for around-construct methods—may not throw
 checked exceptions.
 
-In addition to the rules specified in section
+In addition to the rules specified in section 2.5
 <<exceptions>>, the following rules
 apply to the lifecycle callback interceptor methods:
 

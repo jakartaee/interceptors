@@ -57,49 +57,33 @@ MyInterceptor interceptor will not be invoked:
 ----
 public class MyInterceptor {
     ...
-
     @AroundInvoke
-    public Object around_invoke(InvocationContext ctx) {
-         ...
-    }
+    public Object around_invoke(InvocationContext ctx) { ... }
 
      @PostConstruct
-     public void created(InvocationContext ctx) {
-         ...
-     }
+     public void created(InvocationContext ctx) { ... }
 
      @PreDestroy
-     public void removed(InvocationContext ctx) {
-         ...
-     }
+     public void removed(InvocationContext ctx) { ... }
 }
-
 
 @Stateless
 public class MyBean {
      @PostConstruct
-     void init() {
-         ...
-     }
+     void init() { ... }
 
-     public void notIntercepted() {
-         ...
-     }
+     public void notIntercepted() { ... }
 
      @Interceptors(org.acme.MyInterceptor.class)
-     public void someMethod() {
-        ...
-     }
+     public void someMethod() { ... }
 
      @Interceptors(org.acme.MyInterceptor.class)
-     public void anotherMethod() {
-        ...
-     }
+     public void anotherMethod() { ... }
 }
 ----
 
 In the following example, the
-ValidationInterceptor interceptor interposes on the bean constructor
+_ValidationInterceptor_ interceptor interposes on the bean constructor
 only, and the _validateMethod_ interceptor method will not be invoked:
 
 [source, java]
@@ -113,16 +97,11 @@ public @interface ValidateSpecial {}
 @ValidateSpecial
 public class ValidationInterceptor {
      @AroundConstruct
-     public void validateConstructor(InvocationContext ctx) {
-         ...
-     }
+     public void validateConstructor(InvocationContext ctx) { ... }
 
      @AroundInvoke
-    public Object validateMethod(InvocationContext ctx) {
-         ...
-     }
+    public Object validateMethod(InvocationContext ctx) { ... }
 }
-
 
 public class SomeBean {
     @ValidateSpecial
@@ -137,7 +116,7 @@ public class SomeBean {
 ----
 
 In the following example, the
-_validateConstructor_ method of the ValidationInterceptor interceptor
+_validateConstructor_ method of the _ValidationInterceptor_ interceptor
 interposes on the bean constructor, and the _validateMethod_ method of
 the interceptor interposes on the _anotherMethod_ business method of the
 bean.

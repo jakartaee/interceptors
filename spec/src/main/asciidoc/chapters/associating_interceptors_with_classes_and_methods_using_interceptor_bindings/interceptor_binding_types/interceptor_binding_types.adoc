@@ -12,8 +12,8 @@
 === Interceptor Binding Types
 
 An interceptor binding type is a Java
-annotation defined as Retention(RUNTIME). Typically an interceptor
-binding is defined as Target(\{TYPE, METHOD, CONSTRUCTOR}) or any subset
+annotation defined as _Retention(RUNTIME)_. Typically an interceptor
+binding is defined as _Target({TYPE, METHOD, CONSTRUCTOR})_ or any subset
 of valid target types.
 
 An interceptor binding type may be declared

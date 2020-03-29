@@ -22,9 +22,7 @@ interceptor bindings for the interceptor.
 public class MonitoringInterceptor {
     @AroundInvoke
     public Object monitorInvocation(InvocationContext ctx)
-        throws Exception {
-        ...
-    }
+        throws Exception { ... }
 }
 ----
 An interceptor class may declare multiple
@@ -34,12 +32,14 @@ Multiple interceptors may declare the same
 interceptor bindings.
 
 If an interceptor does not declare an
-Interceptor annotation, it can be bound to components using the
-Interceptors annotation.
+_Interceptor_ annotation, it can be bound to components using the
+_Interceptors_ annotation.
 
 An extension specification may define other
 ways of declaring an interceptor and binding an interceptor to a
 component, such as by means of a deployment descriptor.
 
-An interceptor declared using the Interceptor
-annotation should specify at least one interceptor binding.
+An interceptor declared using the _Interceptor_
+annotation should specify at least one _interceptor_ binding. If an interceptor
+declared using the _Interceptor_ annotation does not declare any intercep-
+tor binding, non-portable behavior results.

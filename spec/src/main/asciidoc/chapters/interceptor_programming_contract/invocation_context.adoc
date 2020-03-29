@@ -18,19 +18,12 @@ the invocation chain.
 ----
 public interface InvocationContext {
  public Object getTarget();
-
  public Object getTimer();
-
  public Method getMethod();
-
  public Constructor<?> getConstructor();
-
  public Object[] getParameters();
-
  public void setParameters(Object[] params);
-
  public java.util.Map<String, Object> getContextData();
-
  public Object proceed() throws Exception;
 }
 ----
@@ -70,7 +63,7 @@ for which there is no corresponding lifecycle callback method declared
 in the target class (or inherited from a superclass) or in an
 around-construct lifecycle callback interceptor method.
 
-The getConstructor method returns the
+The _getConstructor_ method returns the
 constructor of the target class for which the current around-construct
 interceptor method was invoked. The _getConstructor_ method returns null
 for interceptor method types other than around-construct interceptor
@@ -108,5 +101,5 @@ of proceed in the last interceptor method in the chain causes the target
 instance to be created. For all other lifecycle callback interceptor
 methods, if there is no lifecycle callback interceptor method defined on
 the target class, the invocation of _proceed_ in the last interceptor
-method in the chain is a no-{fn-4}, and _null_ is
+method in the chain is a no-op{fn-4}, and _null_ is
 returned.

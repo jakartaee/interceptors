@@ -37,8 +37,8 @@ interceptor bindings of the interceptor. A method or constructor has an
 interceptor binding of an interceptor if it has an interceptor binding
 with (a) the same type and (b) the same annotation member value for each
 member. An extension specification may further refine this rule. For
-example, the CDI specification <<bib3>> adds the
-jakarta.enterprise.util.Nonbinding annotation, causing member values to be
+example, the CDI specification [<<bib3>>] adds the
+_jakarta.enterprise.util.Nonbinding_ annotation, causing member values to be
 ignored by the resolution process.
 
 - The interceptor intercepts the given kind of

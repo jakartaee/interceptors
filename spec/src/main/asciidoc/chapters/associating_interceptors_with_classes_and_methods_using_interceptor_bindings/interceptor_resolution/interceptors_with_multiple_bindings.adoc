@@ -16,14 +16,11 @@ interceptor bindings.
 
 [source, java]
 ----
-@Monitored @Logged @Interceptor
-@Priority(1100)
+@Monitored @Logged @Interceptor @Priority(1100)
 public class MonitoringLoggingInterceptor {
     @AroundInvoke
     public Object aroundInvoke(InvocationContext context)
-        throws Exception {
-        ...
-    }
+        throws Exception { ... }
 }
 ----
 
@@ -36,7 +33,7 @@ of this component:
 public class ShoppingCart { ... }
 ----
 
-The MonitoringLoggingInterceptor will not be
+The _MonitoringLoggingInterceptor_ will not be
 bound to methods of this component, since the Logged interceptor binding
 does not appear:
 
@@ -44,22 +41,18 @@ does not appear:
 ----
 @Monitored
 public class ShoppingCart {
-    public void placeOrder() {
-        ...
-    }
+    public void placeOrder() { ... }
 }
 ----
 
-However, the MonitoringLoggingInterceptor
+However, the _MonitoringLoggingInterceptor_
 will be bound to the placeOrder method of this component:
 
 [source, java]
 ----
 @Monitored
 public class ShoppingCart {
- @Logged
- public void placeOrder() {
-     ...
- }
+    @Logged
+    public void placeOrder() { ... }
 }
 ----

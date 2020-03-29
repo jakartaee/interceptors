@@ -21,33 +21,33 @@ associated with a target class. See Chapter
 <<interceptor_ordering>> for rules on
 interceptor ordering.
 
-An interceptor class must not be abstract and
-must have a public no-arg constructor.
+An interceptor class must not be _abstract_ and
+must have a _public_ no-arg constructor.
 
 This specification defines the interceptor
 method types listed below. Extension specifications may define
 additional interceptor method types.
 
-Around-invoke interceptor methods (annotated
+- Around-invoke interceptor methods (annotated
 with the _jakarta.interceptor.AroundInvoke_ annotation). Around-invoke
 interceptor methods interpose on the invocation of business methods.
 
-Around-timeout interceptor methods (annotated
+- Around-timeout interceptor methods (annotated
 with the _jakarta.interceptor.AroundTimeout_ annotation). Around-timeout
 interceptor methods interpose on the invocation of timeout methods, in
 response to timer events.
 
-Post-construct interceptor methods (annotated
+- Post-construct interceptor methods (annotated
 with the _jakarta.annotation.PostConstruct_ annotation). Post-construct
 interceptor methods are invoked after dependency injection has been
 completed on the target instance.
 
-Pre-destroy interceptor methods (annotated
+- Pre-destroy interceptor methods (annotated
 with the _jakarta.annotation.PreDestroy_ annotation). Pre-destroy
 interceptor methods are invoked before the target instance and all
 interceptor instances associated with it are destroyed by the container.
 
-Around-construct interceptor methods
+- Around-construct interceptor methods
 (annotated with the _jakarta.interceptor.AroundConstruct_ annotation).
 Around-construct interceptor methods interpose on the invocation of the
 constructor of the target instance.
@@ -89,7 +89,7 @@ deployment descriptor to specify the invocation order of interceptors or
 to override the order specified in metadata annotations. A deployment
 descriptor can optionally be used to define interceptors, to define
 default interceptors, or to associate interceptors with a target class.
-For example, the EJB specification <<bib2>> requires support for the
-ejb-jar.xml deployment descriptor and the CDI specification
-<<bib3>> requires support for the beans.xml
+For example, the EJB specification [<<bib2>>] requires support for the
+_ejb-jar.xml_ deployment descriptor and the CDI specification
+[<<bib3>>] requires support for the _beans.xml_
 deployment descriptor.

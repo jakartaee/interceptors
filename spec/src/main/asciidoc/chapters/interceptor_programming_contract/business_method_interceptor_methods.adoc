@@ -27,7 +27,7 @@ method must not be declared as _abstract, final or static_ .
 Around-invoke methods have the following
 signature:
 
- Object <METHOD>(InvocationContext) throws Exception
+ Object <METHOD>(InvocationContext)
 
 _Note: An around-invoke interceptor method may
 be declared to throw any checked exceptions that the associated target
@@ -46,7 +46,7 @@ in the invocation chain, such as those defined by the _Jakarta Transaction
 API_ specification <<bib7>> .
 
 The following example defines
-MonitoringInterceptor, which is used to interpose on ShoppingCart
+_MonitoringInterceptor_, which is used to interpose on _ShoppingCart_
 business methods:
 
 [source, java]
@@ -57,7 +57,6 @@ business methods:
 @Retention(RUNTIME)
 public @interface Monitored {}
 
-
 @Monitored @Interceptor
 public class MonitoringInterceptor {
     @AroundInvoke
@@ -66,7 +65,6 @@ public class MonitoringInterceptor {
         return ctx.proceed();
     }
 }
-
 
 @Monitored
 public class ShoppingCart {

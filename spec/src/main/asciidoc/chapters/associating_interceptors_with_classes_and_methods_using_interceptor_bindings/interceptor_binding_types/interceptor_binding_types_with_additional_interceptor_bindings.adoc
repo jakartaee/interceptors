@@ -31,6 +31,5 @@ interceptor binding type.
 
 An interceptor binding type can only be
 applied to an interceptor binding type defining a subset of its target
-types. For example, interceptor binding types declared Target(TYPE) may
-not be applied to interceptor binding types declared Target(\{TYPE,
-METHOD}).
+types. For example, interceptor binding types declared _Target(TYPE)_ may
+not be applied to interceptor binding types declared _Target({TYPE, METHOD})_.

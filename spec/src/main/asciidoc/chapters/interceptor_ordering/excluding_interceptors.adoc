@@ -33,16 +33,15 @@ deployment descriptor.
 
 In the following example interceptors will be
 invoked in the following order when _someMethod_ is called:
-SomeInterceptor, AnotherInterceptor, MyInterceptor.
+_SomeInterceptor_, _AnotherInterceptor_, _MyInterceptor_.
 
 [source, java]
 ----
 @Stateless
 @Interceptors({org.acme.SomeInterceptor.class,
-    org.acme.AnotherInterceptor.class})
+               org.acme.AnotherInterceptor.class})
 public class MyBean {
     ...
-
     @Interceptors(org.acme.MyInterceptor.class)
     public void someMethod() {
         ...
@@ -61,7 +60,6 @@ of the class-level interceptors.
 @Interceptors(org.acme.AnotherInterceptor.class)
 public class MyBean {
     ...
-
     @Interceptors(org.acme.MyInterceptor.class)
     @ExcludeClassInterceptors
     public void someMethod() {
@@ -80,7 +78,6 @@ invocation of the default interceptors (if any).
 @Stateless
 public class MyBean {
     ...
-
     @ExcludeDefaultInterceptors
     @Interceptors(org.acme.MyInterceptor.class)
     public void someMethod() {

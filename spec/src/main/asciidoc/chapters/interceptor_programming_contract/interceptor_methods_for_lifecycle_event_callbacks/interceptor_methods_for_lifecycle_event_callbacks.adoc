@@ -10,17 +10,17 @@
 
 === Interceptor Methods for Lifecycle Event Callbacks
 
-The AroundConstruct annotation specifies a
+The _AroundConstruct_ annotation specifies a
 lifecycle callback interceptor method that interposes on the invocation
 of the target instance’s constructor.
 
-The PostConstruct annotation specifies a
+The _PostConstruct_ annotation specifies a
 lifecycle callback interceptor method that is invoked after the target
 instance has been constructed and dependency injection on that instance
 has been completed, but before any business method or other event, such
 as a timer event, is invoked on the target instance.
 
-The PreDestroy annotation specifies a
+The _PreDestroy_ annotation specifies a
 lifecycle callback interceptor method that interposes on the target
 instance’s removal by the container.
 
@@ -79,21 +79,19 @@ have the following signature:
 
 The following example declares lifecycle
 callback interceptor methods in both the interceptor class and the
-target class. Rules for interceptor ordering are described in
+target class. Rules for interceptor ordering are described in chapter 5
 <<interceptor_ordering>>.
 
 [source, java]
 ----
 public class MyInterceptor {
     ...
-
     @PostConstruct
     public void someMethod(InvocationContext ctx) {
         ...
         ctx.proceed();
         ...
     }
-
      @PreDestroy
      public void someOtherMethod(InvocationContext ctx) {
         ...
@@ -108,13 +106,10 @@ public class MyInterceptor {
 public class ShoppingCartBean implements ShoppingCart {
     private float total;
     private Vector productCodes;
-
     ...
-
     public int someShoppingMethod() {
         ...
     }
-
     @PreDestroy void endShoppingCart() {
         ...
     }
