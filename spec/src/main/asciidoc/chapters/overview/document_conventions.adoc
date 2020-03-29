@@ -18,4 +18,18 @@ The italic Times font is used for paragraphs
 that contain descriptive information, such as notes describing typical
 use, or notes clarifying the text with prescriptive specification.
 
-The Courier font is used for code examples.
+Java code and sample data fragments are formatted as shown in figure
+<<1.1>>:
+
+[id="1.1"]
+[source,java]
+----
+package com.example.hello;
+
+public class Hello {
+    public static void main(String args[]) {
+    System.out.println("Hello World");
+    }
+}
+----
+
