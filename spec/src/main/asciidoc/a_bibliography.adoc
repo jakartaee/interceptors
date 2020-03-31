@@ -25,4 +25,3 @@
 - [[bib6,6]] Jakarta™ EE Platform 9 . https://jakarta.ee/specifications/platform/9/ .
 
 - [[bib7,7]] Jakarta™ Transaction  (JTA) version 2.0 . https://jakarta.ee/specifications/transactions/2.0/ .
-

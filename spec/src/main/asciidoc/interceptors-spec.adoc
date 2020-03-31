@@ -21,23 +21,23 @@ endif::[]
 
 // == License
 :sectnums!:
-include::chapters/license/license_efsl.adoc[]
+include::0_license_efsl.adoc[]
 
 // attributes for footnotes used among the chapters
-include::chapters/appendix/footnotes.adoc[]
+include::footnotes.adoc[]
 
 :sectnums:
 
-include::chapters/overview/overview.adoc[]
+include::1_overview.adoc[]
 
-include::chapters/interceptor_programming_contract/interceptor_programming_contract.adoc[]
+include::2_interceptor_programming_contract.adoc[]
 
-include::chapters/associating_interceptors_with_classes_and_methods_using_interceptor_bindings/associating_interceptors_with_classes_and_methods_using_interceptor_bindings.adoc[]
+include::3_associating_interceptors_with_classes_and_methods_using_interceptor_bindings.adoc[]
 
-include::chapters/associating_interceptors_with_classes_and_methods_using_the_interceptors_annotation/associating_interceptors_with_classes_and_methods_using_the_interceptors_annotation.adoc[]
+include::4_associating_interceptors_with_classes_and_methods_using_the_interceptors_annotation.adoc[]
 
-include::chapters/interceptor_ordering/interceptor_ordering.adoc[]
+include::5_interceptor_ordering.adoc[]
 
-include::chapters/appendix/bibliography.adoc[]
+include::a_bibliography.adoc[]
 
-include::chapters/appendix/change_log.adoc[]
+include::b_change_log.adoc[]

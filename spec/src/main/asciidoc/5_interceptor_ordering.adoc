@@ -1,0 +1,292 @@
+////
+*******************************************************************
+* Copyright (c) 2019 Eclipse Foundation
+*
+* This specification document is made available under the terms
+* of the Eclipse Foundation Specification License v1.0, which is
+* available at https://www.eclipse.org/legal/efsl.php.
+*******************************************************************
+////
+
+[[interceptor_ordering]]
+== Interceptor Ordering
+
+[[enabling_interceptors]]
+=== Enabling Interceptors
+
+Only interceptors that are enabled are
+eligible to be invoked.
+
+Interceptors declared using interceptor
+bindings are enabled using the Priority annotation (see Section
+<<use_of_the_priority_annotation_in_ordering_interceptors>>).
+The _Priority_ annotation also controls
+interceptor ordering (see Section 5.2 <<interceptor_ordering_rules>>).
+
+Interceptors declared using the
+_Interceptors_ annotation are enabled by that annotation. Using the
+_Interceptors_ annotation to associate interceptor classes with a target
+class or a method or constructor of a target class enables them for that
+target class, method, or constructor. The order in which the interceptor
+classes are specified in the _Interceptors_ annotation controls
+interceptor ordering (see Section 5.2 <<interceptor_ordering_rules>>).
+Interceptor methods declared in the target
+class or in a superclass of the target class are enabled unless
+overridden.
+
+An extension specification may define
+alternative mechanisms (e.g., a deployment descriptor such as the CDI
+beans.xml [<<bib3>>] or the EJB _ejb-jar.xml_
+deployment descriptor [<<bib2>>]) to
+enable and order interceptors, to override the order specified by means
+of annotations, or to disable interceptors.
+
+_Note: The InvocationContext object allows
+interceptor methods to control the behavior of the invocation chain,
+including whether the next method in the chain is invoked and the values
+of its parameters and result. See Section 2.4
+<<invocation_context>>._
+
+[[interceptor_ordering_rules]]
+=== Interceptor Ordering Rules
+
+For each interceptor method type (i.e.,
+around-invoke, around-timeout, post-construct, etc.), the following
+interceptor invocation ordering rules apply, except as specified
+otherwise by an extension specification.
+
+- Default interceptors are invoked first.
+
+- Default interceptors are invoked in the order
+defined by the extension specification (e.g., by their order in the
+deployment descriptor).
+
+- If a default interceptor class has
+superclasses, interceptor methods declared in the interceptor class’s
+superclasses are invoked before the interceptor method declared in the
+interceptor class itself, most general superclass first.
+
+- Interceptors declared by applying the
+Interceptors annotation _at class-level_ to the target class are invoked
+next.
+
+- Interceptor methods declared in the
+interceptor classes listed in the _Interceptors_ annotation are invoked
+in the same order as the specification of the interceptor classes in
+that annotation.
+
+- If an interceptor class declared by applying
+the Interceptors annotation _at class-level_ has superclasses,
+interceptor methods declared in the interceptor class’s superclasses are
+invoked before the interceptor method declared in the interceptor class
+itself, most general superclass first.
+
+NOTE: This specification does not define
+the semantics of applying the Interceptors annotation to a superclass of
+the target class, and thus the corresponding interceptor methods may or
+may not be invoked. Applications that specify the Interceptors
+annotation on a superclass of the target class will not be portable.
+
+- Interceptors declared by applying the
+Interceptors annotation _at method- or constructor-level_ are invoked
+next.
+
+- Interceptor methods declared in the
+interceptor classes listed in the _Interceptors_ annotation are invoked
+in the same order as the specification of the interceptor classes in
+that annotation.
+
+- If an interceptor class declared by applying
+the Interceptors annotation _at method- or constructor-level_ has
+superclasses, interceptor methods declared in the interceptor class’s
+superclasses are invoked before the interceptor method declared in the
+interceptor class itself, most general superclass first.
+
+- Interceptors declared using interceptor
+bindings are invoked next.
+
+- All interceptors specified using interceptor
+binding annotations visible on the target class (e.g., specified on the
+class or visible on the class because they were declared with the
+`Inherited` annotation) are combined with all binding annotations on the
+target method and sorted by the priorities specified by the `Priority`
+annotation; and then the interceptor methods are invoked in order of
+priority. The `Priority` annotation is described in Section
+<<use_of_the_priority_annotation_in_ordering_interceptors>>.
+
+- If an interceptor class declared using
+interceptor bindings has superclasses, interceptor methods declared in
+the interceptor class’s superclasses are invoked before the interceptor
+method declared in the interceptor class itself, most general superclass
+first.
+
+- Interceptor methods declared in the target
+class or in any superclass of the target class are invoked last.
+
+- If the target class has superclasses,
+interceptor methods declared in the target class’s superclasses are
+invoked before an interceptor method declared in the target class
+itself, most general superclass first.
+
+- If an interceptor method is overridden by
+another method (regardless whether that method is itself an interceptor
+method), it will not be invoked.
+
+[[use_of_the_priority_annotation_in_ordering_interceptors]]
+==== Use of the Priority Annotation in Ordering Interceptors
+
+The `Priority` annotation can be used to
+enable and order interceptors associated with components that use
+interceptor bindings. The required `value` element of the `Priority`
+annotation determines the ordering. Interceptors with smaller priority
+values are called first. If more than one interceptor has the same
+priority, the relative order of those interceptors is undefined.
+
+[source, java]
+----
+@Monitored @Interceptor @Priority(100)
+public class MonitoringInterceptor {
+    @AroundInvoke
+    public Object monitorInvocation(InvocationContext ctx)
+        throws Exception { ... }
+}
+----
+
+The Priority annotation is ignored when
+computing the invocation order of interceptors bound to a component
+using the Interceptors annotation.
+
+The following priority values are defined for
+interceptor ordering when used with the Priority annotation.
+Interceptors with lower priority values are invoked earlier in the
+interceptor chain.
+
+- `Interceptor.Priority.PLATFORM_BEFORE` = 0
+
+- `Interceptor.Priority.LIBRARY_BEFORE` = 1000
+
+- `Interceptor.Priority.APPLICATION` = 2000
+
+- `Interceptor.Priority.LIBRARY_AFTER` = 3000
+
+- `Interceptor.Priority.PLATFORM_AFTER` = 4000
+
+These values define the following interceptor
+ranges to order interceptors for a specific interposed method or event
+in the interceptor chain:
+
+- Interceptors defined by the Jakarta EE Platform
+specifications that are to be executed at the beginning of the
+interceptor chain should have priority values in the range
+`PLATFORM_BEFORE` up until `LIBRARY_BEFORE`.
+
+- Interceptors defined by extension libraries
+that are intended to be executed earlier in the interceptor chain, but
+after interceptors in the range up until `LIBRARY_BEFORE` should have
+priority values in the range `LIBRARY_BEFORE` up until `APPLICATION`.
+
+- Interceptors defined by applications should
+be in the range APPLICATION up until `LIBRARY_AFTER`.
+
+- Interceptors defined by extension libraries
+that are intended to be executed later in the interceptor chain should
+have priority values in the range `LIBRARY_AFTER` up until `PLATFORM_AFTER`.
+
+- Interceptors defined by the Jakarta EE Platform
+specifications that are to be executed at the end of the interceptor
+chain should have priority values at `PLATFORM_AFTER` or higher.
+
+- An interceptor that must be invoked before or
+after another defined interceptor can choose any appropriate value.
+
+Negative priority values are reserved for
+future use by this specification and should not be used.
+
+The following example defines an extension
+library interceptor that is to be executed before any application
+interceptor, but after any early platform interceptor:
+
+[source, java]
+----
+@Priority(Interceptor.Priority.LIBRARY_BEFORE+10)
+@Interceptor
+public class ValidationInterceptor { ... }
+----
+
+[[excluding_interceptors]]
+=== Excluding Interceptors
+
+Interceptors may be excluded from execution
+by means of the `ExcludeClassInterceptors` annotation and the
+`ExcludeDefaultInterceptors` annotation.
+
+The `ExcludeClassInterceptors` annotation can
+be used to exclude the invocation of the class-level interceptors
+defined by means of the `Interceptors` annotation.
+
+The `ExcludeDefaultInterceptors` annotation
+can be used to exclude the invocation of default interceptors for a
+target class or—when applied to a target class constructor or method—to
+exclude the invocation of default interceptors for a particular
+constructor or method.
+
+An extension specification may define other
+means for excluding interceptors from execution, such as by means of a
+deployment descriptor.
+
+
+
+In the following example interceptors will be
+invoked in the following order when `someMethod` is called:
+`SomeInterceptor`, `AnotherInterceptor`, `MyInterceptor`.
+
+[source, java]
+----
+@Stateless
+@Interceptors({org.acme.SomeInterceptor.class,
+               org.acme.AnotherInterceptor.class})
+public class MyBean {
+    ...
+    @Interceptors(org.acme.MyInterceptor.class)
+    public void someMethod() {
+        ...
+    }
+}
+----
+
+In the following example only the interceptor
+`MyInterceptor` will be invoked when `someMethod` is called. The
+`ExcludeClassInterceptors` annotation is used to exclude the invocation
+of the class-level interceptors.
+
+[source, java]
+----
+@Stateless
+@Interceptors(org.acme.AnotherInterceptor.class)
+public class MyBean {
+    ...
+    @Interceptors(org.acme.MyInterceptor.class)
+    @ExcludeClassInterceptors
+    public void someMethod() {
+        ...
+    }
+}
+----
+
+In the next example, only the interceptor
+`MyInterceptor` will be invoked when `someMethod` is called. The
+`ExcludeDefaultInterceptors` annotation is used to exclude the
+invocation of the default interceptors (if any).
+
+[source, java]
+----
+@Stateless
+public class MyBean {
+    ...
+    @ExcludeDefaultInterceptors
+    @Interceptors(org.acme.MyInterceptor.class)
+    public void someMethod() {
+        ...
+    }
+}
+----
