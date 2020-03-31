@@ -136,7 +136,10 @@ associated target class.
 With the exception of aroundConstruct
 lifecycle callback interceptor methods, no interceptor methods are
 invoked until after dependency injection has been completed on both the
-interceptor instances and the target {fn-1}.
+interceptor instances and the target footnote:[If a PostConstruct
+interceptor method is declared in the interceptor class or a superclass
+of the interceptor class, it is not invoked when the interceptor
+instance itself is created.].
 
 Post-construct interceptor methods for the
 target instance are invoked after dependency injection has been
@@ -144,7 +147,10 @@ completed on the target instance.
 
 Pre-destroy interceptor methods are
 invoked before the target instance and all interceptor instances
-associated with it are destroyed.{fn-2}
+associated with it are destroyed.footnote:[If a PreDestroy
+interceptor method is declared in the interceptor class or a superclass
+of the interceptor class, it is not invoked when the interceptor
+instance itself is destroyed.]
 
 The following rules apply specifically to
 around-construct lifecycle callback interceptor methods:
@@ -269,8 +275,10 @@ constructor. Modifying the parameter values does not affect the
 determination of the method or the constructor that is invoked on the
 target class. The parameter types must match the types for the target
 class method or constructor, and the number of parameters supplied must
-equal the number of parameters on the target class method or constructor
-{fn-3}, or the `IllegalArgumentException` is
+equal the number of parameters on the target class method or constructor footnote:[If the last parameter
+is a vararg parameter of type T, it is considered be equivalent to a
+parameter of type T{opening-bracket}{closing-bracket}.],
+or the `IllegalArgumentException` is
 thrown to the `setParameters` call.
 
 The `proceed` method causes the invocation of
@@ -290,8 +298,11 @@ of proceed in the last interceptor method in the chain causes the target
 instance to be created. For all other lifecycle callback interceptor
 methods, if there is no lifecycle callback interceptor method defined on
 the target class, the invocation of `proceed` in the last interceptor
-method in the chain is a no-op{fn-4}, and `null` is
-returned.
+method in the chain is a no-op footnote:[In case of the
+PostConstruct interceptor, if there is no callback method defined on the
+target class, the invocation of InvocationContext.proceed method in
+the last interceptor method in the chain validates the target instance.],
+and `null` is returned.
 
 [[exceptions]]
 === Exceptions
@@ -419,7 +430,14 @@ specified on methods declared in a given class.
 Lifecycle callback interceptor methods are
 invoked in an unspecified security context. Lifecycle callback
 interceptor methods are invoked in a transaction context determined by
-their target class and/or method{fn-5}.
+their target class and/or method footnote:[In general, a
+lifecycle callback interceptor method will be invoked in an unspecified
+transaction context. Note however that singleton and stateful session
+beans support the use of a transaction context for the invocation of
+lifecycle callback interceptor methods (see the Jakarta Enterprise
+Beans specification &#91;<<bib2>>&#93;). The
+transaction context may be also changed by transactional interceptors in
+the invocation chain.].
 
 Lifecycle callback interceptor methods can
 have `public` , `private` , `protected` , or `package` level access. A
@@ -551,7 +569,9 @@ An around-timeout method can invoke any
 component or resource that its corresponding timeout method can invoke.
 
 An around-timeout method invocation occurs
-within the same transaction{fn-6} and security context
+within the same transaction footnote:[Note that the
+transaction context may be changed by transactional interceptors in the
+invocation chain.] and security context
 as the timeout method on which it is interposing.
 
 The `InvocationContext.getTimer` method

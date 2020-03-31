@@ -150,7 +150,8 @@ from superclasses of the target class. See [<<bib3>>].
 
 An interceptor binding declared on a method
 or constructor replaces an interceptor binding of the same type declared
-at class level or inherited from a superclass{fn-7}.
+at class level or inherited from a superclass footnote:[This requirement
+follows the rules from the Jakarta Annotations specification, section 2.1 &#91;<<bib5>>&#91;.].
 
 An extension specification may define
 additional rules for combining interceptor bindings, such as
@@ -209,10 +210,11 @@ lifecycle event or method.
 
 - The interceptor is enabled. An interceptor is
 enabled if the `Priority` annotation is applied to the interceptor
-class{fn-8}. An extension specification may define other
+class footnote:[The Priority annotation also orders interceptors. See Chapter 5 <<interceptor_ordering>>.].
+An extension specification may define other
 means of enabling interceptors. For example, the CDI specification
 enables an interceptor if the interceptor class is listed under the
-`<interceptors>`element of the `beans.xml` file for the bean archive.
+`<interceptors>` element of the `beans.xml` file for the bean archive.
 
 [[interceptors_with_multiple_bindings]]
 ==== Interceptors with multiple bindings

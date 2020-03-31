@@ -23,9 +23,6 @@ endif::[]
 :sectnums!:
 include::0_license_efsl.adoc[]
 
-// attributes for footnotes used among the chapters
-include::footnotes.adoc[]
-
 :sectnums:
 
 include::1_overview.adoc[]
