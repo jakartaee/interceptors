@@ -1,0 +1,82 @@
+////
+*******************************************************************
+* Copyright (c) 2019 Eclipse Foundation
+*
+* This specification document is made available under the terms
+* of the Eclipse Foundation Specification License v1.0, which is
+* available at https://www.eclipse.org/legal/efsl.php.
+*******************************************************************
+////
+
+[[overview]]
+== Overview
+
+=== Specification Scope
+
+Jakarta Interceptors defines a means of interposing on business
+method invocations and specific events—such as lifecycle
+events and timeout events—that occur on instances of Jakarta EE
+components and other managed classes.
+
+An interceptor method is either a method of the component class
+(called the target class) or a method of a separate class
+(called the interceptor class) that is associated with the target
+class.
+
+[[revision_history]]
+=== Revision History
+
+This document is an update to the
+Jakarta Interceptors specification 1.2. Version 1.1 was based on the
+Interceptors chapter of the Enterprise JavaBeansTM 3.0 (EJB)
+specification [<<bib1>>]. Version
+1.2 included interceptor binding definitions that were originally
+defined in the Contexts and Dependency Injection for the Jakarta EE
+Platform (CDI) specification [<<bib3>>].
+
+The change log for the current version is found in <<change_log>>.
+
+[[relationship_to_other_specifications]]
+=== Relationship to Other Specifications
+
+The Jakarta EE Platform specification requires
+support for interceptors. The use of interceptors defined by means of
+the `Interceptors` annotation is required to be supported for EJB and
+Managed Bean components, including in the absence of CDI. When CDI is
+enabled, the use of interceptors defined both by means of interceptor
+binding annotations and by means of the `Interceptors` annotation is
+required to be supported for component classes that support injection,
+as described in the section “Annotations and Injection” of the Jakarta EE
+Platform specification [<<bib6>>].
+
+Both the EJB and the CDI specifications
+provide extensions to this specification. Other specifications may
+choose to do so in the future. Such specifications are referred to in
+this document as extension specifications. This document outlines
+permissible extensions to this specification and defines requirements
+for extension specifications.
+
+[[document_conventions]]
+=== Document Conventions
+
+The regular Times font is used for
+information that is prescriptive by the Interceptors specification.
+
+The italic Times font is used for paragraphs
+that contain descriptive information, such as notes describing typical
+use, or notes clarifying the text with prescriptive specification.
+
+Java code and sample data fragments are formatted as shown in figure
+<<1.1>>:
+
+[id="1.1"]
+[source,java]
+----
+package com.example.hello;
+
+public class Hello {
+    public static void main(String args[]) {
+    System.out.println("Hello World");
+    }
+}
+----
