@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (c) 2012, 2019 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 2012, 2020 Oracle and/or its affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Public License v. 2.0, which is available at
@@ -18,27 +18,27 @@
 -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-   <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-   <parent>
+    <parent>
         <groupId>org.eclipse.ee4j</groupId>
         <artifactId>project</artifactId>
         <version>1.0.6</version>
-        <relativePath/>
+        <relativePath />
     </parent>
 
-   <groupId>jakarta.interceptor</groupId>
-   <artifactId>jakarta.interceptor-api</artifactId>
-   <version>2.0.0-RC2</version>
+    <groupId>jakarta.interceptor</groupId>
+    <artifactId>jakarta.interceptor-api</artifactId>
+    <version>2.0.0-SNAPSHOT</version>
 
-   <name>Jakarta Interceptors</name>
-   <description>
+    <name>Jakarta Interceptors</name>
+    <description>
         Jakarta Interceptors defines a means of interposing on business method invocations
         and specific events—such as lifecycle events and timeout events—that occur on instances
         of Jakarta EE components and other managed classes.
     </description>
-   <url>https://github.com/eclipse-ee4j/interceptor-api</url>
-   <licenses>
+    <url>https://github.com/eclipse-ee4j/interceptor-api</url>
+    <licenses>
         <license>
             <name>EPL 2.0</name>
             <url>http://www.eclipse.org/legal/epl-2.0</url>
@@ -51,7 +51,7 @@
         </license>
     </licenses>
 
-   <developers>
+    <developers>
         <developer>
             <id>yaminikb</id>
             <name>Yamini K B</name>
@@ -59,7 +59,7 @@
             <organizationUrl>http://www.oracle.com/</organizationUrl>
         </developer>
     </developers>
-   <contributors>
+    <contributors>
         <contributor>
             <name>Marina Vatkina</name>
             <organization>Oracle Corporation</organization>
@@ -67,18 +67,18 @@
         </contributor>
     </contributors>
 
-   <scm>
+    <scm>
         <connection>scm:git:ssh://git@github.com/eclipse-ee4j/interceptor-api.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/eclipse-ee4j/interceptor-api.git</developerConnection>
         <url>https://github.com/eclipse-ee4j/interceptor-api</url>
         <tag>HEAD</tag>
     </scm>
-   <issueManagement>
+    <issueManagement>
         <system>Github</system>
         <url>https://github.com/eclipse-ee4j/interceptor-api/issues</url>
     </issueManagement>
 
-   <properties>
+    <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -86,7 +86,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
-   <dependencies>
+    <dependencies>
         <dependency>
             <groupId>jakarta.annotation</groupId>
             <artifactId>jakarta.annotation-api</artifactId>
@@ -94,7 +94,7 @@
         </dependency>
     </dependencies>
 
-   <build>
+    <build>
         <resources>
             <resource>
                 <directory>src/main/java</directory>
@@ -123,7 +123,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.0.0-M2</version>
+                <version>3.0.0-M3</version>
                 <executions>
                     <execution>
                         <id>enforce-maven</id>
@@ -140,7 +140,7 @@
                     </execution>
                 </executions>
             </plugin>
-        
+
             <!-- Restricts the Java version to 1.8 -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -151,7 +151,7 @@
                     <compilerArgument>-Xlint:unchecked</compilerArgument>
                 </configuration>
             </plugin>
-            
+
             <!-- First sets properties for the maven-bundle-plugin and later checks if they are indeed used. -->
             <plugin>
                 <groupId>org.glassfish.build</groupId>
@@ -173,7 +173,7 @@
                     </execution>
                 </executions>
             </plugin>
-            
+
             <!-- Creates the OSGi MANIFEST.MF file -->
             <plugin>
                 <groupId>org.apache.felix</groupId>
@@ -207,12 +207,12 @@
                     </execution>
                 </executions>
             </plugin>
-            
+
             <!-- Adds the manifest file created by the org.apache.felix:maven-bundle-plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.2.0</version>
                 <configuration>
                     <archive>
                         <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
@@ -222,7 +222,7 @@
                     </excludes>
                 </configuration>
             </plugin>
-            
+
             <!-- Creates the source jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -240,14 +240,12 @@
                     </execution>
                 </executions>
             </plugin>
-            
-            <!-- 
-               Create Javadoc for API jar
-             -->
+
+            <!-- Create Javadoc for API jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>3.2.0</version>
                 <executions>
                     <execution>
                         <id>attach-api-javadocs</id>
