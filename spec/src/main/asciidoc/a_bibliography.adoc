@@ -1,6 +1,6 @@
 ////
 *******************************************************************
-* Copyright (c) 2019 Eclipse Foundation
+* Copyright (c) 2019, 2020 Eclipse Foundation
 *
 * This specification document is made available under the terms
 * of the Eclipse Foundation Specification License v1.0, which is
@@ -18,10 +18,10 @@
 
 - [[bib3,3]] Jakarta™ Contexts and Dependency Injection (CDI specification) version 3.0 . https://jakarta.ee/specifications/cdi/3.0/ .
 
-- [[bib4,4]] Jakarta™ XML Web Services (JAX-WS 3.0) version 3.0 . https://jakarta.ee/specifications/xml-web-services/3.0/ .
+- [[bib4,4]] Jakarta™ XML Web Services version 3.0 . https://jakarta.ee/specifications/xml-web-services/3.0/ .
 
 - [[bib5,5]] Jakarta™ Annotations version 2.0 . https://jakarta.ee/specifications/annotations/2.0/.
 
 - [[bib6,6]] Jakarta™ EE Platform 9 . https://jakarta.ee/specifications/platform/9/ .
 
-- [[bib7,7]] Jakarta™ Transaction  (JTA) version 2.0 . https://jakarta.ee/specifications/transactions/2.0/ .
+- [[bib7,7]] Jakarta™ Transaction version 2.0 . https://jakarta.ee/specifications/transactions/2.0/ .

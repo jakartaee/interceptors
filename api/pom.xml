@@ -90,7 +90,7 @@
         <dependency>
             <groupId>jakarta.annotation</groupId>
             <artifactId>jakarta.annotation-api</artifactId>
-            <version>2.0.0-RC1</version>
+            <version>2.0.0</version>
         </dependency>
     </dependencies>
 
@@ -261,7 +261,7 @@
                             <header><![CDATA[<br>Jakarta Interceptors API v${project.version}]]></header>
                             <bottom><![CDATA[
 Comments to: <a href="mailto:interceptors-dev@eclipse.org">interceptors-dev@eclipse.org</a>.<br>
-Copyright &#169; 2019 Eclipse Foundation. All rights reserved.<br>
+Copyright &#169; 2019, 2020 Eclipse Foundation. All rights reserved.<br>
 Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">license terms</a>.]]>
                             </bottom>
                             <docfilessubdirs>true</docfilessubdirs>
