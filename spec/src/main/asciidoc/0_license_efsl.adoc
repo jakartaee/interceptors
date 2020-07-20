@@ -1,6 +1,6 @@
 ////
 *******************************************************************
-* Copyright (c) 2019 Eclipse Foundation
+* Copyright (c) 2019, 2020 Eclipse Foundation
 *
 * This specification document is made available under the terms
 * of the Eclipse Foundation Specification License v1.0, which is
@@ -19,9 +19,9 @@ Status: {revremark}
 Release: {revdate}
 ....
 
-Copyright (c) 2019 Eclipse Foundation.
+Copyright (c) 2019, 2020 Eclipse Foundation.
 
-=== Eclipse Foundation Specification License
+== Eclipse Foundation Specification License
 
 By using and/or copying this document, or the Eclipse Foundation
 document from which this statement is linked, you (the licensee) agree
@@ -61,7 +61,7 @@ The notice is:
 document includes material copied from or derived from [title and URI
 of the Eclipse Foundation specification document]."
 
-==== Disclaimers
+=== Disclaimers
 
 THIS DOCUMENT IS PROVIDED &quot;AS IS,&quot; AND THE COPYRIGHT
 HOLDERS AND THE ECLIPSE FOUNDATION MAKE NO REPRESENTATIONS OR
