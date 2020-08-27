@@ -63,7 +63,6 @@
         <tag>HEAD</tag>
     </scm>
 
-
     <build>
         <plugins>
             <!-- Sets minimal Maven version to 3.5.4 -->
