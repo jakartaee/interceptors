@@ -116,7 +116,7 @@ public interface InvocationContext {
      * Enables an interceptor to retrieve or update the data associated with the invocation by another interceptor, business
      * method, and/or webservices endpoint in the invocation chain. If interceptors are invoked as a result of the
      * invocation on a web service endpoint, the returned value will be an instance of
-     * <code>javax.xml.rpc.handler.MessageContext</code>.
+     * <code>jakarta.xml.rpc.handler.MessageContext</code>.
      *
      * @return the context data associated with this invocation or lifecycle callback. If there is no context data, an empty
      * {@code Map<String,Object>} object will be returned.
