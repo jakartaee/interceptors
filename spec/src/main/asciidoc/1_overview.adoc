@@ -28,7 +28,7 @@ class.
 
 This document is an update to the
 Jakarta Interceptors specification 1.2. Version 1.1 was based on the
-Interceptors chapter of the Enterprise JavaBeansTM 3.0 (EJB)
+Interceptors chapter of the Enterprise JavaBeansTM 3.0
 specification [<<bib1>>]. Version
 1.2 included interceptor binding definitions that were originally
 defined in the Contexts and Dependency Injection for the Jakarta EE
@@ -41,15 +41,15 @@ The change log for the current version is found in <<change_log>>.
 
 The Jakarta EE Platform specification requires
 support for interceptors. The use of interceptors defined by means of
-the `Interceptors` annotation is required to be supported for EJB and
-Managed Bean components, including in the absence of CDI. When CDI is
-enabled, the use of interceptors defined both by means of interceptor
-binding annotations and by means of the `Interceptors` annotation is
-required to be supported for component classes that support injection,
-as described in the section “Annotations and Injection” of the Jakarta EE
-Platform specification [<<bib6>>].
+the `Interceptors` annotation is required to be supported for Enterprise 
+Jakarta Beans and Managed Bean components, including in the absence of CDI. 
+When CDI is enabled, the use of interceptors defined both by means of 
+interceptor binding annotations and by means of the `Interceptors`
+annotation is required to be supported for component classes that support
+injection, as described in the section “Annotations and Injection” of the
+Jakarta EE Platform specification [<<bib6>>].
 
-Both the EJB and the CDI specifications
+Both the Enterprise Jakarta Beans and the CDI specifications
 provide extensions to this specification. Other specifications may
 choose to do so in the future. Such specifications are referred to in
 this document as extension specifications. This document outlines
