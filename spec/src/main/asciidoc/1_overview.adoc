@@ -41,15 +41,15 @@ The change log for the current version is found in <<change_log>>.
 
 The Jakarta EE Platform specification requires
 support for interceptors. The use of interceptors defined by means of
-the `Interceptors` annotation is required to be supported for Enterprise 
-Jakarta Beans and Managed Bean components, including in the absence of CDI.
+the `Interceptors` annotation is required to be supported for Jakarta Enterprise 
+Beans and Managed Bean components, including in the absence of CDI.
 When CDI is enabled, the use of interceptors defined both by means of interceptor
 binding annotations and by means of the `Interceptors` annotation is
 required to be supported for component classes that support injection,
 as described in the section “Annotations and Injection” of the Jakarta EE
 Platform specification [<<bib6>>].
 
-Both the Enterprise Jakarta Beans and the CDI specifications
+Both the Jakarta Enterprise Beans and the CDI specifications
 provide extensions to this specification. Other specifications may
 choose to do so in the future. Such specifications are referred to in
 this document as extension specifications. This document outlines
