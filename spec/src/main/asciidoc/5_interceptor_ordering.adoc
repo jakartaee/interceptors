@@ -36,7 +36,7 @@ overridden.
 
 An extension specification may define
 alternative mechanisms (e.g., a deployment descriptor such as the CDI
-beans.xml [<<bib3>>] or the Enterprise Jakarta Beans _ejb-jar.xml_
+beans.xml [<<bib3>>] or the Jakarta Enterprise Beans _ejb-jar.xml_
 deployment descriptor [<<bib2>>]) to
 enable and order interceptors, to override the order specified by means
 of annotations, or to disable interceptors.

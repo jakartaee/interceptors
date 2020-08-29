@@ -111,7 +111,7 @@ deployment descriptor to specify the invocation order of interceptors or
 to override the order specified in metadata annotations. A deployment
 descriptor can optionally be used to define interceptors, to define
 default interceptors, or to associate interceptors with a target class.
-For example, the Enterprise Jakarta Beans specification [<<bib2>>] requires support for the
+For example, the Jakarta Enterprise Beans specification [<<bib2>>] requires support for the
 `ejb-jar.xml` deployment descriptor and the CDI specification
 [<<bib3>>] requires support for the `beans.xml`
 deployment descriptor.
@@ -538,7 +538,7 @@ _Note: Timeout methods are currently specific
 to Jakarta Enterprise Beans, although Timer Service functionality may be
 extended to other specifications in the future, and extension
 specifications may define events that may be interposed on by
-around-timeout methods. The Timer Service, defined by the Jakarta Enterprise
+around-timeout methods. The enterprise beans Timer Service, defined by the Jakarta Enterprise
 Beans specification [<<bib2>>], is a container-provided service
 that allows the Bean Provider to register enterprise beans for timer
 callbacks according to a calendar-based schedule, at a specified time,
