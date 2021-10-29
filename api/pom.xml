@@ -81,9 +81,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -141,17 +138,36 @@
                 </executions>
             </plugin>
 
-            <!-- Restricts the Java version to 1.8 -->
+            <!--
+            Use the JDK 9+ compiler but with -source 1.8 for all
+            but the module-info.java file.
+            -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <compilerArgument>-Xlint:unchecked</compilerArgument>
+                    <release>9</release>
+                    <compilerArgs>
+                        <arg>-Xlint:all</arg>
+                    </compilerArgs>
+                    <showDeprecation>true</showDeprecation>
+                    <showWarnings>true</showWarnings>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>base-compile</id>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <release>8</release>
+                            <excludes>
+                                <exclude>module-info.java</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
-
             <!-- First sets properties for the maven-bundle-plugin and later checks if they are indeed used. -->
             <plugin>
                 <groupId>org.glassfish.build</groupId>
@@ -245,7 +261,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>3.3.0</version>
                 <executions>
                     <execution>
                         <id>attach-api-javadocs</id>
@@ -256,6 +272,7 @@
                             <source>1.8</source>
                             <additionalJOption>-Xdoclint:none</additionalJOption>
                             <description>Jakarta Interceptors API documentation</description>
+                            <detectJavaApiLink>false</detectJavaApiLink>
                             <doctitle>Jakarta Interceptors API documentation</doctitle>
                             <windowtitle>Jakarta Interceptors API documentation</windowtitle>
                             <header><![CDATA[<br>Jakarta Interceptors API v${project.version}]]></header>
