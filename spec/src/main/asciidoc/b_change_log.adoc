@@ -12,6 +12,12 @@
 [[change_log]]
 == Change Log
 
+=== Changes for 2.1
+Updated dependencies for Jakarta EE 10.
+
+Added JPMS module-info.
+
+=== Changes for 2.0
 Clarified <<relationship_to_other_specifications>> to be consistent with the Jakarta EE Platform specification
 with regard to when interceptors defined by means of the _Interceptors_
 annotation and interceptors defined by means of interceptor bindings are

@@ -14,7 +14,7 @@
 Interceptor bindings are intermediate
 annotations that may be used to associate interceptors with any
 component that is not itself an interceptor or decorator
-see [<<bib6>>].
+see [<<bib10>>].
 
 [[interceptor_binding_types]]
 === Interceptor Binding Types
@@ -146,12 +146,12 @@ applied at method level or constructor level. Note that the interceptor
 bindings applied to the target class may include those inherited from
 its superclasses. The CDI specification rules for the inheritance of
 type-level metadata apply to the inheritance of interceptor bindings
-from superclasses of the target class. See [<<bib3>>].
+from superclasses of the target class. See [<<bib8>>].
 
 An interceptor binding declared on a method
 or constructor replaces an interceptor binding of the same type declared
 at class level or inherited from a superclass footnote:[This requirement
-follows the rules from the Jakarta Annotations specification, section 2.1 &#91;<<bib5>>&#91;.].
+follows the rules from the Jakarta Annotations specification, section 3.1 &#91;<<bib9>>&#91;.].
 
 An extension specification may define
 additional rules for combining interceptor bindings, such as
@@ -201,7 +201,7 @@ interceptor bindings of the interceptor. A method or constructor has an
 interceptor binding of an interceptor if it has an interceptor binding
 with (a) the same type and (b) the same annotation member value for each
 member. An extension specification may further refine this rule. For
-example, the CDI specification [<<bib3>>] adds the
+example, the CDI specification [<<bib8>>,<<bib3>>] adds the
 `jakarta.enterprise.util.Nonbinding` annotation, causing member values to be
 ignored by the resolution process.
 
@@ -318,14 +318,14 @@ the `equals` method.
 Array-valued or annotation-valued members of
 an interceptor binding type are not supported. An extension
 specification may add support for these member types. For example the
-CDI specification [<<bib3>>] adds the
+CDI specification [<<bib3>>,<<bib8>>] adds the
 `jakarta.enterprise.util.Nonbinding` annotation, allowing array-valued or
 annotation-valued members to be used on the annotation type, but ignored
 by the resolution process.
 
 If the set of interceptor bindings of a
 component class or interceptor, including bindings inherited from CDI
-stereotypes [<<bib3>>] and other interceptor bindings,
+stereotypes [<<bib3>>,<<bib8>>] and other interceptor bindings,
 has two instances of a certain interceptor binding type and the
 instances have different values of some annotation member, the container
 automatically detects the problem, treats it as a definition error, and
