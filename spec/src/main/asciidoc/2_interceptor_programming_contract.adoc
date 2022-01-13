@@ -589,7 +589,7 @@ public class MyInterceptor {
     @AroundTimeout
     private Object aroundTimeout(InvocationContext ctx)
             throws Exception {
-        logger.info("processing: " + ctx.getTimer().getInfo());
+        logger.info("processing: " + ctx.getTimer());
         return ctx.proceed();
         ...
     }
