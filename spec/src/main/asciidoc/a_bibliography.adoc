@@ -22,6 +22,12 @@
 
 - [[bib5,5]] Jakarta™ Annotations version 2.0 . https://jakarta.ee/specifications/annotations/2.0/.
 
-- [[bib6,6]] Jakarta™ EE Platform 9 . https://jakarta.ee/specifications/platform/9/ .
+- [[bib6,6]] Jakarta™ EE Platform 9 . https://jakarta.ee/specifications/platform/9/.
 
 - [[bib7,7]] Jakarta™ Transaction version 2.0 . https://jakarta.ee/specifications/transactions/2.0/ .
+
+- [[bib8,8]] Jakarta™ Contexts and Dependency Injection (CDI specification) version 4.0 . https://jakarta.ee/specifications/cdi/4.0/ .
+
+- [[bib9,9]] Jakarta™ Annotations version 2.1 . https://jakarta.ee/specifications/annotations/2.1/.
+
+- [[bib10,10]] Jakarta™ EE Platform 10 . https://jakarta.ee/specifications/platform/10/ .

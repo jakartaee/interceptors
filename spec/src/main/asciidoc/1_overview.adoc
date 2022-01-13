@@ -27,8 +27,7 @@ class.
 === Revision History
 
 This document is an update to the
-Jakarta Interceptors specification 1.2. Version 1.1 was based on the
-Interceptors chapter of the Enterprise JavaBeansTM 3.0
+Jakarta Interceptors specification 2.0. Version 2.0 was part of the Jakarta EE 9 [<<bib6>>] javax to jakarta namespace change. Version 1.1 was based on the Interceptors chapter of the Enterprise JavaBeans(TM) 3.0
 specification [<<bib1>>]. Version
 1.2 included interceptor binding definitions that were originally
 defined in the Contexts and Dependency Injection for the Jakarta EE
@@ -47,7 +46,7 @@ When CDI is enabled, the use of interceptors defined both by means of intercepto
 binding annotations and by means of the `Interceptors` annotation is
 required to be supported for component classes that support injection,
 as described in the section “Annotations and Injection” of the Jakarta EE
-Platform specification [<<bib6>>].
+Platform specification [<<bib10>>].
 
 Both the Jakarta Enterprise Beans and the CDI specifications
 provide extensions to this specification. Other specifications may

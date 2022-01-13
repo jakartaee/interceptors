@@ -113,7 +113,7 @@ descriptor can optionally be used to define interceptors, to define
 default interceptors, or to associate interceptors with a target class.
 For example, the Jakarta Enterprise Beans specification [<<bib2>>] requires support for the
 `ejb-jar.xml` deployment descriptor and the CDI specification
-[<<bib3>>] requires support for the `beans.xml`
+[<<bib3>>,<<bib8>>] requires support for the `beans.xml`
 deployment descriptor.
 
 [[interceptor_life_cycle]]
@@ -589,7 +589,7 @@ public class MyInterceptor {
     @AroundTimeout
     private Object aroundTimeout(InvocationContext ctx)
             throws Exception {
-        logger.info("processing: " + ctx.getTimer().getInfo());
+        logger.info("processing: " + ctx.getTimer());
         return ctx.proceed();
         ...
     }
