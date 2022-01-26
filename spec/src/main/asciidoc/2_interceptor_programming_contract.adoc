@@ -1,6 +1,6 @@
 ////
 *******************************************************************
-* Copyright (c) 2019, 2020 Eclipse Foundation
+* Copyright (c) 2019, 2022 Eclipse Foundation
 *
 * This specification document is made available under the terms
 * of the Eclipse Foundation Specification License v1.0, which is
@@ -29,6 +29,8 @@ interceptor class or of a target class that is invoked to interpose on
 the invocation of a method of the target class, a constructor of the
 target class, a lifecycle event of the target class, or a timeout method
 of the target class.
+
+- `Business method` : a public method of an application component that is invoked by a Jakarta EE container/framework, e.g., Jakarta EJB, Jakarta CDI bean, Jakarta RESTful endpoint, etc.
 
 [[definition_of_interceptor_classes_and_interceptor_methods]]
 === Definition of Interceptor Classes and Interceptor Methods
