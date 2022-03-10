@@ -21,7 +21,7 @@ Release: {revdate}
 
 == Copyright
 
-Copyright (c) 2018, 2020 Eclipse Foundation.
+Copyright (c) 2018, 2022 Eclipse Foundation.
 
 === Eclipse Foundation Specification License
 
@@ -59,7 +59,7 @@ specification is expressly prohibited.
 
 The notice is:
 
-"Copyright (C) 2018, 2020 Eclipse Foundation. This software or
+"Copyright (C) 2018, 2022 Eclipse Foundation. This software or
 document includes material copied from or derived from 
 Jakarta(R) Interceptors
 https://jakarta.ee/specifications/interceptors/2.0/[]"
