@@ -306,6 +306,16 @@ target class, the invocation of InvocationContext.proceed method in
 the last interceptor method in the chain validates the target instance.],
 and `null` is returned.
 
+The `getInterceptorBindings` method returns the set of interceptor binding
+annotations that were used to associate interceptors with the target
+instance that is being intercepted. The zero-parameter variant returns all
+interceptor binding annotations, while the variant with a `Class` parameter
+returns only interceptor binding annotations of given type.
+
+The `getInterceptorBinding` method returns the single interceptor binding
+annotation of given type that was used to associate interceptors with
+the target instance that is being intercepted.
+
 [[exceptions]]
 === Exceptions
 

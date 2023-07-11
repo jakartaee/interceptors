@@ -16,9 +16,13 @@
 
 package jakarta.interceptor;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Exposes contextual information about the intercepted invocation and operations that enable interceptor methods to
@@ -138,4 +142,63 @@ public interface InvocationContext {
      */
     Object proceed() throws Exception;
 
+    /**
+     * Returns the set of interceptor binding annotations used to associate interceptors with
+     * the {@linkplain #getTarget() target instance} that is being intercepted. Returns an empty set if all
+     * interceptors were associated with the target instance using the {@link Interceptors @Interceptors}
+     * annotation.
+     *
+     * @return immutable set of interceptor binding annotations, never {@code null}
+     * @since Jakarta Interceptors 2.2
+     */
+    default Set<Annotation> getInterceptorBindings() {
+        // this method is `default` to maintain binary compatibility,
+        // but CDI implementations must override it
+        return Collections.emptySet();
+    }
+
+    /**
+     * Returns the interceptor binding annotation of given type used to associate interceptors with
+     * the {@linkplain #getTarget() target instance} that is being intercepted. Returns {@code null}
+     * if the {@linkplain #getInterceptorBindings() full set} of interceptor binding annotations
+     * does not contain an annotation of given type, or if all interceptors were associated with
+     * the target instance using the {@link Interceptors @Interceptors} annotation.
+     * <p>
+     * In case of {@linkplain  java.lang.annotation.Repeatable repeatable} interceptor binding annotations,
+     * {@link #getInterceptorBindings(Class)} should be used instead.
+     *
+     * @param annotationType type of the interceptor binding annotation, must not be {@code null}
+     * @return the interceptor binding annotation of given type, may be {@code null}
+     * @since Jakarta Interceptors 2.2
+     */
+    default <T extends Annotation> T getInterceptorBinding(Class<T> annotationType) {
+        for (Annotation interceptorBinding : getInterceptorBindings()) {
+            if (interceptorBinding.annotationType().equals(annotationType)) {
+                return (T) interceptorBinding;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns the set of interceptor binding annotations of given type used to associate interceptors with
+     * the {@linkplain #getTarget() target instance} that is being intercepted. The result is typically
+     * a singleton set, unless {@linkplain java.lang.annotation.Repeatable repeatable} interceptor binding
+     * annotations are used. Returns an empty set if the {@linkplain #getInterceptorBindings() full set}
+     * of interceptor binding annotations does not contain any annotation of given type, or if all interceptors
+     * are associated with the target instance using the {@link Interceptors @Interceptors} annotation.
+     *
+     * @param annotationType type of the interceptor binding annotations, must not be {@code null}
+     * @return immutable set of interceptor binding annotations of given type, never {@code null}
+     * @since Jakarta Interceptors 2.2
+     */
+    default <T extends Annotation> Set<T> getInterceptorBindings(Class<T> annotationType) {
+        Set<T> result = new HashSet<>();
+        for (Annotation interceptorBinding : getInterceptorBindings()) {
+            if (interceptorBinding.annotationType().equals(annotationType)) {
+                result.add((T) interceptorBinding);
+            }
+        }
+        return Collections.unmodifiableSet(result);
+    }
 }
