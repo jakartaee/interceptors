@@ -25,7 +25,7 @@
 <p>Contains annotations and interfaces for defining interceptor methods and interceptor
 classes, and for binding interceptor classes to target classes.</p>
 
-<h3>Interceptor methods</h3>
+<h2>Interceptor methods</h2>
 
 <p>An interceptor method is a method of an interceptor class or of a target class
 that is invoked to interpose on the invocation of a method of the target class,
@@ -77,7 +77,7 @@ given interceptor method type: {@link jakarta.interceptor.AroundInvoke},
 {@link jakarta.interceptor.AroundTimeout}, {@link jakarta.annotation.PostConstruct}, 
 {@link jakarta.annotation.PreDestroy}, {@link jakarta.interceptor.AroundConstruct}.</p>
 
-<h3>Interceptor classes</h3>
+<h2>Interceptor classes</h2>
 
 <p>An interceptor class is a class (distinct from the target class) whose methods are 
 invoked in response to invocations and/or lifecycle events on the target class. Any 
@@ -88,7 +88,7 @@ number of interceptor classes may be associated with a target class.</p>
 <p>Interceptor methods and interceptor classes may be defined for a class by means 
 of metadata annotations or, optionally, by means of a deployment descriptor.</p>
 
-<h3>Associating an interceptor class with the target class</h3>
+<h2>Associating an interceptor class with the target class</h2>
 
 <p>An interceptor class may be associated with the target class or a method of the 
 target class in several ways:</p>
@@ -123,7 +123,7 @@ a specific timeout method of the target class. However, if an interceptor class 
 defines lifecycle callback interceptor methods is defined to apply to a target class 
 at the method level, the lifecycle callback interceptor methods are not invoked.</p>
 
-<h3>Default Interceptors</h3>
+<h2>Default Interceptors</h2>
 
 <p>Default interceptors are interceptors that apply to a set of target classes. If a 
 deployment descriptor is supported, it may be used to define default interceptors and 
@@ -132,7 +132,7 @@ their relative ordering.</p>
 <p>The {@link jakarta.interceptor.ExcludeDefaultInterceptors} annotation may be used to 
 exclude the invocation of default interceptors for a target class or method or constructor of a target class.</p>
 
-<h3>Interceptor lifecycle</h3>
+<h2>Interceptor lifecycle</h2>
 
 <p>The lifecycle of an interceptor instance is the same as that of the target class 
 instance with which it is associated. Except as noted below for {@link jakarta.interceptor.AroundConstruct}
@@ -189,7 +189,7 @@ is used, the following rules apply:</p>
   dependency injection may not have been completed.</li>
 </ul>
 
-<h3>Interceptors for lifecycle callbacks</h3>
+<h2>Interceptors for lifecycle callbacks</h2>
 
 <p>A lifecycle callback interceptor method is a non-final, non-static method. A 
 lifecycle callback interceptor method declared by the target class (or superclass) must 
