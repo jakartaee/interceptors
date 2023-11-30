@@ -143,10 +143,16 @@ public interface InvocationContext {
     Object proceed() throws Exception;
 
     /**
-     * Returns the set of interceptor binding annotations used to associate interceptors with
-     * the {@linkplain #getTarget() target instance} that is being intercepted. Returns an empty set if all
-     * interceptors were associated with the target instance using the {@link Interceptors @Interceptors}
-     * annotation.
+     * Returns the set of interceptor binding annotations for the method or constructor whose
+     * invocation is being intercepted. In case there is no target method or target constructor,
+     * interceptor binding annotations applied to the target class are returned.
+     * <p>
+     * All interceptor binding annotations are returned, including interceptor binding annotations
+     * that associate interceptors of a different interceptor method type, as well as interceptor
+     * binding annotations that associate no interceptor.
+     * <p>
+     * Returns an empty set if no interceptor binding annotation is applied and all interceptors
+     * were associated using the {@link Interceptors @Interceptors} annotation.
      *
      * @return immutable set of interceptor binding annotations, never {@code null}
      * @since Jakarta Interceptors 2.2
@@ -158,14 +164,14 @@ public interface InvocationContext {
     }
 
     /**
-     * Returns the interceptor binding annotation of given type used to associate interceptors with
-     * the {@linkplain #getTarget() target instance} that is being intercepted. Returns {@code null}
-     * if the {@linkplain #getInterceptorBindings() full set} of interceptor binding annotations
-     * does not contain an annotation of given type, or if all interceptors were associated with
-     * the target instance using the {@link Interceptors @Interceptors} annotation.
+     * Returns the single annotation of given type present in the {@linkplain #getInterceptorBindings() full set}
+     * of interceptor binding annotations.
      * <p>
-     * In case of {@linkplain  java.lang.annotation.Repeatable repeatable} interceptor binding annotations,
-     * {@link #getInterceptorBindings(Class)} should be used instead.
+     * Returns {@code null} if the {@linkplain #getInterceptorBindings() full set} of interceptor
+     * binding annotations does not contain an annotation of given type.
+     * <p>
+     * In case of {@linkplain java.lang.annotation.Repeatable repeatable} interceptor binding
+     * annotations, {@link #getInterceptorBindings(Class)} should be used instead.
      *
      * @param annotationType type of the interceptor binding annotation, must not be {@code null}
      * @return the interceptor binding annotation of given type, may be {@code null}
@@ -181,12 +187,11 @@ public interface InvocationContext {
     }
 
     /**
-     * Returns the set of interceptor binding annotations of given type used to associate interceptors with
-     * the {@linkplain #getTarget() target instance} that is being intercepted. The result is typically
-     * a singleton set, unless {@linkplain java.lang.annotation.Repeatable repeatable} interceptor binding
-     * annotations are used. Returns an empty set if the {@linkplain #getInterceptorBindings() full set}
-     * of interceptor binding annotations does not contain any annotation of given type, or if all interceptors
-     * are associated with the target instance using the {@link Interceptors @Interceptors} annotation.
+     * Returns all annotations of given type present in the {@linkplain #getInterceptorBindings() full set}
+     * of interceptor binding annotations.
+     * <p>
+     * Returns an empty set if the {@linkplain #getInterceptorBindings() full set} of interceptor
+     * binding annotations does not contain any annotation of given type.
      *
      * @param annotationType type of the interceptor binding annotations, must not be {@code null}
      * @return immutable set of interceptor binding annotations of given type, never {@code null}
