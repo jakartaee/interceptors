@@ -147,7 +147,8 @@ public interface InvocationContext {
      * invocation is being intercepted. In case there is no target method or target constructor,
      * interceptor binding annotations applied to the target class are returned.
      * <p>
-     * All interceptor binding annotations are returned, including interceptor binding annotations
+     * All interceptor binding annotations are returned, including inherited interceptor binding
+     * annotations, transitive interceptor binding annotations, interceptor binding annotations
      * that associate interceptors of a different interceptor method type, as well as interceptor
      * binding annotations that associate no interceptor.
      * <p>
