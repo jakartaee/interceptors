@@ -12,67 +12,65 @@
 [[change_log]]
 == Change Log
 
-=== Changes for 2.1
-Updated dependencies for Jakarta EE 10.
+=== Changes for 2.2
+* Updated dependencies for Jakarta EE 11.
+** Annotations 3.0.0
+* Provide access to interceptor bindings from `InvocationContext` via an `getInterceptorBindings()` method.
 
-Added JPMS module-info.
+=== Changes for 2.1
+* Updated dependencies for Jakarta EE 10.
+* Added JPMS module-info.
 
 === Changes for 2.0
-Clarified <<relationship_to_other_specifications>> to be consistent with the Jakarta EE Platform specification
-with regard to when interceptors defined by means of the _Interceptors_
-annotation and interceptors defined by means of interceptor bindings are
-required to be supported.
+* Clarified <<relationship_to_other_specifications>> to be consistent with the Jakarta EE Platform specification
+with regard to when interceptors defined by means of the _Interceptors_ annotation and interceptors defined by means of interceptor bindings are required to be supported.
 
-Clarified terminology in sections <<terminology>> and
+* Clarified terminology in sections <<terminology>> and
 <<definition_of_interceptor_classes_and_interceptor_methods>>.
 
-Noted that around-construct interceptors run
+* Noted that around-construct interceptors run
 in the same thread as the target constructor in section
 <<interceptor_environment>>.
 
-Clarified that around-construct interceptor
+* Clarified that around-construct interceptor
 methods may throw checked exceptions.
 
-Clarified distinction between core
+* Clarified distinction between core
 requirements and the latitude available to extension specifications.
 
-Reworded to indicate that deployment
+* Reworded to indicate that deployment
 descriptors are specific to extension specifications.
 
-Clarified that interceptor binding may not be
+* Clarified that interceptor binding may not be
 used to associate interceptors with decorators.
 
-Corrected bug in section
+* Corrected bug in section
 <<interceptor_binding_types_with_additional_interceptor_bindings>>:
 An interceptor binding type can only
 be applied to an interceptor binding type defining a subset of its
 target types.
 
-Removed inconsistency whereby only
+* Removed inconsistency whereby only
 around-construct lifecycle callback interceptors could declare
 interceptor binding types defined other than as _Target(TYPE)_ .
 
-Clarified when _Priority_ annotation is
-ignored.
+* Clarified when _Priority_ annotation is ignored.
 
-Added section
+* Added section
 <<enabling_interceptors>> to
 <<interceptor_ordering>> to
 centralize existing requirements on enabling interceptors and separate
 concept of the enabling of interceptors from the ordering of
 interceptors.
 
-Combined interceptor ordering rules into a
+* Combined interceptor ordering rules into a
 single algorithm in section <<interceptor_ordering_rules>>.
 
-Factored out section
-<<excluding_interceptors>> on
-excluding interceptors.
+* Factored out section<<excluding_interceptors>> on excluding interceptors.
 
-Clarified that _ExcludeClassInterceptors_
+* Clarified that _ExcludeClassInterceptors_
 applies only to interceptors defined by means of the _Interceptors_
 annotation.
 
-Made numerous editorial cleanup changes, and
-reorganized document for clarity.
+* Made numerous editorial cleanup changes, and reorganized document for clarity.
 
